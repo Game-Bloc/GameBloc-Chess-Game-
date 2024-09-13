@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/chess_gamebloc_backend"
+]
+resolver = "2"
