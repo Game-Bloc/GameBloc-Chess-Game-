@@ -23,11 +23,15 @@ function Game({players, room, orientation, cleanup}) {
             <CustomDialog 
                 open={Boolean(over)}
                 title={over}
+                contentText={over}
+                handleContinue={ () => {
+                    setOver("")
+                }}
             />
         </>
-    )
+    );
 
-}
+};
 
 
 
