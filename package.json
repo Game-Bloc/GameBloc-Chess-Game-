@@ -14,5 +14,13 @@
   "type": "module",
   "workspaces": [
     "src/chess_gamebloc_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.0",
+    "chess.js": "^1.0.0-beta.8",
+    "react-chessboard": "^4.7.1",
+    "socket.io-client": "^4.7.5"
+  }
 }
