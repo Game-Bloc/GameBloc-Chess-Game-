@@ -6,10 +6,21 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const CustomDialog = (open, children, title, contentText, handleContinue) => {
+export const CustomDialog = ({open, children, title, contentText, handleContinue}) => {
   return (
     <Dialog open={open}>
-        
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
+            <DialogContentText>
+                {contentText}
+            </DialogContentText>
+            {children}
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={handleContinue}></Button>
+        </DialogActions>
     </Dialog>
   )
 }
+
+//　refer to this url: https://mui.com/material-ui/react-dialog/ for more explaination about the codes above - it explains it well
