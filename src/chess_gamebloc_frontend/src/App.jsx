@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { Container } from '@mui/material';
-import Game from "./Game"
+import React from 'react'
+import Game from './Game'
+import { Container } from '@mui/material'
 
-
-function App() {
-  <Container>
-    <Game />
-  </Container>
+export default function App () {
+  return (
+    <Container>
+      <Game />
+    </Container>
+  );
 }
-
-export default App;
