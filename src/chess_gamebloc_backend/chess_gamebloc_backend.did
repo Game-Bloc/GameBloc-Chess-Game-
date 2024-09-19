@@ -1,3 +1,16 @@
+type ManualReply = record {
+  name : text;
+  description : text;
+  keywords : vec text;
+};
+type Profile = record { 
+    name : text; 
+    description : text; 
+    keywords : vec text;
+};
 service : {
-    "greet": (text) -> (text) query;
+  get : (text) -> (ManualReply) query;
+  getSelf : () -> (ManualReply) query;
+  search : (text) -> (opt Profile) query;
+  update : (Profile) -> ();
 }

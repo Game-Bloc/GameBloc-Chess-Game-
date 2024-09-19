@@ -40,19 +40,18 @@ function Game({ players, room, orientation, cleanup }) {
   const makeAMove = useCallback(
     (move) => {
       try {
-        const result = chess.move(move); // update Chess instance
-        setFen(chess.fen()); // update fen state to trigger a re-render
+        const result = chess.move(move); // renders the chess instance
+        setFen(chess.fen()); // set the chessboard to the default position
   
         console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
   
-        if (chess.isGameOver()) { // check if move led to "game over"
-          if (chess.isCheckmate()) { // if reason for game over is a checkmate
-            // Set message to checkmate. 
+        if (chess.isGameOver()) { // the function to check if the move led to a 'game over'
+          if (chess.isCheckmate()) { // this is to check if the move leads to game over
             setOver(
               `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!`
             ); 
-            // The winner is determined by checking for which side made the last move
-          } else if (chess.isDraw()) { // if it is a draw
+            // chess.turn checks for the last move made
+          } else if (chess.isDraw()) { // if it is a draw...
             setOver("Draw"); // set message to "Draw"
           } else {
             setOver("Game over");
@@ -62,7 +61,7 @@ function Game({ players, room, orientation, cleanup }) {
         return result;
       } catch (e) {
         return null;
-      } // null if the move was illegal, the move object if the move was legal
+      } // returns an empty response if the move is illegal.
     },
     [chess]
   );
