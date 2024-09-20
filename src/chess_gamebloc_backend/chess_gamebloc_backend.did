@@ -3,14 +3,13 @@ type ManualReply = record {
   description : text;
   keywords : vec text;
 };
-type Profile = record { 
-    name : text; 
-    description : text; 
-    keywords : vec text;
-};
-service : {
+type Profile = record { name : text; description : text; keywords : vec text };
+service : () -> {
   get : (text) -> (ManualReply) query;
   getSelf : () -> (ManualReply) query;
+  inc : () -> ();
+  read : () -> (nat) query;
   search : (text) -> (opt Profile) query;
   update : (Profile) -> ();
+  write : (nat) -> ();
 }
