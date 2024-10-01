@@ -14,7 +14,7 @@ type ProfileStore = BTreeMap<Principal, Profile>; // the 'profile' here, is it t
 struct Profile {
     pub name: String,
     pub description: String,
-    pub keywords: Vec<String>,
+    // pub keywords: Vec<String>,
     pub count: u8,
     pub age : u8,
     pub principal : String,
@@ -75,11 +75,11 @@ fn search(text: String) -> ManualReply<Option<Profile>> {
                 return ManualReply::one(Some(p));
             }
 
-            for x in p.keywords.iter() {
-                if x.to_lowercase() == text {
-                    return ManualReply::one(Some(p));
-                }
-            }
+            // for x in p.keywords.iter() {
+            //     if x.to_lowercase() == text {
+            //         return ManualReply::one(Some(p));
+            //     }
+            // }
         }
         ManualReply::one(None::<Profile>)
     })

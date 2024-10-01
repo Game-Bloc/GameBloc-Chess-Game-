@@ -4,7 +4,6 @@ type ManualReply = record {
   name : text;
   count : nat8;
   description : text;
-  keywords : vec text;
 };
 type Profile = record {
   age : nat8;
@@ -12,7 +11,6 @@ type Profile = record {
   name : text;
   count : nat8;
   description : text;
-  keywords : vec text;
 };
 service : () -> {
   get : (text) -> (ManualReply) query;
