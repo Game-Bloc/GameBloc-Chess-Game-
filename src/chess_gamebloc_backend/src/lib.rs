@@ -4,6 +4,8 @@ use ic_cdk::{api::call::ManualReply, init, query, update};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
+// use ic_principal::Principal;
+
 
 type IdStore = BTreeMap<String, Principal>;
 type ProfileStore = BTreeMap<Principal, Profile>; // the 'profile' here, is it the same with the struct name
@@ -13,6 +15,10 @@ struct Profile {
     pub name: String,
     pub description: String,
     pub keywords: Vec<String>,
+    pub count: u8,
+    pub age : u8,
+    pub principal : String,
+//     number-of-games-played, rating,
 }
 
 thread_local! {
@@ -87,7 +93,6 @@ fn init() {
 
 #[update]
 fn inc() {
-    ic_cdk::println!("{:?}", OWNER.with(|owner| owner.get()));
     COUNTER.with(|counter| *counter.borrow_mut() += 1u64);
 }
 

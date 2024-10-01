@@ -2,6 +2,8 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
+import Login from "./Login.jsx"
+
 
 function Game({ players, room, orientation, cleanup }) {
   const chess = useMemo(() => new Chess(), []);
@@ -82,6 +84,7 @@ function Game({ players, room, orientation, cleanup }) {
   // this is the rendered UI of the chessboard
   return (
     <>
+        <Login />
       <div className="board">
         <Chessboard position={fen} onPieceDrop={onDrop} /> 
       </div>

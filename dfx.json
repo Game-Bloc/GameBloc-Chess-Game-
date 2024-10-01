@@ -1,13 +1,13 @@
 {
   "canisters": {
-    "chess_gamebloc_backend": {
-      "candid": "src/chess_gamebloc_backend/chess_gamebloc_backend.did",
-      "package": "chess_gamebloc_backend",
+    "chess": {
+      "candid": "src/chess_gamebloc_backend/chess.did",
+      "package": "chess",
       "type": "rust"
     },
     "chess_gamebloc_frontend": {
       "dependencies": [
-        "chess_gamebloc_backend"
+        "chess"
       ],
       "source": [
         "src/chess_gamebloc_frontend/dist"
