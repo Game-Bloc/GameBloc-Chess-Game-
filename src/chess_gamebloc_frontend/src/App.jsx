@@ -18,7 +18,7 @@ export default function App () {
         contentText="Please select a username" 
         handleContinue={() => { 
           if (!username) return; 
-          socket.emit("username", username); 
+          // socket.emit("username", username); 
           setUsernameSubmitted(true); 
         }}
       >
