@@ -16,9 +16,11 @@ struct Profile {
     pub description: String,
     // pub keywords: Vec<String>,
     pub count: u8,
+    pub gamesWon: u64,
     pub age : u8,
     pub principal : String,
-//     number-of-games-played, rating,
+    // number-of-games-played, rating,
+    pub userName: String,
 }
 
 thread_local! {
