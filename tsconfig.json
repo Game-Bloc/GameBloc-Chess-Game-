@@ -8,7 +8,8 @@
         "allowJs": true,
         "outDir": "HACK_BECAUSE_OF_ALLOW_JS",
         "jsx": "react",
-        "types": ["node"],
+        "baseUrl": "src/chess_gamebloc_frontend",
+        "types": ["node"]
     },
     "include": [
         "src/**/*.ts",

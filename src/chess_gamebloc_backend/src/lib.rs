@@ -16,11 +16,11 @@ struct Profile {
     pub description: String,
     // pub keywords: Vec<String>,
     pub count: u8,
-    pub gamesWon: u64,
+    // pub gamesWon: u64,
     pub age : u8,
     pub principal : String,
     // number-of-games-played, rating,
-    pub userName: String,
+    // pub userName: String,
 }
 
 thread_local! {
@@ -43,7 +43,7 @@ fn get_self() -> ManualReply<Profile> {
     })
 }
 
-#[update(name = "setProfile", manual_reply = true)]
+// #[update(name = "setProfile", manual_reply = true)]
 
 #[query(manual_reply = true)]
 fn get(name:String) -> ManualReply<Profile> {

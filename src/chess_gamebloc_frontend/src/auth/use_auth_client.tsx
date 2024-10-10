@@ -1,17 +1,17 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { canisterId, createActor } from "../../../declarations/chess_gamebloc_backend"
+import { canisterId, createActor } from "../../../declarations/chess"
 import {
   canisterId as canisterId2,
   createActor as createActor2,
-  chess_gamebloc_backend,
-} from "../../../declarations/chess_gamebloc_backend"
+  chess,
+} from "../../../declarations/chess"
 import {
   canisterId as ledgerId,
   createActor as createLedgerActor,
-} from "../../../declarations/chess_gamebloc_backend"
+} from "../../../declarations/chess"
 import { ActorSubclass, SignIdentity } from "@dfinity/agent"
-import { _SERVICE } from "../../../declarations/chess_gamebloc_backend/chess_gamebloc_backend.did"
+import { _SERVICE } from "../../../declarations/chess/chess.did"
 // import { _SERVICE as _SERVICE2 } from "../../../declarations/game_bloc_backend/game_bloc_backend.did"
 // import { _SERVICE as _SERVICE3 } from "../../../declarations/icp_ledger/icp_ledger.did"
 // import { _SERVICE as _SERVICE4 } from "../../../declarations/icp_index/icp_index.did"
@@ -71,6 +71,9 @@ const AUTH_PATH =
     APPLICATION_LOGO_URL +
     "#authorize"
 
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
 const defaultOptions = {
   /**
    *  @type {import("@dfinity/auth-client").AuthClientCreateOptions}
@@ -107,7 +110,7 @@ const defaultOptions = {
  */
 export const useAuthClient = (options = defaultOptions) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [authClient, setAuthClient] = useState(null)
+  const [authClient, setAuthClient] = useState<AuthClient>()
   const [identity, setIdentity] = useState(null)
   const [principal, setPrincipal] = useState(null)
   // const navigate = useNavigate()
@@ -127,7 +130,7 @@ export const useAuthClient = (options = defaultOptions) => {
   }, [])
 
   const login = () => {
-    authClient.login({
+    authClient?.login({
       ...options.loginOptions,
       onSuccess: () => {
         updateClient(authClient)
@@ -140,7 +143,7 @@ export const useAuthClient = (options = defaultOptions) => {
 
   const loginNFID = () => {
 
-    authClient.login({
+    authClient?.login({
       ...options.loginNFID,
       onSuccess: () => {
         updateClient(authClient)
@@ -168,7 +171,7 @@ export const useAuthClient = (options = defaultOptions) => {
       console.log("ledgerId", ledgerId )
       // console.log("indexId", indexId )
 
-      const actor = createActor(canisterId, {
+      const actor  = createActor(canisterId, {
         agentOptions: {
           identity,
         },
@@ -187,13 +190,23 @@ export const useAuthClient = (options = defaultOptions) => {
         },
       })
 
+      // actor.update()
       // const actor4 = createIndexActor(indexId, {
       //   agentOptions: {
       //     identity,
       //   },
       // })
       console.log("Actor", actor2)
-      setWhoamiActor(actor)
+      setWhoamiActor(actor);
+      // actor3.update({
+      //   "",
+      //   "",
+      //   2,
+      //   4,
+      //   6,
+      //   "",
+      //   ""
+      // })
       // setWhoamiActor2(actor2)
       // setLedgerAcor(actor3)
       // setIndexAcor(actor4)

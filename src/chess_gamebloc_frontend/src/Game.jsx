@@ -4,9 +4,23 @@ import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client.tsx";
+// import { chess } from "../../declarations/chess";
+import { chess_gamebloc_backend } from "../../declarations/chess_gamebloc_backend";
 
 
 function Game({ players, room, orientation, cleanup }) {
+    window.addEventListener("load", () => {
+        const currentPlayer = chess_gamebloc_backend.getSelf();
+        const valueElement = document.getElementById("value");
+
+        if (valueElement) {
+            valueElement.innerHTML = currentPlayer;
+        } else {
+            console.error('Element with id "value" not found');
+        }
+        document.getElementById("value").innerHTML = currentPlayer;
+        // console.log("Finished loading")
+    })
   const chess = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chess.fen()); 
   const [over, setOver] = useState("");
@@ -94,9 +108,16 @@ function Game({ players, room, orientation, cleanup }) {
           <button onClick={() => {
 
               console.log('login:', loginNFID);
-              loginNFID();
-          }}>Login Auth</button>
+              login();
+          }}>Login with II</button>
 
+          <button onClick={() => {
+
+              console.log('login:', loginNFID);
+              loginNFID();
+          }}>Login with NFID</button>
+
+          <div id="value">here</div>
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
