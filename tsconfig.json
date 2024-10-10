@@ -9,7 +9,11 @@
         "outDir": "HACK_BECAUSE_OF_ALLOW_JS",
         "jsx": "react",
         "types": ["node"],
-    }
+    },
+    "include": [
+        "src/**/*.ts",
+        "test/**/*.spec.ts"
+    ],
 }
 
 

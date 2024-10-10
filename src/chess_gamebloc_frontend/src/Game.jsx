@@ -11,7 +11,7 @@ function Game({ players, room, orientation, cleanup }) {
   const [fen, setFen] = useState(chess.fen()); 
   const [over, setOver] = useState("");
 
-    const { isAuthenticated,login ,loginNFID:any } = useAuth();
+    const { isAuthenticated,login ,loginNFID} = useAuth();
 
     //   const makeAMove = useCallback (
     //     (move) => {
@@ -90,13 +90,14 @@ function Game({ players, room, orientation, cleanup }) {
         <Login />
         {/*<useAuthClient />*/}
       <div className="board">
-          {!isAuthenticated ? (
 
-              <button onClick={() => {
-                  console.log('login:', login);
-                  loginNFID.loginNFID();
-              }}>Login Auth</button>
-          ) : {}}
+          <button onClick={() => {
+
+              console.log('login:', loginNFID);
+              loginNFID();
+          }}>Login Auth</button>
+
+
         <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
       <CustomDialog 
