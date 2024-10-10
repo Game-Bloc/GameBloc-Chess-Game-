@@ -3,12 +3,15 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
+import { useAuth } from "./auth/use_auth_client.tsx";
 
 
 function Game({ players, room, orientation, cleanup }) {
   const chess = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chess.fen()); 
   const [over, setOver] = useState("");
+
+    const { isAuthenticated,login ,loginNFID:any } = useAuth();
 
     //   const makeAMove = useCallback (
     //     (move) => {
@@ -85,8 +88,16 @@ function Game({ players, room, orientation, cleanup }) {
   return (
     <>
         <Login />
+        {/*<useAuthClient />*/}
       <div className="board">
-        <Chessboard position={fen} onPieceDrop={onDrop} /> 
+          {!isAuthenticated ? (
+
+              <button onClick={() => {
+                  console.log('login:', login);
+                  loginNFID.loginNFID();
+              }}>Login Auth</button>
+          ) : {}}
+        <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
       <CustomDialog 
         open={Boolean(over)}

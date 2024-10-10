@@ -43,6 +43,8 @@ fn get_self() -> ManualReply<Profile> {
     })
 }
 
+#[update(name = "setProfile", manual_reply = true)]
+
 #[query(manual_reply = true)]
 fn get(name:String) -> ManualReply<Profile> {
     ID_STORE.with(|id_store| {
