@@ -89,6 +89,25 @@ fn search(text: String) -> ManualReply<Option<Profile>> {
     })
 }
 
+#[query(manual_reply = true)]
+fn getUser(text: String) -> ManualReply<Option<Profile>> {
+    let text = text.to_lowercase();
+    PROFILE_STORE.with(|profile_store| {
+        for (_, p) in profile_store.borrow().iter() {
+            if p.name.to_lowercase().contains(&text) || p.description.to_lowercase().contains(&text) {
+                return ManualReply::one(Some(p));
+            }
+
+            // for x in p.keywords.iter() {
+            //     if x.to_lowercase() == text {
+            //         return ManualReply::one(Some(p));
+            //     }
+            // }
+        }
+        ManualReply::one(None::<Profile>)
+    })
+}
+
 // for the counter functions
 #[init] // the 'init' function is used when I want a function to run before main
 fn init() {

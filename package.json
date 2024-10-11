@@ -16,7 +16,6 @@
     "src/chess_gamebloc_frontend"
   ],
   "dependencies": {
-    "@dfinity/agent": "^1.0.1",
     "@dfinity/auth-client": "^1.0.1",
     "@dfinity/candid": "^1.0.1",
     "@dfinity/identity": "^1.0.1",
@@ -46,7 +45,6 @@
     "socket.io-client": "^4.8.0"
   },
   "devDependencies": {
-    "@dfinity/agent": "^2.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "html-webpack-plugin": "^5.5.0",
     "process": "^0.11.10",

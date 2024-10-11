@@ -10,7 +10,7 @@ import {
   canisterId as ledgerId,
   createActor as createLedgerActor,
 } from "../../../declarations/chess"
-import { ActorSubclass, SignIdentity } from "@dfinity/agent"
+import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE } from "../../../declarations/chess/chess.did"
 // import { _SERVICE as _SERVICE2 } from "../../../declarations/game_bloc_backend/game_bloc_backend.did"
 // import { _SERVICE as _SERVICE3 } from "../../../declarations/icp_ledger/icp_ledger.did"
@@ -110,7 +110,7 @@ const defaultOptions = {
  */
 export const useAuthClient = (options = defaultOptions) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [authClient, setAuthClient] = useState<AuthClient>()
+  const [authClient, setAuthClient] = useState<AuthClient | null>(null)
   const [identity, setIdentity] = useState(null)
   const [principal, setPrincipal] = useState(null)
   // const navigate = useNavigate()
@@ -265,7 +265,7 @@ export const useAuthClient = (options = defaultOptions) => {
 /**
  * @type {React.FC}
  */
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }:any) => {
   const auth = useAuthClient()
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
