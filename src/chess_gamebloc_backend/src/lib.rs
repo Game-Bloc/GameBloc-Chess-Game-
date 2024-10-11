@@ -90,7 +90,7 @@ fn search(text: String) -> ManualReply<Option<Profile>> {
 }
 
 #[query(manual_reply = true)]
-fn getUser(text: String) -> ManualReply<Option<Profile>> {
+fn get_player(text: String) -> ManualReply<Option<Profile>> {
     let text = text.to_lowercase();
     PROFILE_STORE.with(|profile_store| {
         for (_, p) in profile_store.borrow().iter() {
