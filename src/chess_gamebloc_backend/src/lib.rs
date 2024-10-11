@@ -108,6 +108,20 @@ fn get_player(text: String) -> ManualReply<Option<Profile>> {
     })
 }
 
+#[update]
+fn store_username(name: String, player_name: Profile, description: String) {
+    let principal_id = ic_cdk::api::caller();
+    PROFILE_STORE.with(|profile_store| {
+        profile_store.borrow_mut().insert(
+            player_name.name.clone(),
+            Profile {
+                name,
+                description,
+            },
+        );
+    });
+}
+
 // for the counter functions
 #[init] // the 'init' function is used when I want a function to run before main
 fn init() {
