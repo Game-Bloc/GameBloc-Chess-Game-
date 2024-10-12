@@ -122,7 +122,9 @@ function Game({ players, room, orientation, cleanup }) {
               loginNFID();
           }}>Login with NFID</button>
 
-          <div id="value">here</div>
+          <div>
+            <p id="value"></p>
+          </div>
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
