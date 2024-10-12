@@ -3,7 +3,7 @@ import {
     canisterId as canisterId2,
     createActor as createActor2,
     chess_gamebloc_backend,
-} from "./declarations/chess_gamebloc_backend"
+} from "./../../declarations/chess_gamebloc_backend"
 
 const Login = () => {
     const {

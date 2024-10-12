@@ -5,22 +5,27 @@ import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client.tsx";
 // import { chess } from "../../declarations/chess";
-import { chess_gamebloc_backend } from "../../declarations/chess_gamebloc_backend";
+import { chess } from "../../declarations/chess";
 
 
 function Game({ players, room, orientation, cleanup }) {
-    window.addEventListener("load", () => {
-        const currentPlayer = chess_gamebloc_backend.getSelf();
-        const valueElement = document.getElementById("value");
 
-        if (valueElement) {
-            valueElement.innerHTML = currentPlayer;
-        } else {
-            console.error('Element with id "value" not found');
-        }
-        document.getElementById("value").innerHTML = currentPlayer;
-        // console.log("Finished loading")
-    })
+  // this is the snippet to communicate with the backend functions
+  window.addEventListener("load", () => {
+      const currentPlayer = chess.getSelf();
+      const valueElement = document.getElementById("value");
+
+      if (valueElement) {
+          valueElement.innerHTML = currentPlayer;
+      } else {
+          console.error('Element with id "value" not found');
+      }
+      document.getElementById("value").innerHTML = currentPlayer;
+      // console.log("Finished loading")
+  })
+
+  // this is the snippet to communicate with the backend functions
+
   const chess = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chess.fen()); 
   const [over, setOver] = useState("");

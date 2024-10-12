@@ -40,7 +40,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   // ws: IcWebSocket<_SERVICE, AppMessage> | null
-  whoamiActor: ActorSubclass<_SERVICE> | null
+  whoamiActor: ActorSubclass<_SERVICE> | null | undefined
   // whoamiActor2: ActorSubclass<_SERVICE2> | null
   // ledgerActor: ActorSubclass<_SERVICE3> | null
   // indexActor: ActorSubclass<_SERVICE4> | null

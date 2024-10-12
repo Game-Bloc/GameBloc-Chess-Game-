@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "strict": true,
-        "target": "ES2020",
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
         "moduleResolution": "node",
@@ -9,7 +8,18 @@
         "outDir": "HACK_BECAUSE_OF_ALLOW_JS",
         "jsx": "react",
         "baseUrl": "src/chess_gamebloc_frontend",
-        "types": ["node"]
+        "types": ["vite/client, node"],
+        "target": "ESNext",
+        "useDefineForClassFields": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "skipLibCheck": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
     },
     "include": [
         "src/**/*.ts",

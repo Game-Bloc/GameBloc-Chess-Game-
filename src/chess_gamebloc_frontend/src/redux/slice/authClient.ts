@@ -8,7 +8,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  auth: undefined,
+  auth: false,   // I changed this to "false" from "undefined" due to type errors.
 }
 
 export const authSlice = createSlice({
