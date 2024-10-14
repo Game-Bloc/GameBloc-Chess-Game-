@@ -4,6 +4,9 @@ use ic_cdk::{api::call::ManualReply, init, query, update};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
+// from the ic-cdk on icp 
+use tanton::tools::Searcher;
+// from the ic-cdk on icp 
 // use ic_principal::Principal;
 
 mod getrandom_fails;
