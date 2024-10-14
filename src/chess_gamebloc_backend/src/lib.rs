@@ -9,7 +9,7 @@ use tanton::tools::Searcher;
 // from the ic-cdk on icp 
 // use ic_principal::Principal;
 
-mod getrandom_fails;
+mod getrandom_fail;
 
 
 type IdStore = BTreeMap<String, Principal>;
