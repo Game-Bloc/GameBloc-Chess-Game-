@@ -46,10 +46,10 @@ fn get_self() -> ManualReply<Profile> {
 }
 
 // #[update(name = "setProfile", manual_reply = true)]
-#[query]
-fn whoami() -> Principal {
-   ic_cdk::api::caller()
-}
+// #[query]
+// fn whoami() -> Principal {
+//    ic_cdk::api::caller()
+// }
 
 #[query(manual_reply = true)]
 fn get(name:String) -> ManualReply<Profile> {
