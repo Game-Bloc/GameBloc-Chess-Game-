@@ -1,5 +1,5 @@
 
-use candid::Principal;
+use candid::{CandidType, Principal};
 use ic_cdk::{api::call::ManualReply, init, query, update};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
@@ -27,6 +27,17 @@ struct Profile {
     // number-of-games-played, rating,
     // pub userName: String,
 }
+
+// from the rust chess ic-cdk
+#[derive(Clone, Debug, Default, CandidType, Serialize)]
+pub struct Game {
+    pub fen: String,
+}
+
+pub struct GameInternal {
+    pub board: tanton::Board,
+}
+// from the rust chess ic-cdk
 
 thread_local! {
     static PROFILE_STORE: RefCell<ProfileStore> = RefCell::default();
