@@ -8,26 +8,26 @@ import { useAuth } from "./auth/use_auth_client.tsx";
 import { chess } from "../../declarations/chess";
 
 
-function Game({ players, room, orientation, cleanup }) {
+function Game({  }) {
 
   // this is the snippet to communicate with the backend functions
   window.addEventListener("load", () => {
-      const currentPlayer = chess.getSelf();
-      const valueElement = document.getElementById("value");
+    const currentPlayer = chess.getSelf();
+    const valueElement = document.getElementById("value");
 
-      if (valueElement) {
-          valueElement.innerHTML = currentPlayer;
-      } else {
-          console.error('Element with id "value" not found');
-      }
-      document.getElementById("value").innerHTML = currentPlayer;
-      // console.log("Finished loading")
+    if (valueElement) {
+        valueElement.innerHTML = currentPlayer;
+    } else {
+        console.error('Element with id "value" not found');
+    }
+    document.getElementById("value").innerHTML = currentPlayer;
+    // console.log("Finished loading")
   })
 
   // this is the snippet to communicate with the backend functions
 
-  const chess = useMemo(() => new Chess(), []);
-  const [fen, setFen] = useState(chess.fen()); 
+  const chesss = useMemo(() => new Chess(), []);
+  const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
 
     const { isAuthenticated,login ,loginNFID} = useAuth();
@@ -64,18 +64,18 @@ function Game({ players, room, orientation, cleanup }) {
   const makeAMove = useCallback(
     (move) => {
       try {
-        const result = chess.move(move); // renders the chess instance
-        setFen(chess.fen()); // set the chessboard to the default position
+        const result = chesss.move(move); // renders the chess instance
+        setFen(chesss.fen()); // set the chessboard to the default position
   
-        console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
+        console.log("over, checkmate", chesss.isGameOver(), chesss.isCheckmate());
   
-        if (chess.isGameOver()) { // the function to check if the move led to a 'game over'
-          if (chess.isCheckmate()) { // this is to check if the move leads to game over
+        if (chesss.isGameOver()) { // the function to check if the move led to a 'game over'
+          if (chesss.isCheckmate()) { // this is to check if the move leads to game over
             setOver(
-              `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!`
+              `Checkmate! ${chesss.turn() === "w" ? "black" : "white"} wins!`
             ); 
             // chess.turn checks for the last move made
-          } else if (chess.isDraw()) { // if it is a draw...
+          } else if (chesss.isDraw()) { // if it is a draw...
             setOver("Draw"); // set message to "Draw"
           } else {
             setOver("Game over");
@@ -87,7 +87,7 @@ function Game({ players, room, orientation, cleanup }) {
         return null;
       } // returns an empty response if the move is illegal.
     },
-    [chess]
+    [chesss]
   );
 
 
@@ -96,7 +96,7 @@ function Game({ players, room, orientation, cleanup }) {
         const moveData = {
             from: sourceSquare,
             to: targetSquare,
-            color: chess.turn(),
+            color: chesss.turn(),
             promotion: "q",
         }
         const move = makeAMove(moveData);

@@ -16,8 +16,8 @@
     "src/chess_gamebloc_frontend"
   ],
   "dependencies": {
-    "@dfinity/auth-client": "^1.0.1",
     "@dfinity/agent": "^1.0.1",
+    "@dfinity/auth-client": "^1.0.1",
     "@dfinity/candid": "^1.0.1",
     "@dfinity/identity": "^1.0.1",
     "@dfinity/identity-secp256k1": "^1.0.1",
@@ -52,6 +52,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.6.3",
     "util": "^0.12.4",
+    "vite": "^5.4.8",
     "webpack": "^5.95.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.15.2"

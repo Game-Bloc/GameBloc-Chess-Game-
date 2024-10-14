@@ -1,17 +1,17 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { canisterId, createActor } from "../../../declarations/chess"
+import { canisterId, createActor } from "../../../declarations/chess_gamebloc_backend"
 import {
   canisterId as canisterId2,
   createActor as createActor2,
-  chess,
-} from "../../../declarations/chess"
+  chess_gamebloc_backend,
+} from "../../../declarations/chess_gamebloc_backend"
 import {
   canisterId as ledgerId,
   createActor as createLedgerActor,
-} from "../../../declarations/chess"
+} from "../../../declarations/chess_gamebloc_backend"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
-import { _SERVICE } from "../../../declarations/chess/chess.did"
+import { _SERVICE } from "../../../declarations/chess_gamebloc_backend/chess_gamebloc_backend.did"
 import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
@@ -152,6 +152,7 @@ export const useAuthClient = (options = defaultOptions) => {
           identity,
         },
       })
+      
 
       const actor3 = createLedgerActor(ledgerId, {
         agentOptions: {

@@ -6,6 +6,8 @@ use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
 // use ic_principal::Principal;
 
+mod getrandom_fails;
+
 
 type IdStore = BTreeMap<String, Principal>;
 type ProfileStore = BTreeMap<Principal, Profile>; // the 'profile' here, is it the same with the struct name
@@ -44,6 +46,10 @@ fn get_self() -> ManualReply<Profile> {
 }
 
 // #[update(name = "setProfile", manual_reply = true)]
+#[query]
+fn whoami() -> Principal {
+   ic_cdk::api::caller()
+}
 
 #[query(manual_reply = true)]
 fn get(name:String) -> ManualReply<Profile> {
