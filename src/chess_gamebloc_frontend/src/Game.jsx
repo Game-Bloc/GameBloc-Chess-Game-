@@ -11,8 +11,8 @@ import { chess } from "../../declarations/chess";
 function Game({  }) {
 
   // this is the snippet to communicate with the backend functions
-  window.addEventListener("load", () => {
-    const currentPlayer = chess.getSelf();
+  window.addEventListener("load", async () => {
+    const currentPlayer = (await chess.getSelf()).name;
     const valueElement = document.getElementById("value");
 
     if (valueElement) {

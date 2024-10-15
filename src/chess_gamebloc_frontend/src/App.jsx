@@ -22,19 +22,21 @@ export default function App () {
           setUsernameSubmitted(true); 
         }}
       >
-        <TextField // Input
-          autoFocus // automatically set focus on input (make it active).
-          margin="dense"
-          id="username"
-          label="Username"
-          name="username"
-          value={username}
-          required
-          onChange={(e) => setUsername(e.target.value)} 
-          type="text"
-          fullWidth
-          variant="standard"
-        />
+        <div id="user-inut">
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="username"
+            label="Username"
+            name="username"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)} 
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </div>
       </CustomDialog>
       <Game />
     </Container>

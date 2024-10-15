@@ -5,8 +5,6 @@ use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
 // from the ic-cdk on icp 
-use tanton::tools::Searcher;
-// from the ic-cdk on icp 
 // use ic_principal::Principal;
 
 mod getrandom_fail;
@@ -60,10 +58,10 @@ fn get_self() -> ManualReply<Profile> {
 }
 
 // #[update(name = "setProfile", manual_reply = true)]
-// #[query]
-// fn whoami() -> Principal {
-//    ic_cdk::api::caller()
-// }
+#[query]
+fn whoami() -> Principal {
+   ic_cdk::api::caller()
+}
 
 #[query(manual_reply = true)]
 fn get(name:String) -> ManualReply<Profile> {
