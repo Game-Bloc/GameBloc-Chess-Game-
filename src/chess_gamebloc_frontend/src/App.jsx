@@ -22,7 +22,7 @@ export default function App () {
           setUsernameSubmitted(true); 
         }}
       >
-        <div id="user-inut">
+        <div id="user-input">
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
             margin="dense"
