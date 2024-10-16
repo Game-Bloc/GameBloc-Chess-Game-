@@ -1,7 +1,7 @@
 
 import { createContext } from "react";
 
-export interface contextProfile {
+export interface ContextProfile {
     age : number,
     principal : string | undefined,
     name : string | undefined,
@@ -9,6 +9,6 @@ export interface contextProfile {
     description : string | undefined
 }
 
-export const profileContext = createContext<contextProfile | undefined>(undefined);
+export const profileContext = createContext<ContextProfile | undefined>(undefined);
 
 
