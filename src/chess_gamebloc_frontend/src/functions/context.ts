@@ -1,5 +1,6 @@
-import { useContext } from "react";
 
-export const profileContext = useContext();
+import { createContext } from "react";
+
+export const profileContext = createContext(undefined);
 
 
