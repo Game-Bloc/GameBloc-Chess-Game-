@@ -24,7 +24,7 @@
     "include": [
         "src/**/*.ts",
         "test/**/*.spec.ts"
-    ],
+, "src/chess_gamebloc_frontend/src/functions/chessHooks.tsx"    ],
 }
 
 

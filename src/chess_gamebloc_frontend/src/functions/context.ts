@@ -2,11 +2,11 @@
 import { createContext } from "react";
 
 export interface ContextProfile {
-    age : number,
-    principal : string | undefined,
-    name : string | undefined,
-    count : number | undefined,
-    description : string | undefined
+    age : number | null,
+    principal : string | null,
+    name : string | null,
+    count : number | null,
+    description : string | null
 }
 
 export const profileContext = createContext<ContextProfile | undefined>(undefined);
