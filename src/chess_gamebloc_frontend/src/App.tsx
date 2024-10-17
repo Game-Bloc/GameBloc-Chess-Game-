@@ -3,7 +3,7 @@ import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
-import { profileContext } from './functions/context';
+import { ContextProfile, profileContext } from './functions/context';
 
 interface AppProps {}
 
@@ -14,8 +14,16 @@ const App = ({} : AppProps) => {
   const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
 
   const users = useContext(profileContext)
+  const [profile] = useState<ContextProfile>({
+    age: 11,
+    principal: "soft",
+    name: "felix",
+    count: 13,
+    description: "where"
+})
 
   return (
+    <profileContext.Provider value={profile}>
     <Container>
       <CustomDialog
         open={!usernameSubmitted} 
@@ -44,8 +52,8 @@ const App = ({} : AppProps) => {
         </div>
       </CustomDialog>
       <Game />
-      <div>{users?.name}</div>
     </Container>
+    </profileContext.Provider>
   );
 }
 

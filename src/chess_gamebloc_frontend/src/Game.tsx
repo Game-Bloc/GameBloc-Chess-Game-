@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, useContext } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
@@ -6,24 +6,25 @@ import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
 // import { chess } from "../../declarations/chess";
 import { chess } from "../../declarations/chess";
-import { profileContext } from './functions/context';
+import { UseProfileContext } from './functions/context';
 
+interface AppProps {}
 
-function Game({  }) {
+function Game({} : AppProps) {
 
   // this is the snippet to communicate with the backend functions
-  window.addEventListener("load", async () => {
-    const currentPlayer = (await chess.getSelf()).name;
-    const valueElement = document.getElementById("value");
+  // window.addEventListener("load", async () => {
+  //   const currentPlayer = (await chess.getSelf()).name;
+  //   const valueElement = document.getElementById("value");
 
-    if (valueElement) {
-        valueElement.innerHTML = currentPlayer;
-    } else {
-        console.error('Element with id "value" not found');
-    }
-    document.getElementById("value").innerHTML = currentPlayer;
-    // console.log("Finished loading")
-  })
+  //   if (valueElement) {
+  //       valueElement.innerHTML = currentPlayer;
+  //   } else {
+  //       console.error('Element with id "value" not found');
+  //   }
+  //   document.getElementById("value").innerHTML = currentPlayer;
+  //   // console.log("Finished loading")
+  // })
 
   // this is the snippet to communicate with the backend functions
 
@@ -32,6 +33,7 @@ function Game({  }) {
   const [over, setOver] = useState("");
 
     const { isAuthenticated,login ,loginNFID} = useAuth();
+    const users = UseProfileContext();
 
     //   const makeAMove = useCallback (
     //     (move) => {
@@ -63,7 +65,7 @@ function Game({  }) {
     //   );
 
   const makeAMove = useCallback(
-    (move) => {
+    (move: string | { from: string; to: string; promotion?: string; }) => {
       try {
         const result = chesss.move(move); // renders the chess instance
         setFen(chesss.fen()); // set the chessboard to the default position
@@ -93,7 +95,7 @@ function Game({  }) {
 
 
     // the function that handles the pieces movement on the chessboard
-    function onDrop(sourceSquare, targetSquare) {
+    function onDrop(sourceSquare: any, targetSquare: any) {
         const moveData = {
             from: sourceSquare,
             to: targetSquare,
@@ -122,6 +124,12 @@ function Game({  }) {
               console.log('login:', loginNFID);
               loginNFID();
           }}>Login with NFID</button>
+
+          <div>{users.age}</div>
+          <div>{users.principal}</div>
+          <div>{users.name}</div>
+          <div>{users.count}</div>
+          <div>{users.description}</div>
 
           <div>
             <p id="value"></p>
