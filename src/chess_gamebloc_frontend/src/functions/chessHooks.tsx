@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../auth/use_auth_client";
-import { ContextProfile } from "./context";
+import { ContextProfile, profileContext } from "./context";
+import App from "../App"
 
 interface ProfileProps {}
 
@@ -28,6 +29,8 @@ export const chessHooks = async ({} : ProfileProps) => {
 
 
     return (
-        <div></div>
+        <profileContext.Provider value={profile}>
+        <App />
+        </profileContext.Provider>
     )
 }

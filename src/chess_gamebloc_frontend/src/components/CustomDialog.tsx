@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function CustomDialog ({open, children, title, contentText, handleContinue}) {
+export default function CustomDialog ({open, children, title, contentText, handleContinue}:any) {
   return (
     <Dialog open={open}>
         <DialogTitle>{title}</DialogTitle>

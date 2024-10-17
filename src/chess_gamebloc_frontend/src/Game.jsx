@@ -3,9 +3,10 @@ import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
-import { useAuth } from "./auth/use_auth_client.tsx";
+import { useAuth } from "./auth/use_auth_client";
 // import { chess } from "../../declarations/chess";
 import { chess } from "../../declarations/chess";
+import { profileContext } from './functions/context';
 
 
 function Game({  }) {

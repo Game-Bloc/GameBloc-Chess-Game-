@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
+import { profileContext } from './functions/context';
 
-export default function App () {
+interface AppProps {}
+
+const App = ({} : AppProps) => {
 
   const [username, setUsername] = useState('');  // the player gets to enter a in-game username for the game
 
   const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
+
+  const users = useContext(profileContext)
 
   return (
     <Container>
@@ -39,6 +44,9 @@ export default function App () {
         </div>
       </CustomDialog>
       <Game />
+      <div>{users?.name}</div>
     </Container>
   );
 }
+
+export default App
