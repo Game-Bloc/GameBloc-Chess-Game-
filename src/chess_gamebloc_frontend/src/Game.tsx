@@ -103,8 +103,12 @@ function Game({} : AppProps) {
             promotion: "q",
         }
         const move = makeAMove(moveData);
-        if (move === null) return false;  // this function handles any false or illegal pieces movement
-    }
+        if (move === null) {
+          return false;  // this function handles any false or illegal pieces movement
+        } else {
+          return true;
+        }
+      }
   
   // this is the rendered UI of the chessboard
   return (
