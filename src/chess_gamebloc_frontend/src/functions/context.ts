@@ -1,6 +1,6 @@
 
 import { createContext, useContext } from "react";
-import { Profile } from "../../../declarations/chess_gamebloc_backend/chess_gamebloc_backend.did";
+import { Profile } from "../../../declarations/chess/chess.did"; //ignore
 
 export interface ContextProfile {
     age : number,

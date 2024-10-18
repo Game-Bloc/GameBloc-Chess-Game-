@@ -94,7 +94,7 @@ export const useAuthClient = (options = defaultOptions) => {
     // Initialize AuthClient
     AuthClient.create(options.createOptions).then(async (client) => {
       setAuthClient(client); // this is the issue - relating to other things too
-      updateClient(client)
+      
     })
   }, [])
 

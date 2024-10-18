@@ -46,11 +46,11 @@ thread_local! {
 }
 
 #[query(name = "getSelf", manual_reply = true)]
-fn get_self() -> ManualReply<Profile> {
+fn get_self() -> ManualReply<String> {
     let id = ic_cdk::api::caller();
     PROFILE_STORE.with(| profile_store | {
         if let Some(profile) = profile_store.borrow().get(&id) {
-            ManualReply::one(profile)
+            ManualReply::one(profile.name.clone())
         } else {
             ManualReply::one(Profile::default())
         }

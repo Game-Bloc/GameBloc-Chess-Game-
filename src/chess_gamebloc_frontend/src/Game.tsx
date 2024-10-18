@@ -95,7 +95,7 @@ function Game({} : AppProps) {
 
 
     // the function that handles the pieces movement on the chessboard
-    function onDrop(sourceSquare: any, targetSquare: any) {
+    const onDrop = (sourceSquare: any, targetSquare: any):boolean => {
         const moveData = {
             from: sourceSquare,
             to: targetSquare,

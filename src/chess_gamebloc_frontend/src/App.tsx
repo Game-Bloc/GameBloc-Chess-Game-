@@ -4,6 +4,7 @@ import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
+import { useAuth } from './auth/use_auth_client';
 
 interface AppProps {}
 
@@ -13,11 +14,13 @@ const App = ({} : AppProps) => {
 
   const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
 
+  const {whoamiActor} = useAuth()
+  const useUser = whoamiActor?.update
   const users = useContext(profileContext)
   const [profile] = useState<ContextProfile>({
     age: 11,
     principal: "soft",
-    name: "felix",
+    name: "sdfd",
     count: 13,
     description: "where"
 })
