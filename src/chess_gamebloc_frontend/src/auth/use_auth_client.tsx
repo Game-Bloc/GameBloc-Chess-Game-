@@ -37,7 +37,7 @@ const AuthContext = React.createContext<{
   whoamiActor: null,
 })
 const network = process.env.DFX_NETWORK || "local"
-const APPLICATION_NAME = "GameBloc"
+const APPLICATION_NAME = "chess_gamebloc"
 const APPLICATION_LOGO_URL = "https://i.postimg.cc/zBMQpTJn/Asset-51.png"
 
 const AUTH_PATH =
