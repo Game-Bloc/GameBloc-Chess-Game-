@@ -117,7 +117,7 @@ function Game({} : AppProps) {
         {/*<useAuthClient />*/}
       <div className="board">
 
-          <button onClick={() => {
+          {/* <button onClick={() => {
 
               console.log('login:', loginNFID);
               login();
@@ -127,7 +127,7 @@ function Game({} : AppProps) {
 
               console.log('login:', loginNFID);
               loginNFID();
-          }}>Login with NFID</button>
+          }}>Login with NFID</button> */}
 
           <div>{users.age}</div>
           <div>{users.principal}</div>

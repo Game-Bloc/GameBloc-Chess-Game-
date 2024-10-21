@@ -8,7 +8,7 @@ import { useAuth } from './auth/use_auth_client';
 
 interface AppProps {}
 
-const App = ({} : AppProps) => {
+const ChessPage = ({} : AppProps) => {
 
   const [username, setUsername] = useState('');  // the player gets to enter a in-game username for the game
 
@@ -60,6 +60,5 @@ const App = ({} : AppProps) => {
   );
 }
 
-export default App
-
+export default ChessPage;
 
