@@ -6,9 +6,9 @@ import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
 import { useAuth } from './auth/use_auth_client';
 
-interface AppProps {}
+interface ChessPageProps {}
 
-const ChessPage = ({} : AppProps) => {
+const ChessPage = ({} : ChessPageProps) => {
 
   const [username, setUsername] = useState('');  // the player gets to enter a in-game username for the game
 
