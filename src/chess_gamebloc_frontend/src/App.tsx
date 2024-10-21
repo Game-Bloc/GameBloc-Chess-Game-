@@ -23,7 +23,7 @@ const App = ({} : AppProps) => {
     name: "sdfd",
     count: 13,
     description: "where"
-})
+  })
 
   return (
     <profileContext.Provider value={profile}>
