@@ -88,6 +88,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const [identity, setIdentity] = useState(null)
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [whoamiActor, setWhoamiActor] = useState<ActorSubclass<_SERVICE>>()
 
   useEffect(() => {
@@ -103,7 +104,7 @@ export const useAuthClient = (options = defaultOptions) => {
       ...options.loginOptions,
       onSuccess: () => {
         updateClient(authClient)
-        // navigate("/dashboard")
+        navigate("/landingPage")
       },
     })
   }
@@ -116,7 +117,7 @@ export const useAuthClient = (options = defaultOptions) => {
       ...options.loginNFID,
       onSuccess: () => {
         updateClient(authClient)
-        // navigate("/dashboard")
+        navigate("/landingPage")
       },
     })
   }
