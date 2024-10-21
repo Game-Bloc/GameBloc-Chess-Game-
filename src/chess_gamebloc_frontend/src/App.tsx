@@ -20,7 +20,7 @@ const App = ({} : AppProps) => {
   const [profile] = useState<ContextProfile>({
     age: 11,
     principal: "soft",
-    name: "sdfd",
+    name: "Sukuna",
     count: 13,
     description: "where"
   })
