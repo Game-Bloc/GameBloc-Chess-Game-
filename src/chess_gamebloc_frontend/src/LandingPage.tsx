@@ -10,7 +10,7 @@ const LandingPage = () => {
             console.log('login:', loginNFID);
             login();
         }}>Login with II</button>
-        <button className='border-2' onClick={() => {
+        <button className='px-2 py-2 border-2 rounded-lg' onClick={() => {
         console.log('login:', loginNFID);
         loginNFID();
         }}>Login with NFID</button>

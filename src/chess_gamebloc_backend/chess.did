@@ -14,13 +14,12 @@ type Profile = record {
 };
 service : () -> {
   get : (text) -> (ManualReply) query;
-  getSelf : () -> (ManualReply) query;
+  getPlayerProfile : () -> (text) query;
   get_player : (text) -> (opt Profile) query;
-  whoami : () -> (principal) query;
   inc : () -> ();
   read : () -> (nat) query;
   search : (text) -> (opt Profile) query;
-  update : (Profile) -> ();
+  update_player_profile : (Profile) -> ();
+  whoami : () -> (principal) query;
   write : (nat) -> ();
 }
-
