@@ -15,14 +15,14 @@ const ChessPage = ({} : ChessPageProps) => {
   const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
 
   const {whoamiActor} = useAuth()
-  const useUser = whoamiActor?.update
+  
   const users = useContext(profileContext)
   const [profile] = useState<ContextProfile>({
-    age: 11,
-    principal: "soft",
-    name: "Sukuna",
-    count: 13,
-    description: "where"
+    age: 0,
+    principal: "",
+    name: "",
+    count: 0,
+    description: ""
   })
 
   return (

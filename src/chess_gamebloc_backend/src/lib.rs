@@ -45,8 +45,8 @@ thread_local! {
     static OWNER: Cell<Principal> = Cell::new(Principal::from_slice(&[]));
 }
 
-#[query(name = "getSelf", manual_reply = true)]
-fn get_self() -> ManualReply<String> {
+#[query(name = "getPlayerProfile", manual_reply = true)]
+fn player_info() -> ManualReply<String> {
     let id = ic_cdk::api::caller();
     PROFILE_STORE.with(| profile_store | {
         if let Some(profile) = profile_store.borrow().get(&id) {
@@ -78,7 +78,7 @@ fn get(name:String) -> ManualReply<Profile> {
 }
 
 #[update]
-fn update(profile: Profile) {
+fn update_player_profile(profile: Profile) {
     let principal_id = ic_cdk::api::caller();
     ID_STORE.with(|id_store| {
         id_store.borrow_mut().insert(profile.name.clone(), principal_id);

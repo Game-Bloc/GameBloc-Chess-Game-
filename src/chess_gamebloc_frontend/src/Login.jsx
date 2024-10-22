@@ -105,7 +105,7 @@ const Login = () => {
 
     return (
         <div>
-            <h2>Login:</h2>
+            <h2></h2>
             <div>
                 {loginLoading && <div>Loading...</div>}
                 {loginError ? <div>{loginError}</div> : null}
