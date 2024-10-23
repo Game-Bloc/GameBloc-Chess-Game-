@@ -16,7 +16,7 @@ export function UseProfileContext () {
     const users = useContext(profileContext)
 
     if (users === undefined) {
-        throw new Error("must be wrapped with profileCo")
+        throw new Error("must be wrapped with profileContext")
     }
 
     return users;
