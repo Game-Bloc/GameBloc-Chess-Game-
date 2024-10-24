@@ -8,21 +8,23 @@ import { useAuth } from "./auth/use_auth_client";
 import { chess } from "../../declarations/chess";
 import { UseProfileContext } from './functions/context';
 
-interface AppProps {}
+// interface AppProps {{} : AppProps}
 
-function Game({} : AppProps) {
+function Game() {
+  const { isAuthenticated,login ,loginNFID} = useAuth();
+  const users = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
   // window.addEventListener("load", async () => {
   //   const currentPlayer = (await chess.getSelf()).name;
   //   const valueElement = document.getElementById("value");
+  //   valueElement.innerHTML = currentPlayer;
 
   //   if (valueElement) {
   //       valueElement.innerHTML = currentPlayer;
   //   } else {
   //       console.error('Element with id "value" not found');
   //   }
-  //   document.getElementById("value").innerHTML = currentPlayer;
   //   // console.log("Finished loading")
   // })
 
@@ -32,8 +34,6 @@ function Game({} : AppProps) {
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
 
-    const { isAuthenticated,login ,loginNFID} = useAuth();
-    const users = UseProfileContext();
 
     //   const makeAMove = useCallback (
     //     (move) => {

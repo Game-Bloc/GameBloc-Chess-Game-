@@ -5,6 +5,7 @@ import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
 import { useAuth } from './auth/use_auth_client';
+import { chessFunctions } from './functions/functions';
 
 interface ChessPageProps {}
 
@@ -14,7 +15,9 @@ const ChessPage = ({} : ChessPageProps) => {
 
   const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
 
-  const {whoamiActor} = useAuth()
+  const { isAuthenticated } = useAuth()
+  
+  const { updateUserProfile, updatingProfile } = chessFunctions()
   
   const users = useContext(profileContext)
   const [profile] = useState<ContextProfile>({
