@@ -7,7 +7,9 @@ export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
 
-    const updateUserProfile = async () => {
+    const createUserProfile = async (
+        
+    ) => {
         setUpdatingProfile(true)
         const user:any = await whoamiActor.getSelf()
         console.log("Profile", user);
@@ -15,7 +17,7 @@ export const chessFunctions = () => {
     }
 
     return {
-        updateUserProfile,
+        createUserProfile,
         updatingProfile,
     }
 }

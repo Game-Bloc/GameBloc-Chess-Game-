@@ -11,22 +11,25 @@ import { UseProfileContext } from './functions/context';
 // interface AppProps {{} : AppProps}
 
 function Game() {
-  const { isAuthenticated,login ,loginNFID} = useAuth();
+  const { whoamiActor, principal } = useAuth();
   const users = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
-  // window.addEventListener("load", async () => {
-  //   const currentPlayer = (await chess.getSelf()).name;
-  //   const valueElement = document.getElementById("value");
-  //   valueElement.innerHTML = currentPlayer;
+  window.addEventListener("load", async () => {
+    const profile = { 
+      age: 0
+     }
+    const currentPlayer = await chess.update_player_profile().name
+    document.getElementById("value").innerHTML = currentPlayer
+    // valueElement.innerHTML = currentPlayer;
 
-  //   if (valueElement) {
-  //       valueElement.innerHTML = currentPlayer;
-  //   } else {
-  //       console.error('Element with id "value" not found');
-  //   }
-  //   // console.log("Finished loading")
-  // })
+    // if (valueElement) {
+    //     valueElement.innerHTML = currentPlayer;
+    // } else {
+    //     console.error('Element with id "value" not found');
+    // }
+    // console.log("Finished loading")
+  })
 
   // this is the snippet to communicate with the backend functions
 
@@ -65,7 +68,7 @@ function Game() {
     //   );
 
   const makeAMove = useCallback(
-    (move: string | { from: string; to: string; promotion?: string; }) => {
+    (move) => {
       try {
         const result = chesss.move(move); // renders the chess instance
         setFen(chesss.fen()); // set the chessboard to the default position
@@ -95,7 +98,7 @@ function Game() {
 
 
     // the function that handles the pieces movement on the chessboard
-    const onDrop = (sourceSquare: any, targetSquare: any):boolean => {
+    const onDrop = (sourceSquare, targetSquare) => {
         const moveData = {
             from: sourceSquare,
             to: targetSquare,
@@ -154,3 +157,5 @@ function Game() {
 }
 
 export default Game;
+
+// : string | { from: string; to: string; promotion?: string; }
