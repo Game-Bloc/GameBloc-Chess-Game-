@@ -8,11 +8,15 @@ export const chessFunctions = () => {
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
 
     const createUserProfile = async (
-        
+        age: number,
+        principal: string,
+        name: string,
+        count: number,
+        description: string,
     ) => {
         setUpdatingProfile(true)
-        const user:any = await whoamiActor.getSelf()
-        console.log("Profile", user);
+        const user = who
+        
         
     }
 
