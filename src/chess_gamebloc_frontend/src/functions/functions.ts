@@ -9,7 +9,8 @@ export const chessFunctions = () => {
 
     const update_player_profile = () => {
         try {
-            
+            setUpdatingProfile(true)
+            const user = whoamiActor?.update
         } catch (error) {
             
         }
