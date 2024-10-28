@@ -7,17 +7,12 @@ export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
 
-    const createUserProfile = async (
-        age: number,
-        principal: string,
-        name: string,
-        count: number,
-        description: string,
-    ) => {
-        setUpdatingProfile(true)
-        const user = who
-        
-        
+    const update_player_profile = () => {
+        try {
+            
+        } catch (error) {
+            
+        }
     }
 
     return {

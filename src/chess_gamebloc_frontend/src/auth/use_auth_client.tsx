@@ -25,7 +25,7 @@ const AuthContext = React.createContext<{
   authClient: any
   identity: any
   principal: any
-  whoamiActor: ActorSubclass<_SERVICE> | null | undefined | any
+  whoamiActor: ActorSubclass<_SERVICE> | null | undefined
 }>({
   isAuthenticated: false,
   login: null,
