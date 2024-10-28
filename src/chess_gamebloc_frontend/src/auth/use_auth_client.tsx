@@ -1,17 +1,17 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { canisterId, createActor } from "../../../declarations/chess_gamebloc_backend"
+import { canisterId, createActor } from "../../../declarations/chess"
 import {
   canisterId as canisterId2,
   createActor as createActor2,
-  chess_gamebloc_backend,
-} from "../../../declarations/chess_gamebloc_backend"
+  chess,
+} from "../../../declarations/chess"
 import {
   canisterId as ledgerId,
   createActor as createLedgerActor,
-} from "../../../declarations/chess_gamebloc_backend"
+} from "../../../declarations/chess"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
-import { _SERVICE } from "../../../declarations/chess_gamebloc_backend/chess_gamebloc_backend.did"
+import { _SERVICE } from "../../../declarations/chess/chess.did"
 import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
@@ -25,7 +25,7 @@ const AuthContext = React.createContext<{
   authClient: any
   identity: any
   principal: any
-  whoamiActor: ActorSubclass<_SERVICE> | null | undefined
+  whoamiActor: ActorSubclass<_SERVICE> | null 
 }>({
   isAuthenticated: false,
   login: null,

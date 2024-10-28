@@ -17,7 +17,7 @@ const ChessPage = ({} : ChessPageProps) => {
 
   const { isAuthenticated } = useAuth()
   
-  const { createUserProfile, updatingProfile } = chessFunctions()
+  // const { createUserProfile, updatingProfile } = chessFunctions()
   
   const users = useContext(profileContext)
   const [profile] = useState<ContextProfile>({

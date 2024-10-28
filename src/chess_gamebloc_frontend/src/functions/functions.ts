@@ -7,17 +7,27 @@ export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
 
-    const update_player_profile = () => {
+    const update_player_profile = (
+        age: number,
+        principal: string,
+        name: string,
+        count: number,
+        description: string,
+    ) => {
         try {
             setUpdatingProfile(true)
-            const user = whoamiActor?.update
+            const user = whoamiActor?.update_player_profile(
+                age,
+                principal,
+                
+            )
         } catch (error) {
             
         }
     }
 
     return {
-        createUserProfile,
+        update_player_profile,
         updatingProfile,
     }
 }

@@ -78,7 +78,7 @@ fn get(name:String) -> ManualReply<Profile> {
 }
 
 #[update]
-fn update_player_profile(profile: Profile) {
+fn update_player_profile(profile: Profile) { // age: u8, principal: String, name: String, count: u8, description: u8
     let principal_id = ic_cdk::api::caller();
     ID_STORE.with(|id_store| {
         id_store.borrow_mut().insert(profile.name.clone(), principal_id);
