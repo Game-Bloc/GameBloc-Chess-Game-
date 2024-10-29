@@ -19,7 +19,10 @@ export const chessFunctions = () => {
             const user = whoamiActor?.update_player_profile(
                 age,
                 principal,
-                
+                name,
+                count,
+                description
+
             )
         } catch (error) {
             
@@ -28,6 +31,6 @@ export const chessFunctions = () => {
 
     return {
         update_player_profile,
-        updatingProfile,
+        updatingProfile, 
     }
 }

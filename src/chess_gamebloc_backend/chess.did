@@ -1,0 +1,25 @@
+type ManualReply = record {
+  age : nat8;
+  "principal" : text;
+  name : text;
+  count : nat8;
+  description : text;
+};
+type Profile = record {
+  age : nat8;
+  "principal" : text;
+  name : text;
+  count : nat8;
+  description : text;
+};
+service : () -> {
+  get : (text) -> (ManualReply) query;
+  getPlayerProfile : () -> (text) query;
+  get_player : (text) -> (opt Profile) query;
+  inc : () -> ();
+  read : () -> (nat) query;
+  search : (text) -> (opt Profile) query;
+  update_player_profile : (nat8, text, text, nat8, text) -> ();
+  whoami : () -> (principal) query;
+  write : (nat) -> ();
+}

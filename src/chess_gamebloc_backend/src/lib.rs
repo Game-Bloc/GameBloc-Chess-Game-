@@ -78,15 +78,21 @@ fn get(name:String) -> ManualReply<Profile> {
 }
 
 #[update]
-fn update_player_profile(profile: Profile) { // age: u8, principal: String, name: String, count: u8, description: u8
+fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) {
     let principal_id = ic_cdk::api::caller();
     ID_STORE.with(|id_store| {
-        id_store.borrow_mut().insert(profile.name.clone(), principal_id);
+        id_store.borrow_mut().insert(name.clone(), principal_id);
     });
     PROFILE_STORE.with(|profile_store| {
-        profile_store.borrow_mut().insert(principal_id, profile);
+        profile_store.borrow_mut().insert(principal_id, Profile{
+                name,
+                description,
+                count,
+                age,
+                principal
+        });
     })
-} // I honestly don't knw what this code does... now I do :)
+} 
 
 #[query(manual_reply = true)]
 fn search(text: String) -> ManualReply<Option<Profile>> {
