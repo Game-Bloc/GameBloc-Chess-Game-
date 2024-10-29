@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { profileContext } from "./context";
 import { useAuth } from "../auth/use_auth_client";
-import { Principal } from "@dfinity/principal"
+import swal from 'sweetalert';
+// import { Principal } from "@dfinity/principal"
 
 export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
@@ -21,11 +22,12 @@ export const chessFunctions = () => {
                 principal,
                 name,
                 count,
-                description
-
+                description,
             )
+            if (user) {
+                
+            }
         } catch (error) {
-            
         }
     }
 
