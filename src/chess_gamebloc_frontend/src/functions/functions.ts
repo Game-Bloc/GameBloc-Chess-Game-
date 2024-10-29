@@ -33,9 +33,15 @@ export const chessFunctions = () => {
                 }
                 sessionStorage.setItem("PlayerState", "true")
             } else {
-                
+                setIsLoading(false)
             }
-        } catch (error) {
+        } catch (err) {
+            setIsLoading(false)
+            console.log("Failed to create an account", err);
+            
+        } finally {
+            setIsLoading(false)
+            return
         }
     }
 
