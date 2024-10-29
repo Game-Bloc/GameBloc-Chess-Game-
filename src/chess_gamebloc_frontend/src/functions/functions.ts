@@ -28,6 +28,11 @@ export const chessFunctions = () => {
             )
             if (user) {
                 setIsLoading(true);
+                if (window.location.pathname === "/landingPage") {
+                    window.location.reload()
+                }
+                sessionStorage.setItem("PlayerState", "true")
+            } else {
                 
             }
         } catch (error) {
