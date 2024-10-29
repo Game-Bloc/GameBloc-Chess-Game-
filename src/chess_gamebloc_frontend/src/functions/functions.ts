@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { profileContext } from "./context";
 import { useAuth } from "../auth/use_auth_client";
+// import 
 import swal from 'sweetalert';
 // import { Principal } from "@dfinity/principal"
 
 export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
+    const [ isLoading, setIsLoading ] = useState<boolean>(false)
 
     const update_player_profile = (
         age: number,
@@ -25,6 +27,7 @@ export const chessFunctions = () => {
                 description,
             )
             if (user) {
+                setIsLoading(true);
                 
             }
         } catch (error) {

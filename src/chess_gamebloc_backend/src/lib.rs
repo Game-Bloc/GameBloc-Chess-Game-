@@ -85,11 +85,11 @@ fn update_player_profile(age: u8, principal: String, name: String, count: u8, de
     });
     PROFILE_STORE.with(|profile_store| {
         profile_store.borrow_mut().insert(principal_id, Profile{
-                name,
-                description,
-                count,
-                age,
-                principal
+            name,
+            description,
+            count,
+            age,
+            principal
         });
     })
 } 
