@@ -4,21 +4,20 @@ import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
-import { useAuth } from './auth/use_auth_client';
+// import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from './functions/functions';
 
-interface ChessPageProps {}
+interface Props {
+  modal? : () => void
+}
 
-const ChessPage = ({} : ChessPageProps) => {
+const ChessPage = ({} : Props) => {
 
   const [username, setUsername] = useState('');  // the player gets to enter a in-game username for the game
-
-  const [usernameSubmitted, setUsernameSubmitted] = useState(false); // indicator that the player username has been submitted
-
-  const { isAuthenticated } = useAuth()
-  
-  // const { createUserProfile, updatingProfile } = chessFunctions()
-  
+  const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
+  // const { isAuthenticated } = useAuth()
+  const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
+  const { update_player_profile, updatingProfile } = chessFunctions()
   const users = useContext(profileContext)
   const [profile] = useState<ContextProfile>({
     age: 0,
@@ -56,6 +55,7 @@ const ChessPage = ({} : ChessPageProps) => {
             variant="standard"
           />
         </div>
+        
       </CustomDialog>
       <Game />
     </Container>

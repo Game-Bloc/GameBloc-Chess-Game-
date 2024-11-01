@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
-    const [ isLoading, setIsLoading ] = useState<boolean>(false)
+    const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
     const update_player_profile = (
         age: number,
