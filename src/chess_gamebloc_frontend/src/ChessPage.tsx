@@ -5,7 +5,7 @@ import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
-import { chessFunctions } from './functions/functions';
+import { chessFunctions } from "./functions/functions"
 
 interface Props {
   modal? : () => void
@@ -29,6 +29,32 @@ const ChessPage = ({ modal } : Props) => {
     count: 0,
     description: ""
   })
+
+  const onChangeUsername = (e: any) => {
+    e.preventDefault()
+    const userNameInput = e.target.value
+    setUsername(userNameInput)
+  }
+
+  const onChangeAge = (e: any) => {
+    e.preventDefault()
+    const ageInput = e.target.value
+    setAge(ageInput)
+  }
+
+  const submit = () => {
+    if (username.trim() === "" && age.trim() === "") {
+      console.log("username is Empty");
+    } else {
+      update_player_profile(
+        +age,
+        principal,
+        Username,
+        count,
+        description
+      )
+    }
+  }
 
   return (
     <profileContext.Provider value={profile}>
