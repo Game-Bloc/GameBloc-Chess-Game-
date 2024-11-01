@@ -11,9 +11,13 @@ interface Props {
   modal? : () => void
 }
 
-const ChessPage = ({} : Props) => {
+const ChessPage = ({ modal } : Props) => {
 
-  const [username, setUsername] = useState('');  // the player gets to enter a in-game username for the game
+  const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
+  const [ age, setAge ] = useState("")
+  const [ principal, setPrincipal ] = useState<string>("")
+  const [ count, setCount ] = useState("")
+  const [ description, setDescription ] = useState<String>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   // const { isAuthenticated } = useAuth()
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
@@ -55,7 +59,7 @@ const ChessPage = ({} : Props) => {
             variant="standard"
           />
         </div>
-        
+
       </CustomDialog>
       <Game />
     </Container>
