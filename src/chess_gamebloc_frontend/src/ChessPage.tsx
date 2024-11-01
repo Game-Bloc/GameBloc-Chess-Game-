@@ -19,7 +19,6 @@ const ChessPage = ({ modal } : Props) => {
   const [ count, setCount ] = useState("")
   const [ description, setDescription ] = useState<String>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
-  // const { isAuthenticated } = useAuth()
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const { update_player_profile, updatingProfile } = chessFunctions()
   const users = useContext(profileContext)
@@ -44,6 +43,51 @@ const ChessPage = ({ modal } : Props) => {
           setUsernameSubmitted(true); 
         }}
       >
+        <div id="user-input">
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="username"
+            label="Username"
+            name="username"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)} 
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </div>
+        <div id="user-input">
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="username"
+            label="Username"
+            name="username"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)} 
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </div>
+        <div id="user-input">
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="username"
+            label="Username"
+            name="username"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)} 
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+        </div>
         <div id="user-input">
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
