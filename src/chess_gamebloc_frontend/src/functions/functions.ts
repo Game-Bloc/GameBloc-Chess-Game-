@@ -13,7 +13,7 @@ export const chessFunctions = () => {
     const update_player_profile = (
         age: number,
         principal: string,
-        Username: string,
+        username: string,
         count: number,
         description: string,
     ) => {
@@ -22,7 +22,7 @@ export const chessFunctions = () => {
             const user = whoamiActor?.update_player_profile(
                 age,
                 principal,
-                Username,
+                username,
                 count,
                 description,
             )

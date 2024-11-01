@@ -17,7 +17,7 @@ const ChessPage = ({ modal } : Props) => {
   const [ age, setAge ] = useState("")
   const [ principal, setPrincipal ] = useState<string>("")
   const [ count, setCount ] = useState("")
-  const [ description, setDescription ] = useState<String>("")
+  const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const { update_player_profile, updatingProfile } = chessFunctions()
@@ -49,8 +49,8 @@ const ChessPage = ({ modal } : Props) => {
       update_player_profile(
         +age,
         principal,
-        Username,
-        count,
+        username,
+        +count,
         description
       )
     }
