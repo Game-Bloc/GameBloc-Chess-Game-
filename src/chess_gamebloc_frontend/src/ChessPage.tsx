@@ -47,12 +47,27 @@ const ChessPage = ({ modal } : Props) => {
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
             margin="dense"
-            id="username"
-            label="Username"
-            name="username"
-            value={username}
+            id="age"
+            label="Age"
+            name="age"
+            value={age}
             required
-            onChange={(e) => setUsername(e.target.value)} 
+            onChange={(e) => setAge(e.target.value)} 
+            type="number"
+            fullWidth
+            variant="standard"
+          />
+        </div>
+        <div id="user-input">
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="principal"
+            label="IC Principal"
+            name="principal"
+            value={principal}
+            required
+            onChange={(e) => setPrincipal(e.target.value)} 
             type="text"
             fullWidth
             variant="standard"
@@ -77,28 +92,13 @@ const ChessPage = ({ modal } : Props) => {
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
             margin="dense"
-            id="username"
-            label="Username"
-            name="username"
-            value={username}
+            id="count"
+            label="winCount"
+            name="Won Count"
+            value={count}
             required
-            onChange={(e) => setUsername(e.target.value)} 
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-        </div>
-        <div id="user-input">
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="username"
-            label="Username"
-            name="username"
-            value={username}
-            required
-            onChange={(e) => setUsername(e.target.value)} 
-            type="text"
+            onChange={(e) => setCount(e.target.value)} 
+            type="number"
             fullWidth
             variant="standard"
           />
