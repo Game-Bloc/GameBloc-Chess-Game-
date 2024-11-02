@@ -30,6 +30,8 @@ const ChessPage = ({ modal } : Props) => {
     description: ""
   })
 
+  
+
   const onChangeUsername = (e: any) => {
     e.preventDefault()
     const userNameInput = e.target.value
@@ -42,15 +44,33 @@ const ChessPage = ({ modal } : Props) => {
     setAge(ageInput)
   }
 
+  // const onChangePrincipal = (e: any) => {
+  //   e.preventDefault()
+  //   const porincipalInput = e.target.value
+  //   setPrincipal(porincipalInput)
+  // }
+
+  const onChangeCount = (e: any) => {
+    e.preventDefault()
+    const countInput = e.target.value
+    setCount(countInput)
+  }
+
+  const onChangeDescription = (e: any) => {
+    e.preventDefault()
+    const countInput = e.target.value
+    setDescription(countInput)
+  }
+
   const submit = () => {
-    if (username.trim() === "" && age.trim() === "") {
-      console.log("username is Empty");
+    if (username.trim() === "" || age.trim() === "") {
+      console.log("Either age or username is Empty");
     } else {
       update_player_profile(
         +age,
         principal,
         username,
-        +count,
+        +count, 
         description
       )
     }
@@ -63,13 +83,9 @@ const ChessPage = ({ modal } : Props) => {
         open={!usernameSubmitted} 
         title="Pick a username" 
         contentText="Please select a username" 
-        handleContinue={() => { 
-          if (!username) return; 
-          // socket.emit("username", username); 
-          setUsernameSubmitted(true); 
-        }}
+        handleContinue={() => submit()}
       >
-        <div id="user-input">
+        <div id="user-input1">
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
             margin="dense"
@@ -78,28 +94,11 @@ const ChessPage = ({ modal } : Props) => {
             name="age"
             value={age}
             required
-            onChange={(e) => setAge(e.target.value)} 
+            onChange={onChangeAge} 
             type="number"
             fullWidth
             variant="standard"
           />
-        </div>
-        <div id="user-input">
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="principal"
-            label="IC Principal"
-            name="principal"
-            value={principal}
-            required
-            onChange={(e) => setPrincipal(e.target.value)} 
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-        </div>
-        <div id="user-input">
           <TextField // Input
             autoFocus // automatically set focus on input (make it active).
             margin="dense"
@@ -108,26 +107,44 @@ const ChessPage = ({ modal } : Props) => {
             name="username"
             value={username}
             required
-            onChange={(e) => setUsername(e.target.value)} 
+            onChange={onChangeUsername} 
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="count"
+            label="Won Count"
+            name="Won Count"
+            value={count}
+            required
+            onChange={onChangeCount} 
+            type="number"
+            fullWidth
+            variant="standard"
+          />
+          <TextField // Input
+            autoFocus // automatically set focus on input (make it active).
+            margin="dense"
+            id="description"
+            label="Intro About 'ya Self"
+            name="Won Count"
+            value={description}
+            required
+            onChange={onChangeDescription} 
             type="text"
             fullWidth
             variant="standard"
           />
         </div>
-        <div id="user-input">
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="count"
-            label="winCount"
-            name="Won Count"
-            value={count}
-            required
-            onChange={(e) => setCount(e.target.value)} 
-            type="number"
-            fullWidth
-            variant="standard"
-          />
+        
+        <div id="user-input3">
+          
+        </div>
+        <div id="user-input4">
+          
         </div>
 
       </CustomDialog>

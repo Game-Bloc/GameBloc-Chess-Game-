@@ -13,10 +13,14 @@ type Profile = record {
   description : text;
 };
 service : () -> {
+  aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;
+  getFen : (text) -> (opt text) query;
   getPlayerProfile : () -> (text) query;
   get_player : (text) -> (opt Profile) query;
   inc : () -> ();
+  move : (text, text) -> (bool);
+  new : (text, bool) -> ();
   read : () -> (nat) query;
   search : (text) -> (opt Profile) query;
   update_player_profile : (nat8, text, text, nat8, text) -> ();

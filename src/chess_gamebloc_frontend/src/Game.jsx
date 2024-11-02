@@ -34,38 +34,46 @@ function Game() {
   // this is the snippet to communicate with the backend functions
 
   const chesss = useMemo(() => new Chess(), []);
-  const [fen, setFen] = useState(chesss.fen()); 
+  const initialFen = localStorage.getItem("chessGameFen") || chesss.fen();
+  const [fen, setFen] = useState(initialFen); 
   const [over, setOver] = useState("");
 
+  // this is to save the FEN position to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("chessGameFen", fen);
+  }, [fen]);
 
-    //   const makeAMove = useCallback (
-    //     (move) => {
-    //         try {
-    //             const result = chess.move(move); // this is the function that updates the chess moves instances
-    //             setFen(chess.fen()); // this works as a re-render trigger the FEN state/notation
 
-    //             console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
-                
-    //             if (chess.isGameOver()) { // this is to check if the pieces movement led to a game over
-    //                 if (chess.isCheckmate()) { // this is to check if the pieces movement led to a checkmate
-    //                     setOver (
-    //                         `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!` // the winner is determined by checking which side/color made the last move
 
-    //                     )                  
-    //                 } else if (chess.isDraw()) {
-    //                     setOver("Draw"); // this sets a message is the game is draw
-    //                 } else {
-    //                     setOver("Game Over");
-    //                 }
-    //             }
 
-    //             return result;
-    //         } catch (e) {
-    //             return null;
-    //         }  // this return null is the move was illegal or invalid
-    //     },
-    //     [chess]
-    //   );
+  //   const makeAMove = useCallback (
+  //     (move) => {
+  //         try {
+  //             const result = chess.move(move); // this is the function that updates the chess moves instances
+  //             setFen(chess.fen()); // this works as a re-render trigger the FEN state/notation
+
+  //             console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
+              
+  //             if (chess.isGameOver()) { // this is to check if the pieces movement led to a game over
+  //                 if (chess.isCheckmate()) { // this is to check if the pieces movement led to a checkmate
+  //                     setOver (
+  //                         `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!` // the winner is determined by checking which side/color made the last move
+
+  //                     )                  
+  //                 } else if (chess.isDraw()) {
+  //                     setOver("Draw"); // this sets a message is the game is draw
+  //                 } else {
+  //                     setOver("Game Over");
+  //                 }
+  //             }
+
+  //             return result;
+  //         } catch (e) {
+  //             return null;
+  //         }  // this return null is the move was illegal or invalid
+  //     },
+  //     [chess]
+  //   );
 
   const makeAMove = useCallback(
     (move) => {
@@ -99,19 +107,19 @@ function Game() {
 
     // the function that handles the pieces movement on the chessboard
     const onDrop = (sourceSquare, targetSquare) => {
-        const moveData = {
-            from: sourceSquare,
-            to: targetSquare,
-            color: chesss.turn(),
-            promotion: "q",
-        }
-        const move = makeAMove(moveData);
-        if (move === null) {
-          return false;  // this function handles any false or illegal pieces movement
-        } else {
-          return true;
-        }
+      const moveData = {
+          from: sourceSquare,
+          to: targetSquare,
+          color: chesss.turn(),
+          promotion: "q",
       }
+      const move = makeAMove(moveData);
+      if (move === null) {
+        return false;  // this function handles any false or illegal pieces movement
+      } else {
+        return true;
+      }
+    }
   
   // this is the rendered UI of the chessboard
   return (
