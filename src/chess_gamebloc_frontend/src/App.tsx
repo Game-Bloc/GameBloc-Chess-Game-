@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route } from "react-router-dom"
 import ChessPage from './ChessPage'
 import LandingPage from './LandingPage'
+import UserInputForm from './UserInputForm'
 
 
 const App = () => {
@@ -9,7 +10,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/landingPage' element={<ChessPage />} />
+        <Route path='/landingPage' element={<UserInputForm />} />
       </Routes>
     </div>
   )

@@ -6,12 +6,13 @@ import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
+import { useNavigate } from 'react-router';
 
 interface Props {
-  modal? : () => void
+  modal?: () => void
 }
 
-const ChessPage = ({ modal } : Props) => {
+function UserInputForm({ modal } : Props) {
 
   const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
   const [ age, setAge ] = useState("")
@@ -21,16 +22,14 @@ const ChessPage = ({ modal } : Props) => {
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const { update_player_profile, updatingProfile } = chessFunctions()
-  const users = useContext(profileContext)
-  const [profile] = useState<ContextProfile>({
-    age: 0,
-    principal: "",
-    name: "",
-    count: 0,
-    description: ""
-  })
-
-  
+  // const users = useContext(profileContext)
+  // const [profile] = useState<ContextProfile>({
+  //   age: 0,
+  //   principal: "",
+  //   name: "",
+  //   count: 0,
+  //   description: ""
+  // })
 
   const onChangeUsername = (e: any) => {
     e.preventDefault()
@@ -78,13 +77,13 @@ const ChessPage = ({ modal } : Props) => {
 
   const continueFunction = () => {
     submit();
-    setUsernameSubmitted(true)    
+    setUsernameSubmitted(true)
+    navigate("/game")
   }
 
   return (
-    <profileContext.Provider value={profile}>
     <Container>
-      {/* <CustomDialog
+      <CustomDialog
         open={!usernameSubmitted} 
         title="Pick a username" 
         contentText="Please select a username" 
@@ -152,12 +151,9 @@ const ChessPage = ({ modal } : Props) => {
           
         </div>
 
-      </CustomDialog> */}
-      <Game />
+      </CustomDialog>
     </Container>
-    </profileContext.Provider>
-  );
+  )
 }
 
-export default ChessPage;
-
+export default UserInputForm
