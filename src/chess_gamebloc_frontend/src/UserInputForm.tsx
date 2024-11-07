@@ -14,6 +14,7 @@ interface Props {
 
 function UserInputForm({ modal } : Props) {
 
+  const navigate = useNavigate()
   const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
   const [ age, setAge ] = useState("")
   const [ principal, setPrincipal ] = useState<string>("")
