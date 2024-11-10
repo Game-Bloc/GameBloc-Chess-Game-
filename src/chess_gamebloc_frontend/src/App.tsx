@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<CurvedTextApp />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/landingPage' element={<UserInputForm />} />
         <Route path='/game' element={<ChessPage />} />
       </Routes>

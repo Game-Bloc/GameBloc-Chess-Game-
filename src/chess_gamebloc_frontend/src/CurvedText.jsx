@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import jsxToString from 'jsx-to-string';
-// import './App.css';
+import './curve.css';
 // import HeaderInfo from './HeaderInfo';
 import ReactCurvedText from './lib/ReactCurvedText';
 
 function CurvedTextApp() {
     const [width, setWidth] = useState(665);
-    const [height, setHeight] = useState(300);
-    const [cx, setCx] = useState(150);
-    const [cy, setCy] = useState(150);
-    const [rx, setRx] = useState(100);
+    const [height, setHeight] = useState(382);
+    const [cx, setCx] = useState(307);
+    const [cy, setCy] = useState(147);
+    const [rx, setRx] = useState(227);
     const [ry, setRy] = useState(100);
     const [startOffset, setStartOffset] = useState(-4);
     const [reversed, setReversed] = useState(true);
     const [text, setText] = useState('WELCOME TO CHESS GAMEBLOC');
-    const [fontSize, setFontSize] = useState(24);
+    const [fontSize, setFontSize] = useState(33);
     const [textPathFill, setTextPathFill] = useState();
     const [dy, setDy] = useState(0);
     const [fill, setFill] = useState();
@@ -106,7 +106,7 @@ function CurvedTextApp() {
                             onChange={(e) => setWidth(e.target.value)}
                         />
                     </div> */}
-                    <div className="settingsItem">
+                    {/* <div className="settingsItem">
                         <label htmlFor="height">height:</label>
                         <input type="number" id="height" value={height} onChange={(e) => setHeight(e.target.value)} />
                         <input
@@ -116,8 +116,8 @@ function CurvedTextApp() {
                             value={height}
                             onChange={(e) => setHeight(e.target.value)}
                         />
-                    </div>
-                    <div className="settingsItem">
+                    </div> */}
+                    {/* <div className="settingsItem">
                         <label htmlFor="cx">cx:</label>
                         <input type="number" id="cx" value={cx} onChange={(e) => setCx(e.target.value)} />
                         <input type="range" min="0" max="1000" value={cx} onChange={(e) => setCx(e.target.value)} />
@@ -136,8 +136,8 @@ function CurvedTextApp() {
                         <label htmlFor="ry">ry:</label>
                         <input type="number" id="ry" value={ry} onChange={(e) => setRy(e.target.value)} />
                         <input type="range" min="0" max="1000" value={ry} onChange={(e) => setRy(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
+                    </div> */}
+                    {/* <div className="settingsItem">
                         <label htmlFor="fontSize">textProps.style.fontSize:</label>
                         <input
                             type="number"
@@ -152,8 +152,8 @@ function CurvedTextApp() {
                             value={fontSize}
                             onChange={(e) => setFontSize(e.target.value)}
                         />
-                    </div>
-                    <div className="settingsItem">
+                    </div> */}
+                    {/* <div className="settingsItem">
                         <label htmlFor="textPathFill">textPathProps.style.fill:</label>
                         <input
                             type="color"
@@ -181,9 +181,9 @@ function CurvedTextApp() {
                             value={rotate}
                             onChange={(e) => setRotate(e.target.value)}
                         />
-                    </div>
+                    </div> */}
                 </div>
-                <div className="currentJsxDiv">
+                {/* <div className="currentJsxDiv">
                     <h2>Current JSX</h2>
                     <span>{currentJsxString}</span>
                 </div>
@@ -299,7 +299,7 @@ function CurvedTextApp() {
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> */}
             </div>
         </div>
     );
