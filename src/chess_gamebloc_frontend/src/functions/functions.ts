@@ -10,7 +10,8 @@ export const chessFunctions = () => {
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
-    const update_player_profile = (
+     
+    const update_player_profile = async(
         age: number,
         principal: string,
         username: string,
@@ -19,7 +20,7 @@ export const chessFunctions = () => {
     ) => {
         try {
             setUpdatingProfile(true)
-            const user = whoamiActor?.update_player_profile(
+            const user = await whoamiActor?.update_player_profile(
                 age,
                 principal,
                 username,
