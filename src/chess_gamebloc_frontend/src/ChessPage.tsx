@@ -25,7 +25,7 @@ const ChessPage = ({ modal } : Props) => {
   const [profile] = useState<ContextProfile>({
     age: 0,
     principal: "",
-    name: "",
+    name: "Sukuna",
     count: 0,
     description: ""
   })
@@ -83,78 +83,9 @@ const ChessPage = ({ modal } : Props) => {
 
   return (
     <profileContext.Provider value={profile}>
-    <Container>
-      {/* <CustomDialog
-        open={!usernameSubmitted} 
-        title="Pick a username" 
-        contentText="Please select a username" 
-        handleContinue={continueFunction}
-      >
-        <div id="user-input1">
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="age"
-            label="Age"
-            name="age"
-            value={age}
-            required
-            onChange={onChangeAge} 
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="username"
-            label="Username"
-            name="username"
-            value={username}
-            required
-            onChange={onChangeUsername} 
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="count"
-            label="Won Count"
-            name="Won Count"
-            value={count}
-            required
-            onChange={onChangeCount} 
-            type="number"
-            fullWidth
-            variant="standard"
-          />
-          <TextField // Input
-            autoFocus // automatically set focus on input (make it active).
-            margin="dense"
-            id="description"
-            label="Intro About 'ya Self"
-            name="Won Count"
-            value={description}
-            required
-            onChange={onChangeDescription} 
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-        </div>
-        
-        <div id="user-input3">
-          
-        </div>
-        <div id="user-input4">
-          
-        </div>
-
-      </CustomDialog> */}
-      <Game />
-    </Container>
+      <Container>
+        <Game />
+      </Container>
     </profileContext.Provider>
   );
 }

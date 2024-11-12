@@ -11,7 +11,7 @@ export const chessFunctions = () => {
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
      
-    const update_player_profile = async(
+    const create_player_profile = async(
         age: number,
         principal: string,
         username: string,
@@ -29,7 +29,7 @@ export const chessFunctions = () => {
             )
             if (user) {
                 setIsLoading(true);
-                if (window.location.pathname === "/landingPage") {
+                if (window.location.pathname === "/game") {
                     window.location.reload()
                 }
                 sessionStorage.setItem("PlayerState", "true")
@@ -46,8 +46,12 @@ export const chessFunctions = () => {
         }
     }
 
+    const getProfile = () => {
+
+    }
+
     return {
-        update_player_profile,
+        create_player_profile,
         updatingProfile, 
     }
 }

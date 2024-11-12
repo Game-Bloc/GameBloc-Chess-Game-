@@ -2,6 +2,7 @@ import { useState } from 'react';
 import jsxToString from 'jsx-to-string';
 import './curve.css';
 // import HeaderInfo from './HeaderInfo';
+import Typewriter from "typewriter-effect"
 import ReactCurvedText from './lib/ReactCurvedText';
 
 function CurvedTextApp() {
@@ -75,231 +76,17 @@ function CurvedTextApp() {
                         View on GitHub
                     </a>
                 </h3> */}
+                {/* <Typewriter
+                    onInit={(typewriter) => {
+                        typewriter
+                            .typeString("GeeksForGeeks")
+                            .pauseFor(1000)
+                            .deleteAll()
+                            .typeString("Welcomes You")
+                            .start();
+                    }}
+                /> */}
                 <div className="exampleWrapperDiv">{currentJsx}</div>
-                <div className="settingsDiv">
-                    
-                    
-                    {/* <div className="settingsItem">
-                        <label htmlFor="startOffset">startOffset:</label>
-                        <input
-                            type="number"
-                            id="startOffset"
-                            value={startOffset}
-                            onChange={(e) => setStartOffset(e.target.value)}
-                        />
-                        <input
-                            type="range"
-                            min="0"
-                            max="1000"
-                            value={startOffset}
-                            onChange={(e) => setStartOffset(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="settingsItem">
-                        <label htmlFor="width">width:</label>
-                        <input type="number" id="width" value={width} onChange={(e) => setWidth(e.target.value)} />
-                        <input
-                            type="range"
-                            min="0"
-                            max="1000"
-                            value={width}
-                            onChange={(e) => setWidth(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="settingsItem">
-                        <label htmlFor="height">height:</label>
-                        <input type="number" id="height" value={height} onChange={(e) => setHeight(e.target.value)} />
-                        <input
-                            type="range"
-                            min="0"
-                            max="1000"
-                            value={height}
-                            onChange={(e) => setHeight(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="settingsItem">
-                        <label htmlFor="cx">cx:</label>
-                        <input type="number" id="cx" value={cx} onChange={(e) => setCx(e.target.value)} />
-                        <input type="range" min="0" max="1000" value={cx} onChange={(e) => setCx(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="cy">cy:</label>
-                        <input type="number" id="cy" value={cy} onChange={(e) => setCy(e.target.value)} />
-                        <input type="range" min="0" max="1000" value={cy} onChange={(e) => setCy(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="rx">rx:</label>
-                        <input type="number" id="rx" value={rx} onChange={(e) => setRx(e.target.value)} />
-                        <input type="range" min="0" max="1000" value={rx} onChange={(e) => setRx(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="ry">ry:</label>
-                        <input type="number" id="ry" value={ry} onChange={(e) => setRy(e.target.value)} />
-                        <input type="range" min="0" max="1000" value={ry} onChange={(e) => setRy(e.target.value)} />
-                    </div> */}
-                    {/* <div className="settingsItem">
-                        <label htmlFor="fontSize">textProps.style.fontSize:</label>
-                        <input
-                            type="number"
-                            id="fontSize"
-                            value={fontSize}
-                            onChange={(e) => setFontSize(e.target.value)}
-                        />
-                        <input
-                            type="range"
-                            min="0"
-                            max="60"
-                            value={fontSize}
-                            onChange={(e) => setFontSize(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div className="settingsItem">
-                        <label htmlFor="textPathFill">textPathProps.style.fill:</label>
-                        <input
-                            type="color"
-                            id="textPathFill"
-                            checked={textPathFill}
-                            onChange={(e) => setTextPathFill(e.target.value)}
-                        />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="dy">tspanProps.dy:</label>
-                        <input type="number" id="dy" value={dy} onChange={(e) => setDy(e.target.value)} />
-                        <input type="range" min="-60" max="60" value={dy} onChange={(e) => setDy(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="fill">ellipseProps.style.fill:</label>
-                        <input type="color" id="fill" checked={fill} onChange={(e) => setFill(e.target.value)} />
-                    </div>
-                    <div className="settingsItem">
-                        <label htmlFor="rotate">svgProps.style.rotate:</label>
-                        <input type="number" id="rotate" value={rotate} onChange={(e) => setRotate(e.target.value)} />
-                        <input
-                            type="range"
-                            min="0"
-                            max="360"
-                            value={rotate}
-                            onChange={(e) => setRotate(e.target.value)}
-                        />
-                    </div> */}
-                </div>
-                {/* <div className="currentJsxDiv">
-                    <h2>Current JSX</h2>
-                    <span>{currentJsxString}</span>
-                </div>
-
-                <h2>LIVE DEMO</h2>
-
-                <div className="demoLinkDiv">
-                    <a href="https://stackblitz.com/edit/react-curved-text-demo" target="_blank" rel="noreferrer">
-                        <h3>Checkout Live Demo</h3>
-                    </a>
-                </div>
-                <div className="demoLinkDiv">
-                    <a href="https://stackblitz.com/edit/react-curved-text-animation" target="_blank" rel="noreferrer">
-                        <h3>Checkout Live Demo with Rotate Animation</h3>
-                    </a>
-                </div>
-
-                <div className="apiDiv">
-                    <h2>API</h2>
-                    <table className="apiTable">
-                        <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Type</th>
-                                <th>Required</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>text</td>
-                                <td>string</td>
-                                <td>yes</td>
-                                <td>Text to be displayed</td>
-                            </tr>
-                            <tr>
-                                <td>width</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Width of the SVG</td>
-                            </tr>
-                            <tr>
-                                <td>height</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Height of the SVG</td>
-                            </tr>
-                            <tr>
-                                <td>cx</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Center x of the ellipse</td>
-                            </tr>
-                            <tr>
-                                <td>cy</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Center y of the ellipse</td>
-                            </tr>
-                            <tr>
-                                <td>rx</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Radius x of the ellipse</td>
-                            </tr>
-                            <tr>
-                                <td>ry</td>
-                                <td>number</td>
-                                <td>yes</td>
-                                <td>Radius y of the ellipse</td>
-                            </tr>
-                            <tr>
-                                <td>startOffset</td>
-                                <td>number</td>
-                                <td>no</td>
-                                <td>Start offset of the text</td>
-                            </tr>
-                            <tr>
-                                <td>reversed</td>
-                                <td>boolean</td>
-                                <td>no</td>
-                                <td>Reverse the text path</td>
-                            </tr>
-                            <tr>
-                                <td>textProps</td>
-                                <td>object</td>
-                                <td>no</td>
-                                <td>Props to be passed to the text element</td>
-                            </tr>
-                            <tr>
-                                <td>textPathProps</td>
-                                <td>object</td>
-                                <td>no</td>
-                                <td>Props to be passed to the textPath element</td>
-                            </tr>
-                            <tr>
-                                <td>tspanProps</td>
-                                <td>object</td>
-                                <td>no</td>
-                                <td>Props to be passed to the tspan element</td>
-                            </tr>
-                            <tr>
-                                <td>ellipseProps</td>
-                                <td>object</td>
-                                <td>no</td>
-                                <td>Props to be passed to the ellipse element</td>
-                            </tr>
-                            <tr>
-                                <td>svgProps</td>
-                                <td>object</td>
-                                <td>no</td>
-                                <td>Props to be passed to the svg element</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> */}
             </div>
         </div>
     );

@@ -22,7 +22,7 @@ function UserInputForm({ modal } : Props) {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
-  const { update_player_profile, updatingProfile } = chessFunctions()
+  const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({
   //   age: 0,
@@ -66,7 +66,7 @@ function UserInputForm({ modal } : Props) {
     if (username.trim() === "" || age.trim() === "") {
       console.log("Either age or username is Empty");
     } else {
-      update_player_profile(
+      create_player_profile(
         +age,
         principal,
         username,

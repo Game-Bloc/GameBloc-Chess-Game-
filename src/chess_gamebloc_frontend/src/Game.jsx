@@ -34,14 +34,8 @@ function Game() {
   // this is the snippet to communicate with the backend functions
 
   const chesss = useMemo(() => new Chess(), []);
-  const initialFen = localStorage.getItem("chessGameFen") || chesss.fen();
-  const [fen, setFen] = useState(initialFen); 
+  const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
-
-  // this is to save the FEN position to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("chessGameFen", fen);
-  }, [fen]);
 
 
 
