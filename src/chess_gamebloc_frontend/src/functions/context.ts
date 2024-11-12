@@ -8,7 +8,7 @@ export interface ContextProfile {
     name : string,
     count : number,
     description : string
-}
+} // this is related to the user type that was used in the tuto
 
 export const profileContext = createContext<Profile | undefined>(undefined);
 
