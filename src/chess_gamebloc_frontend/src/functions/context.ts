@@ -1,7 +1,9 @@
 
 import { createContext, useContext } from "react";
 import { Profile } from "../../../declarations/chess/chess.did"; //ignore
+import { useAuth } from "../auth/use_auth_client"
 
+const { isAuthenticated, whoamiActor } = useAuth()
 export interface ContextProfile {
     age : number,
     principal : string,
@@ -10,7 +12,7 @@ export interface ContextProfile {
     description : string
 } // this is related to the user type that was used in the tuto
 
-export const profileContext = createContext<Profile | undefined>(undefined);
+export const profileContext = createContext<ContextProfile | undefined>(undefined);
 
 export function UseProfileContext () {
     const users = useContext(profileContext)
