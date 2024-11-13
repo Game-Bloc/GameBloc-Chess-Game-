@@ -5,6 +5,7 @@ import LandingPage from './LandingPage'
 import UserInputForm from './UserInputForm'
 import Game from './Game'
 import CurvedTextApp from './CurvedText'
+import AppWrap from './AppWrap'
 
 
 const App = () => {
@@ -13,7 +14,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/landingPage' element={<UserInputForm />} />
-        <Route path='/game' element={<ChessPage />} />
+        <Route path='/game' element={<AppWrap />} />
       </Routes>
     </div>
   )

@@ -134,7 +134,7 @@ function Game() {
               loginNFID();
           }}>Login with NFID</button> */}
 
-          <div>{users.age}</div>
+          <div>{users.name}</div>
           <div>{users.principal}</div>
           <div>{users.name}</div>
           <div>{users.count}</div>

@@ -11,7 +11,7 @@ export interface ContextProfile {
     name : string,
     count : number,
     description : string
-} // this is related to the user type that was used in the tuto
+} // this is related to the user type that was used in the git example
 
 export const profileContext = createContext<ContextProfile | undefined>(undefined);
 

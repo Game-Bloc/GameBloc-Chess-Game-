@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import React from 'react'
-import App from './App'
+import ChessPage from './ChessPage'
 import { ContextProfile, profileContext } from './functions/context'
 
-const AppWrap = () => {
+
+interface AppWrapProp {}
+const AppWrap = ({} : AppWrapProp) => {
 
     const [profile] = useState<ContextProfile>({
         age: 0,
-        principal: "",
+        principal: "Softwork",
         name: "Sukuna",
         count: 0,
         description: ""
@@ -15,7 +17,7 @@ const AppWrap = () => {
   return (
     <>
     <profileContext.Provider value={profile}>
-        <App />
+        <ChessPage />
     </profileContext.Provider>
     </>
   )

@@ -80,11 +80,11 @@ const ChessPage = ({ modal } : Props) => {
   }
 
   return (
-    <profileContext.Provider value={profile}>
+    // <profileContext.Provider value={profile}>
       <Container>
         <Game />
       </Container>
-    </profileContext.Provider>
+    // </profileContext.Provider>
   );
 }
 
