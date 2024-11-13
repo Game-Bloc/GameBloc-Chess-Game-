@@ -3,7 +3,7 @@ import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
-import { ContextProfile, profileContext } from './functions/context';
+import { ContextProfile, profileContext, UseProfileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
 
@@ -21,16 +21,14 @@ const ChessPage = ({ modal } : Props) => {
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const { create_player_profile, updatingProfile } = chessFunctions()
-  const users = useContext(profileContext)
-  const [profile] = useState<ContextProfile>({
-    age: 0,
-    principal: "",
-    name: "Sukuna",
-    count: 0,
-    description: ""
-  })
-
-  
+  const users = UseProfileContext();
+  // const [profile] = useState<ContextProfile>({
+  //   age: 0,
+  //   principal: "",
+  //   name: "Sukuna",
+  //   count: 0,
+  //   description: ""
+  // })
 
   const onChangeUsername = (e: any) => {
     e.preventDefault()

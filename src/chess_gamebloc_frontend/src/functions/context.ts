@@ -1,11 +1,12 @@
 
 import { createContext, useContext } from "react";
 import { Profile } from "../../../declarations/chess/chess.did"; //ignore
-import { useAuth } from "../auth/use_auth_client"
+// import { useAuth } from "../auth/use_auth_client"
 
-const { isAuthenticated, whoamiActor } = useAuth()
+// const { isAuthenticated, whoamiActor } = useAuth()
 export interface ContextProfile {
-    age : number,
+    // const player = whoamiActor.
+    age : number | undefined,
     principal : string,
     name : string,
     count : number,
