@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { ContextProfile, profileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
 import { useNavigate } from 'react-router';
+import { useAuth } from './auth/use_auth_client';
 
 interface Props {
   modal?: () => void
@@ -22,7 +23,7 @@ function UserInputForm({ modal } : Props) {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
-  const { create_player_profile, updatingProfile } = chessFunctions()
+  const { create_player_profile, updatingProfile, getProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({
   //   age: 0,
@@ -81,6 +82,23 @@ function UserInputForm({ modal } : Props) {
     setUsernameSubmitted(true)
     navigate("/game")
   }
+
+  useEffect(() => {
+    getICPrice()
+    if (isAuthenticated) {
+      if (username === "") {
+        getProfile()
+      } else {
+        updateProfile()
+      }
+      getChatmessage(20)
+      if (userSession === "true") {
+        setAccountModal(false)
+      } else {
+        setAccountModal(true)
+      }
+    }
+  }, [isAuthenticated, userSession])
 
   return (
     <Container>

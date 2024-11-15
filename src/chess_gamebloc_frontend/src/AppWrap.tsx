@@ -18,9 +18,9 @@ const AppWrap = ({} : AppWrapProp) => {
       description: ""
   })
 
-  const get_Player_Profile = async () => {
-    
-  }
+  // const get_Player_Profile = () => {
+
+  // }
 
   return (
     

@@ -46,12 +46,23 @@ export const chessFunctions = () => {
         }
     }
 
-    const getProfile = () => {
-
+    const getProfile = async () => {
+        try {
+            setIsLoading(true)
+            const user: any = await whoamiActor?.getPlayerProfile()
+            console.log("the users;", user);
+            if (user.name != "") {
+                setIsLoading(true)
+                
+            }
+        } catch (error) {
+            
+        }
     }
 
     return {
         create_player_profile,
         updatingProfile, 
+        getProfile,
     }
 }
