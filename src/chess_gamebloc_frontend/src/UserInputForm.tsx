@@ -20,6 +20,7 @@ function UserInputForm({ modal } : Props) {
   const [ age, setAge ] = useState("")
   const [ principal, setPrincipal ] = useState<string>("")
   const [ count, setCount ] = useState("")
+  const {  isAuthenticated } = useAuth()
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
@@ -84,21 +85,20 @@ function UserInputForm({ modal } : Props) {
   }
 
   useEffect(() => {
-    getICPrice()
     if (isAuthenticated) {
       if (username === "") {
         getProfile()
       } else {
-        updateProfile()
-      }
-      getChatmessage(20)
-      if (userSession === "true") {
-        setAccountModal(false)
-      } else {
-        setAccountModal(true)
+        create_player_profile(
+          +age,
+        principal,
+        username,
+        +count, 
+        description
+        )
       }
     }
-  }, [isAuthenticated, userSession])
+  }, [isAuthenticated])
 
   return (
     <Container>
