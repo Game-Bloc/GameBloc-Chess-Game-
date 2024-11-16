@@ -1,15 +1,15 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { canisterId, createActor } from "../../../declarations/chess"
-import {
-  canisterId as canisterId2,
-  createActor as createActor2,
-  chess,
-} from "../../../declarations/chess"
-import {
-  canisterId as ledgerId,
-  createActor as createLedgerActor,
-} from "../../../declarations/chess"
+// import {
+//   canisterId as canisterId2,
+//   createActor as createActor2,
+//   chess,
+// } from "../../../declarations/chess"
+// import {
+//   canisterId as ledgerId,
+//   createActor as createLedgerActor,
+// } from "../../../declarations/chess"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE } from "../../../declarations/chess/chess.did"
 import { useAppDispatch } from "../redux/hooks"
@@ -25,7 +25,7 @@ const AuthContext = React.createContext<{
   authClient: any
   identity: any
   principal: any
-  whoamiActor: ActorSubclass<_SERVICE> | null | undefined
+  whoamiActor: ActorSubclass<_SERVICE> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -89,12 +89,12 @@ export const useAuthClient = (options = defaultOptions) => {
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [whoamiActor, setWhoamiActor] = useState<ActorSubclass<_SERVICE>>()
+  const [whoamiActor, setWhoamiActor] = useState<any>()
 
   useEffect(() => {
     // Initialize AuthClient
     AuthClient.create(options.createOptions).then(async (client) => {
-      setAuthClient(client); // this is the issue - relating to other things too
+      updateClient(client); // this is the issue - relating to other things too
       
     })
   }, [])
@@ -122,14 +122,16 @@ export const useAuthClient = (options = defaultOptions) => {
     })
   }
 
-  async function updateClient({client}:any) {
+  async function updateClient(client:any) {
     try {
       const isAuthenticated = await client.isAuthenticated()
+      // console.log("isAuthenticated", isAuthenticated);
+      
       setIsAuthenticated(isAuthenticated)
 
       const identity = client.getIdentity()
       setIdentity(identity)
-      // console.log("identity", identity)
+      console.log("identity", identity)
       const principal = identity.getPrincipal()
 
       setPrincipal(principal)
@@ -137,31 +139,18 @@ export const useAuthClient = (options = defaultOptions) => {
       setAuthClient(client)
 
       console.log("canisterId", canisterId )
-      console.log("canisterId2", canisterId2 )
-      console.log("ledgerId", ledgerId )
-      // console.log("indexId", indexId )
+      
 
       const actor  = createActor(canisterId, {
         agentOptions: {
           identity,
         },
       })
-
-
-      const actor2 = createActor2(canisterId2, {
-        agentOptions: {
-          identity,
-        },
-      })
       
 
-      const actor3 = createLedgerActor(ledgerId, {
-        agentOptions: {
-          identity,
-        },
-      })
+     
 
-      console.log("Actor", actor2)
+      console.log("Actor", actor)
       setWhoamiActor(actor);
       
     } catch (err) {

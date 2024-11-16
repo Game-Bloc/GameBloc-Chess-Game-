@@ -27,15 +27,23 @@ export const chessFunctions = () => {
                 count,
                 description,
             )
-            if (user) {
-                setIsLoading(true);
-                if (window.location.pathname === "/game") {
-                    window.location.reload()
-                }
-                sessionStorage.setItem("PlayerState", "true")
-            } else {
-                setIsLoading(false)
-            }
+            console.log("testing");
+            console.log(user);
+            console.log("age", age);
+            console.log("principal", principal);
+            console.log("username", username);
+            console.log("count", count);
+            console.log("description", description);
+            
+            // if (user) {
+            //     setIsLoading(true);
+            //     if (window.location.pathname === "/game") {
+            //         window.location.reload()
+            //     }
+            //     sessionStorage.setItem("PlayerState", "true")
+            // } else {
+            //     setIsLoading(false)
+            // }
         } catch (err) {
             setIsLoading(false)
             console.log("Failed to create an account", err);

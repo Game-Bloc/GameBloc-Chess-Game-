@@ -86,17 +86,18 @@ function UserInputForm({ modal } : Props) {
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (username === "") {
-        getProfile()
-      } else {
-        create_player_profile(
-          +age,
-        principal,
-        username,
-        +count, 
-        description
-        )
-      }
+      // if (username === "") {
+      //   getProfile()
+      // } else {
+      //   create_player_profile(
+      //     +age,
+      //   principal,
+      //   username,
+      //   +count, 
+      //   description
+      //   )
+      // }
+      getProfile()
     }
   }, [isAuthenticated])
 

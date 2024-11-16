@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 import Game from './Game'
 import { Container, TextField } from '@mui/material'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomDialog from "./components/CustomDialog";
 import { ContextProfile, profileContext, UseProfileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
+import { useAuth } from './auth/use_auth_client';
+// import { chessFunctions } from "./functions/functions"
 
 interface Props {
   modal? : () => void
@@ -20,8 +22,9 @@ const ChessPage = ({ modal } : Props) => {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
-  const { create_player_profile, updatingProfile } = chessFunctions()
+  const { create_player_profile, updatingProfile, getProfile } = chessFunctions()
   const users = UseProfileContext();
+  const {  isAuthenticated } = useAuth()
   // const [profile] = useState<ContextProfile>({
   //   age: 0,
   //   principal: "",
@@ -78,6 +81,23 @@ const ChessPage = ({ modal } : Props) => {
     submit();
     setUsernameSubmitted(true)    
   }
+
+  useEffect(() => {
+    // if (isAuthenticated) {
+      // if (username === "") {
+      //   getProfile()
+      // } else {
+      //   create_player_profile(
+      //     +age,
+      //   principal,
+      //   username,
+      //   +count, 
+      //   description
+      //   )
+      // }
+      getProfile()
+    // }
+  }, [isAuthenticated])
 
   return (
     // <profileContext.Provider value={profile}>
