@@ -6,6 +6,7 @@ import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
 // import { chess } from "../../declarations/chess";
 import { chess } from "../../declarations/chess";
+import { Principal } from "@dfinity/principal";
 import { UseProfileContext } from './functions/context';
 
 // interface AppProps {{} : AppProps}
