@@ -15,21 +15,21 @@ function Game() {
   const users = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
-  window.addEventListener("load", async () => {
-    const profile = { 
-      age: 0
-     }
-    const currentPlayer = await chess.update_player_profile().name
-    document.getElementById("value").innerHTML = currentPlayer
-    // valueElement.innerHTML = currentPlayer;
+  // window.addEventListener("load", async () => {
+  //   const profile = { 
+  //     age: 0
+  //    }
+  //   const currentPlayer = await chess.update_player_profile().name
+  //   document.getElementById("value").innerHTML = currentPlayer
+  //   // valueElement.innerHTML = currentPlayer;
 
-    // if (valueElement) {
-    //     valueElement.innerHTML = currentPlayer;
-    // } else {
-    //     console.error('Element with id "value" not found');
-    // }
-    // console.log("Finished loading")
-  })
+  //   // if (valueElement) {
+  //   //     valueElement.innerHTML = currentPlayer;
+  //   // } else {
+  //   //     console.error('Element with id "value" not found');
+  //   // }
+  //   // console.log("Finished loading")
+  // })
 
   // this is the snippet to communicate with the backend functions
 
@@ -141,7 +141,7 @@ function Game() {
           <div>{users.description}</div>
 
           <div>
-            <p id="value"></p>
+            {/* <p id="value"></p> */}
           </div>
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
