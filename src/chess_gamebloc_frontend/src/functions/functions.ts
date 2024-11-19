@@ -27,13 +27,13 @@ export const chessFunctions = () => {
                 count,
                 description,
             )
-            console.log("testing");
+            // console.log("testing");
             console.log(user);
-            console.log("age", age);
-            console.log("principal", principal);
-            console.log("username", username);
-            console.log("count", count);
-            console.log("description", description);
+            // console.log("age", age);
+            // console.log("principal", principal);
+            // console.log("username", username);
+            // console.log("count", count);
+            // console.log("description", description);
             
             // if (user) {
             //     setIsLoading(true);

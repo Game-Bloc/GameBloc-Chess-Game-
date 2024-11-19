@@ -27,22 +27,19 @@ const ChessPage = ({ modal } : Props) => {
   const {  isAuthenticated } = useAuth()
   const [ userPrincipal, setUserPrincipal ] = useState("")
   const contextTrial = UseProfileContext()
-  const principalVar = contextTrial.principal
+  const principalVar:any = contextTrial.principal
   const playerPrincipal = Principal.fromText(principalVar);
-  const principalID = principalVar
-  // const [profile] = useState<ContextProfile>({
-  //   age: 0,
-  //   principal: "",
-  //   name: "Sukuna",
-  //   count: 0,
-  //   description: ""
-  // })
-
-  const onChangeUsername = (e: any) => {
-    e.preventDefault()
-    const userNameInput = e.target.value
-    setUsername(userNameInput)
+  // const principalID = principalVar
+  
+  const principalCheck = () => {
+    if (isAuthenticated) {
+      console.log("Player Principal To Text", playerPrincipal)
+    }
   }
+
+  useEffect (() => {
+    principalCheck()
+  }, []) 
 
   const onChangeAge = (e: any) => {
     e.preventDefault()
@@ -68,24 +65,24 @@ const ChessPage = ({ modal } : Props) => {
     setDescription(countInput)
   }
 
-  const submit = () => {
-    if (username.trim() === "" || age.trim() === "") {
-      console.log("Either age or username is Empty");
-    } else {
-      create_player_profile(
-        +age,
-        principal,
-        username,
-        +count, 
-        description
-      )
-    }
-  }
+  // const submit = () => {
+  //   if (username.trim() === "" || age.trim() === "") {
+  //     console.log("Either age or username is Empty");
+  //   } else {
+  //     create_player_profile(
+  //       +age,
+  //       principal,
+  //       username,
+  //       +count, 
+  //       description
+  //     )
+  //   }
+  // }
 
-  const continueFunction = () => {
-    submit();
-    setUsernameSubmitted(true)    
-  }
+  // const continueFunction = () => {
+  //   submit();
+  //   setUsernameSubmitted(true)    
+  // }
 
   useEffect(() => {
     // if (isAuthenticated) {

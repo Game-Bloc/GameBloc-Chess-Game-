@@ -1,6 +1,7 @@
 
 import { createContext, useContext } from "react";
 import { Profile } from "../../../declarations/chess/chess.did"; //ignore
+import { Principal } from "@dfinity/principal";
 // import { useAuth } from "../auth/use_auth_client"
 
 // const { isAuthenticated, whoamiActor } = useAuth()

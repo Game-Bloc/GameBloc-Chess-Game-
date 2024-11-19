@@ -8,11 +8,11 @@ interface AppWrapProp {}
 const AppWrap = ({} : AppWrapProp) => {
 
   const { whoamiActor } = useAuth()
-  const actorsAct = whoamiActor?.get_player
+  const [actorsAct, setActor] = useState("")
   
   const [profile] = useState<ContextProfile>({
       age: 0,
-      principal: "Softwork",
+      principal: "aaaaa-aa",
       name: "Sukuna",
       count: 0,
       description: ""
