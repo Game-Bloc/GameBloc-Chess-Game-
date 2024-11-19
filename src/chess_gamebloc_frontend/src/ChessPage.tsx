@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState, useEffect } from "react";
-import CustomDialog from "./components/CustomDialog";
+import { Principal } from "@dfinity/principal";
 import { ContextProfile, profileContext, UseProfileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
@@ -25,6 +25,11 @@ const ChessPage = ({ modal } : Props) => {
   const { create_player_profile, updatingProfile, getProfile } = chessFunctions()
   const users = UseProfileContext();
   const {  isAuthenticated } = useAuth()
+  const [ userPrincipal, setUserPrincipal ] = useState("")
+  const contextTrial = UseProfileContext()
+  const principalVar = contextTrial.principal
+  const playerPrincipal = Principal.fromText(principalVar);
+  const principalID = principalVar
   // const [profile] = useState<ContextProfile>({
   //   age: 0,
   //   principal: "",
