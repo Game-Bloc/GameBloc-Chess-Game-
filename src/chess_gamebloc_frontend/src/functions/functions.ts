@@ -11,25 +11,19 @@ export const chessFunctions = () => {
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
      
-    const create_player_profile = async(
-        age: number,
-        principal: string,
-        username: string,
-        count: number,
-        description: string,
-    ) => {
+    const create_player_profile = async() => {
         try {
             setUpdatingProfile(true)
             const users = await whoamiActor?.update_player_profile(
-                age,
-                principal,
-                username,
-                count,
-                description,
+                0,
+                "principal",
+                "username",
+                0,
+                "description",
             )
             // console.log("testing");
             console.log("created profile", users);
-            console.log("age", age);
+            // console.log("age", age);
             // console.log("principal", principal);
             // console.log("username", username);
             // console.log("count", count);
@@ -48,9 +42,6 @@ export const chessFunctions = () => {
             setIsLoading(false)
             console.log("Failed to create an account", err);
             
-        } finally {
-            setIsLoading(false)
-            return
         }
     }
 

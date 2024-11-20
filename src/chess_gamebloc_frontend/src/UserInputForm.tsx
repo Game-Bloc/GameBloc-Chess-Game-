@@ -68,13 +68,7 @@ function UserInputForm({ modal } : Props) {
     if (username.trim() === "" || age.trim() === "") {
       console.log("Either age or username is Empty");
     } else {
-      create_player_profile(
-        +age,
-        principal,
-        username,
-        +count, 
-        description
-      )
+      create_player_profile()
     }
   }
 

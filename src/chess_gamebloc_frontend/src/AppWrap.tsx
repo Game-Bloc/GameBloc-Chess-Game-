@@ -12,7 +12,7 @@ const AppWrap = ({} : AppWrapProp) => {
   
   const [profile] = useState<ContextProfile>({
       age: 0,
-      principal: "aaaaa-aa",
+      principal: "ifuh5-cjwm6-kngda-3cczv-pafa4-sedqe-qqej7-d4zzm-udp2v-7r4bc-bae",
       name: "Sukuna",
       count: 0,
       description: ""

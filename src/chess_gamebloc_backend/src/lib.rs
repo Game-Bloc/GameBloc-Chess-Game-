@@ -85,6 +85,7 @@ fn get(name:String) -> ManualReply<Profile> {
 #[update]
 fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) {
     let principal_id = ic_cdk::api::caller();
+    ic_cdk::println!("Caller Principal: {:?}", principal_id);
     ID_STORE.with(|id_store| {
         id_store.borrow_mut().insert(name.clone(), principal_id);
     });
@@ -96,7 +97,8 @@ fn update_player_profile(age: u8, principal: String, name: String, count: u8, de
             age,
             principal
         });
-    })
+    });
+    "Player Profile Created Successfully".to_string(); // this is for the return of response for the users
 } 
 
 #[query(manual_reply = true)]
