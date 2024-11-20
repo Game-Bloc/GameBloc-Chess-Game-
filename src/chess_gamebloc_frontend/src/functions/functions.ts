@@ -21,15 +21,15 @@ export const chessFunctions = () => {
         try {
             setUpdatingProfile(true)
             const users = await whoamiActor?.update_player_profile(
-                0,
-                "",
-                "",
-                0,
-                "",
+                age,
+                principal,
+                username,
+                count,
+                description,
             )
             // console.log("testing");
             console.log("created profile", users);
-            // console.log("age", age);
+            console.log("age", age);
             // console.log("principal", principal);
             // console.log("username", username);
             // console.log("count", count);
