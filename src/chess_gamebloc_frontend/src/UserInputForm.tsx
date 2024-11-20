@@ -24,7 +24,7 @@ function UserInputForm({ modal } : Props) {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
-  const { create_player_profile, updatingProfile, getProfile } = chessFunctions()
+  const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({
   //   age: 0,
@@ -84,22 +84,22 @@ function UserInputForm({ modal } : Props) {
     navigate("/game")
   }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      // if (username === "") {
-      //   getProfile()
-      // } else {
-      //   create_player_profile(
-      //     +age,
-      //   principal,
-      //   username,
-      //   +count, 
-      //   description
-      //   )
-      // }
-      getProfile()
-    }
-  }, [isAuthenticated])
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     // if (username === "") {
+  //     //   getProfile()
+  //     // } else {
+  //     //   create_player_profile(
+  //     //     +age,
+  //     //   principal,
+  //     //   username,
+  //     //   +count, 
+  //     //   description
+  //     //   )
+  //     // }
+  //     getProfile()
+  //   }
+  // }, [isAuthenticated])
 
   return (
     <Container>

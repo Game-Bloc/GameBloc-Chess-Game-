@@ -3,7 +3,7 @@ import { profileContext } from "./context";
 import { useAuth } from "../auth/use_auth_client";
 // import 
 import swal from 'sweetalert';
-// import { Principal } from "@dfinity/principal"
+import { Principal } from "@dfinity/principal"
 
 export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
@@ -20,15 +20,15 @@ export const chessFunctions = () => {
     ) => {
         try {
             setUpdatingProfile(true)
-            const user = await whoamiActor?.update_player_profile(
-                age,
-                principal,
-                username,
-                count,
-                description,
+            const users = await whoamiActor?.update_player_profile(
+                0,
+                "",
+                "",
+                0,
+                "",
             )
             // console.log("testing");
-            console.log(user);
+            console.log("created profile", users);
             // console.log("age", age);
             // console.log("principal", principal);
             // console.log("username", username);
@@ -54,23 +54,23 @@ export const chessFunctions = () => {
         }
     }
 
-    const getProfile = async () => {
-        try {
-            setIsLoading(true)
-            const user: any = await whoamiActor?.getPlayerProfile()
-            console.log("the users;", user);
-            if (user.name != "") {
-                setIsLoading(true)
+    // const getProfile = async () => {
+    //     try {
+    //         setIsLoading(true)
+    //         const user: any = await whoamiActor?.getPlayerProfile()
+    //         console.log("the users;", user);
+    //         if (user.name != "") {
+    //             setIsLoading(true)
                 
-            }
-        } catch (error) {
+    //         }
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     return {
         create_player_profile,
         updatingProfile, 
-        getProfile,
+        // getProfile,
     }
 }

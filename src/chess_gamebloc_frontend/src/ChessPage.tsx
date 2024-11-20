@@ -22,7 +22,7 @@ const ChessPage = ({ modal } : Props) => {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
-  const { create_player_profile, updatingProfile, getProfile } = chessFunctions()
+  const { create_player_profile, updatingProfile } = chessFunctions()
   const users = UseProfileContext();
   const {  isAuthenticated } = useAuth()
   const [ userPrincipal, setUserPrincipal ] = useState("")
@@ -84,22 +84,22 @@ const ChessPage = ({ modal } : Props) => {
   //   setUsernameSubmitted(true)    
   // }
 
-  useEffect(() => {
-    // if (isAuthenticated) {
-      // if (username === "") {
-      //   getProfile()
-      // } else {
-      //   create_player_profile(
-      //     +age,
-      //   principal,
-      //   username,
-      //   +count, 
-      //   description
-      //   )
-      // }
-      getProfile()
-    // }
-  }, [isAuthenticated])
+  // useEffect(() => {
+  //   // if (isAuthenticated) {
+  //     // if (username === "") {
+  //     //   getProfile()
+  //     // } else {
+  //     //   create_player_profile(
+  //     //     +age,
+  //     //   principal,
+  //     //   username,
+  //     //   +count, 
+  //     //   description
+  //     //   )
+  //     // }
+  //     getProfile()
+  //   // }
+  // }, [isAuthenticated])
 
   return (
     // <profileContext.Provider value={profile}>
