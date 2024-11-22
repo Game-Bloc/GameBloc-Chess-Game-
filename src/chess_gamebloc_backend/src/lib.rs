@@ -83,24 +83,52 @@ fn get(name:String) -> ManualReply<Profile> {
 }
 
 #[update]
-fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) {
+fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
     let principal_id = ic_cdk::api::caller();
     ic_cdk::println!("Caller Principal: {:?}", principal_id);
     ID_STORE.with(|id_store| {
         id_store.borrow_mut().insert(name.clone(), principal_id);
     });
     PROFILE_STORE.with(|profile_store| {
-        profile_store.borrow_mut().insert(principal_id, Profile{
+        profile_store.borrow_mut().insert(principal_id, Profile {
             name,
             description,
             count,
             age,
-            principal
+            principal,
         });
     });
-    "Player Profile Created Successfully".to_string(); // this is for the return of response for the users
-} 
+    "Player Profile Created Successfully".to_string()
+}
+// #[query]
+// fn source (name: String, description: String, count: u8, age: u8, principal: String, description:String) 
+// ic_cdk::println!("Storing profile: {:?}", Profile {
+//     name,
+//     description,
+//     count,
+//     age,
+//     principal,
+// });
 
+
+// #[update] // this is the adjusted update_player_profile fn
+// fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
+//     let principal_id = ic_cdk::api::caller();
+//     ic_cdk::println!("Caller Principal: {:?}", principal_id);
+//     ID_STORE.with(|id_store| {
+//         id_store.borrow_mut().insert(name.clone(), principal_id);
+//     });
+//     PROFILE_STORE.with(|profile_store| {
+//         profile_store.borrow_mut().insert(principal_id, Profile {
+//             name,
+//             description,
+//             count,
+//             age,
+//             principal,
+//         });
+//     });
+//     "Player Profile Created Successfully".to_string()
+// }
 
 #[query(manual_reply = true)]
 fn search(text: String) -> ManualReply<Option<Profile>> {

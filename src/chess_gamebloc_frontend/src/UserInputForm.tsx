@@ -18,9 +18,9 @@ function UserInputForm({ modal } : Props) {
   const navigate = useNavigate()
   const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
   const [ age, setAge ] = useState("")
-  const [ principal, setPrincipal ] = useState<string>("")
+  // const [ principal, setPrincipal ] = useState<string>("")
   const [ count, setCount ] = useState("")
-  const {  isAuthenticated } = useAuth()
+  const {  isAuthenticated, principal} = useAuth()
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
@@ -68,7 +68,13 @@ function UserInputForm({ modal } : Props) {
     if (username.trim() === "" || age.trim() === "") {
       console.log("Either age or username is Empty");
     } else {
-      create_player_profile()
+      create_player_profile(
+        +age,
+        principal || "",
+        username,
+        +count,
+        description,
+      )
     }
   }
 
@@ -77,6 +83,12 @@ function UserInputForm({ modal } : Props) {
     setUsernameSubmitted(true)
     navigate("/game")
   }
+  
+  console.log("username", setUsername);
+  console.log("age", setAge);
+  console.log("description", setDescription);
+  console.log("count", setCount);
+  
 
   // useEffect(() => {
   //   if (isAuthenticated) {
