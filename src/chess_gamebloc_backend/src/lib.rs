@@ -101,6 +101,7 @@ fn update_player_profile(age: u8, principal: String, name: String, count: u8, de
     "Player Profile Created Successfully".to_string(); // this is for the return of response for the users
 } 
 
+
 #[query(manual_reply = true)]
 fn search(text: String) -> ManualReply<Option<Profile>> {
     let text = text.to_lowercase();

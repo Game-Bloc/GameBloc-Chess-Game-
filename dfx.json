@@ -7,7 +7,7 @@
     },
     "chess_gamebloc_frontend": {
       "dependencies": [
-        "chess"
+        "chess"                                                   
       ],
       "source": [
         "src/chess_gamebloc_frontend/dist"
