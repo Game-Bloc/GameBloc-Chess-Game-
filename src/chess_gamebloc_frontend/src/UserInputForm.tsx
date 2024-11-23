@@ -69,10 +69,10 @@ function UserInputForm({ modal } : Props) {
       console.log("Either age or username is Empty");
     } else {
       create_player_profile(
-        +age,
+        age,
         principal || "",
         username,
-        +count,
+        count,
         description,
       )
     }

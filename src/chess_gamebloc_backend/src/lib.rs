@@ -4,6 +4,10 @@ use ic_cdk::{api::call::ManualReply, init, query, update};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
+// use ic_cdk::export::Principal;
+// use ic_cdk_macros::update;
+// use std::cell::RefCell;
+// use std::collections::HashMap;
 // from the ic-cdk on icp 
 
 use tanton::tools::Searcher;
@@ -15,6 +19,7 @@ mod getrandom_fail;
 type GameStore = BTreeMap<String, GameInternal>; // from cdk-chess
 type IdStore = BTreeMap<String, Principal>;
 type ProfileStore = BTreeMap<Principal, Profile>; // the 'profile' here, is it the same with the struct name
+// static PROFILE_STORE: RefCell<HashMap<Principal, Profile>> = RefCell::new(HashMap::new());
 
 #[derive(Clone, Debug, Default, candid::CandidType, candid::Deserialize, Serialize)]
 struct Profile {
@@ -82,24 +87,92 @@ fn get(name:String) -> ManualReply<Profile> {
     })
 }
 
+// #[update]
+// fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
+//     let principal_id = ic_cdk::api::caller();
+//     ic_cdk::println!("Caller Principal: {:?}", principal_id);
+//     ID_STORE.with(|id_store| {
+//         id_store.borrow_mut().insert(name.clone(), principal_id);
+//     });
+//     PROFILE_STORE.with(|profile_store| {
+//         profile_store.borrow_mut().insert(principal_id, Profile {
+//             name,
+//             description,
+//             count,
+//             age,
+//             principal,
+//         });
+//     });
+//     "Player Profile Created Successfully".to_string()
+// }
+
+// #[update]
+// fn update_player_profile(
+//     age: u8,
+//     principal: String,
+//     name: String,
+//     count: u8,
+//     description: String,
+// ) -> String {
+//     let caller_principal = Principal::from_text(&principal)
+//         .unwrap_or_else(|_| ic_cdk::api::caller());
+
+//     ic_cdk::println!("Caller Principal: {:?}", caller_principal);
+//     ic_cdk::println!(
+//         "Received data: age={}, principal={}, name={}, count={}, description={}",
+//         age, principal, name, count, description
+//     );
+
+//     PROFILE_STORE.with(|profile_store| {
+//         profile_store.borrow_mut().insert(
+//             caller_principal,
+//             Profile {
+//                 name,
+//                 description,
+//                 count,
+//                 age,
+//                 principal,
+//             },
+//         );
+//     });
+
+//     format!("Player profile updated successfully for principal: {}", caller_principal.to_text())
+// }
+
 #[update]
-fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
-    let principal_id = ic_cdk::api::caller();
-    ic_cdk::println!("Caller Principal: {:?}", principal_id);
-    ID_STORE.with(|id_store| {
-        id_store.borrow_mut().insert(name.clone(), principal_id);
-    });
+fn update_player_profile(
+    age: u8,
+    principal: String,
+    name: String,
+    count: u8,
+    description: String,
+) -> Profile {
+    let caller_principal = Principal::from_text(&principal)
+        .unwrap_or_else(|_| ic_cdk::api::caller());
+
+    ic_cdk::println!("Caller Principal: {:?}", caller_principal);
+    ic_cdk::println!(
+        "Received data: age={}, principal={}, name={}, count={}, description={}",
+        age, principal, name, count, description
+    );
+
+    let profile = Profile {
+        name,
+        description,
+        count,
+        age,
+        principal: caller_principal.to_text(),
+    };
+
     PROFILE_STORE.with(|profile_store| {
-        profile_store.borrow_mut().insert(principal_id, Profile {
-            name,
-            description,
-            count,
-            age,
-            principal,
-        });
+        profile_store.borrow_mut().insert(caller_principal, profile.clone());
     });
-    "Player Profile Created Successfully".to_string()
+
+    profile
 }
+
+
+
 // #[query]
 // fn source (name: String, description: String, count: u8, age: u8, principal: String, description:String) 
 // ic_cdk::println!("Storing profile: {:?}", Profile {

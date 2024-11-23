@@ -11,18 +11,31 @@ export const chessFunctions = () => {
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
      
-    const create_player_profile = async(age: number, principal: string, username: string, count: number, description: string) => {
+    const create_player_profile = async(age: string, principal: string, username: string, count: string, description: string) => {
         try {
             setUpdatingProfile(true)
-            const users = await whoamiActor?.update_player_profile(
+
+            console.log("Sending data:", {
                 age,
-                principal,
+                principal: principal.toString(),
                 username,
                 count,
                 description,
+            });
+
+            const users = await whoamiActor?.update_player_profile(
+                parseInt(age),
+                principal.toString(),
+                username,
+                parseInt(count),
+                description,
             )
             // console.log("testing");
-            console.log("created profile", users);
+            if (users) {
+                console.log("created profile", users);
+            } else {
+                console.warn("Profile creation returned undefined. Check backend response.");
+            }
             // console.log("age", age);
             // console.log("principal", principal);
             // console.log("username", username);

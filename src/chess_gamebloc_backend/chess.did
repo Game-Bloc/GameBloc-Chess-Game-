@@ -23,7 +23,7 @@ service : () -> {
   new : (text, bool) -> ();
   read : () -> (nat) query;
   search : (text) -> (opt Profile) query;
-  update_player_profile : (nat8, text, text, nat8, text) -> ();
+  update_player_profile : (nat8, text, text, nat8, text) -> (Profile);
   whoami : () -> (principal) query;
   write : (nat) -> ();
 }
