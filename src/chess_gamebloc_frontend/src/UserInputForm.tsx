@@ -84,10 +84,10 @@ function UserInputForm({ modal } : Props) {
     navigate("/game")
   }
   
-  console.log("username", setUsername);
-  console.log("age", setAge);
-  console.log("description", setDescription);
-  console.log("count", setCount);
+  // console.log("username", setUsername);
+  // console.log("age", setAge);
+  // console.log("description", setDescription);
+  // console.log("count", setCount);
   
 
   // useEffect(() => {

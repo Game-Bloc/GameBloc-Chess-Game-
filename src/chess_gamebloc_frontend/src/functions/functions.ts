@@ -59,23 +59,21 @@ export const chessFunctions = () => {
         }
     }
 
-    // const getProfile = async () => {
-    //     try {
-    //         setIsLoading(true)
-    //         const user: any = await whoamiActor?.getPlayerProfile()
-    //         console.log("the users;", user);
-    //         if (user.name != "") {
-    //             setIsLoading(true)
-                
-    //         }
-    //     } catch (error) {
+    const getProfile = async () => {
+        try {
+            setIsLoading(true)
+            const user: any = await whoamiActor?.getPlayerProfile()
+            console.log("players profile gotten", user);
             
-    //     }
-    // }
+        } catch (error) {
+            console.log("couldn7t get player profile");
+            
+        }
+    }
 
     return {
         create_player_profile,
         updatingProfile, 
-        // getProfile,
+        getProfile,
     }
 }
