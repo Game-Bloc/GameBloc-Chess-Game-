@@ -66,7 +66,7 @@ export const chessFunctions = () => {
             console.log("players profile gotten", user);
             
         } catch (error) {
-            console.log("couldn7t get player profile");
+            console.log("couldn't get player profile");
             
         }
     }
