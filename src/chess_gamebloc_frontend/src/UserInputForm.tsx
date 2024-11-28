@@ -9,11 +9,17 @@ import { chessFunctions } from "./functions/functions"
 import { useNavigate } from 'react-router';
 import { useAuth } from './auth/use_auth_client';
 
-interface Props {
-  modal?: () => void
+interface PlayerInputProps {
+  createPlayerProfile: (
+      age: string,
+      principal: string,
+      username: string,
+      count: string,
+      description: string
+  ) => Promise<void>;
 }
 
-function UserInputForm({ modal } : Props) {
+function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
 
   const navigate = useNavigate()
   const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
@@ -33,6 +39,16 @@ function UserInputForm({ modal } : Props) {
   //   count: 0,
   //   description: ""
   // })
+
+  const handleProfileUpdate = () => {
+    createPlayerProfile(
+      age, 
+      "principal_id", 
+      username, 
+      count, 
+      "kill",
+    );
+  };
 
   const onChangeUsername = (e: any) => {
     e.preventDefault()
@@ -79,7 +95,7 @@ function UserInputForm({ modal } : Props) {
   }
 
   const continueFunction = () => {
-    submit();
+    handleProfileUpdate();
     setUsernameSubmitted(true)
     navigate("/game")
   }

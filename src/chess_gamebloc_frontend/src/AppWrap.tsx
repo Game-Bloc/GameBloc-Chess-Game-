@@ -20,7 +20,7 @@ const AppWrap = ({} : AppWrapProp) => {
   
   const [profile, setProfile] = useState<ContextProfile>({
     age: 0,
-    principal: "",
+    principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
     name: "",
     count: 0,
     description: ""
@@ -29,7 +29,13 @@ const AppWrap = ({} : AppWrapProp) => {
   const { whoamiActor } = useAuth()
   const [ updatingProfile, setUpdatingProfile ] = useState(false)
 
-  const create_player_profile = async(age: string, principal: string, username: string, count: string, description: string) => {
+  const create_player_profile = async (
+    age: string, 
+    principal: string, 
+    username: string, 
+    count: string, 
+    description: string
+  ) => {
     try {
         setUpdatingProfile(true)
 
@@ -53,6 +59,13 @@ const AppWrap = ({} : AppWrapProp) => {
         // console.log("testing");
         if (users) {
             console.log("created profile", users);
+            setProfile({
+              age: parseInt(age),
+                principal,
+                name: username,
+                count: parseInt(count),
+                description,
+            })
         } else {
             console.warn("Profile creation returned undefined. Check backend response.");
         }
@@ -82,7 +95,7 @@ const AppWrap = ({} : AppWrapProp) => {
   return (
     
     <profileContext.Provider value={profile}>
-      <ChessPage />
+      <ChessPage  />
     </profileContext.Provider>
   
   )
