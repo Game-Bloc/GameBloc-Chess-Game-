@@ -7,7 +7,7 @@ import { Principal } from "@dfinity/principal";
 // const { isAuthenticated, whoamiActor } = useAuth()
 export interface ContextProfile {
     // const player = whoamiActor.
-    age : number | undefined,
+    age : number,
     principal : string,
     name : string,
     count : number,
