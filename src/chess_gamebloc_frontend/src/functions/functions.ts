@@ -3,6 +3,7 @@ import { profileContext } from "./context";
 import { useAuth } from "../auth/use_auth_client";
 // import 
 import swal from 'sweetalert';
+// import { UseProfileContext } from "./context";
 import { Principal } from "@dfinity/principal"
 
 export const chessFunctions = () => {
@@ -22,6 +23,8 @@ export const chessFunctions = () => {
                 count,
                 description,
             });
+
+            // const PlayerUsername = UseProfileContext();
 
             const users = await whoamiActor?.update_player_profile(
                 parseInt(age),
@@ -55,7 +58,7 @@ export const chessFunctions = () => {
             // setIsLoading(false)
             console.log("Failed to create an account", err);
         } finally {
-            setUpdatingProfile(false);
+            setUpdatingProfile(true);
         }
     }
 
@@ -64,9 +67,15 @@ export const chessFunctions = () => {
             setIsLoading(true)
             const user: any = await whoamiActor?.getPlayerProfile()
             console.log("players profile gotten", user);
+            // if (user.name != "") {
+            //     console.log("gotten profile:", user);
+            // } else {
+            //     console.log("couldn't listen to the player info");
+            // }
             
         } catch (error) {
-            console.log("couldn't get player profile");
+            setIsLoading(false)
+            console.log("couldn't get player profile", error);
             
         }
     }

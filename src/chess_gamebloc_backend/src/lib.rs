@@ -55,17 +55,31 @@ thread_local! {
     static STORE: RefCell<GameStore> = RefCell::default();
 }
 
+// #[query(name = "getPlayerProfile", manual_reply = true)]
+// fn player_info() -> ManualReply<String> {
+//     let id = ic_cdk::api::caller();
+//     PROFILE_STORE.with(| profile_store | {
+//         if let Some(profile) = profile_store.borrow().get(&id) {
+//             ManualReply::one(profile.clone())
+//         } else {
+//             ManualReply::one(Profile::default())
+//         }
+//     })
+// }
+
 #[query(name = "getPlayerProfile", manual_reply = true)]
-fn player_info() -> ManualReply<String> {
+fn player_info() -> ManualReply<Profile> {
     let id = ic_cdk::api::caller();
-    PROFILE_STORE.with(| profile_store | {
+    PROFILE_STORE.with(|profile_store| {
         if let Some(profile) = profile_store.borrow().get(&id) {
-            ManualReply::one(profile.name.clone())
+            ManualReply::one(profile.clone())
         } else {
+            // this will return a default or error profile if no profile exists for the caller
             ManualReply::one(Profile::default())
         }
     })
 }
+
 
 // #[update(name = "setProfile", manual_reply = true)]
 #[query]

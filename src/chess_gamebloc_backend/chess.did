@@ -16,7 +16,7 @@ service : () -> {
   aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;
   getFen : (text) -> (opt text) query;
-  getPlayerProfile : () -> (text) query;
+  getPlayerProfile : () -> (Profile) query;
   get_player : (text) -> (opt Profile) query;
   inc : () -> ();
   move : (text, text) -> (bool);

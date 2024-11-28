@@ -4,15 +4,14 @@ import { Chess } from "chess.js";
 import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
-// import { chess } from "../../declarations/chess";
-import { chess } from "../../declarations/chess";
+import { chessFunctions } from "./functions/functions";
 import { UseProfileContext } from './functions/context';
 
 // interface AppProps {{} : AppProps}
 
 function Game() {
-  const { whoamiActor, principal } = useAuth();
-  const users = UseProfileContext();
+  const { whoamiActor, isAuthenticated } = useAuth();
+  // const users = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
   // window.addEventListener("load", async () => {
@@ -36,6 +35,7 @@ function Game() {
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
+  const { getProfile } = chessFunctions()
 
 
 
@@ -114,6 +114,12 @@ function Game() {
         return true;
       }
     }
+
+    useEffect (() => {
+      if (isAuthenticated) {  
+        getProfile()
+      }
+    }, [isAuthenticated])
   
   // this is the rendered UI of the chessboard
   return (
@@ -134,11 +140,11 @@ function Game() {
               loginNFID();
           }}>Login with NFID</button> */}
 
-          <div>{users.age}</div>
-          <div>{users.principal}</div>
-          <div>{users.name}</div>
-          <div>{users.count}</div>
-          <div>{users.description}</div>
+          {/* <div>{users.age}</div> */}
+          {/* <div>{users.principal}</div> */}
+          {/* <div>{users.name}</div> */}
+          {/* <div>{users.count}</div> */}
+          {/* <div>{users.description}</div> */}
 
           <div>
             {/* <p id="value"></p> */}
