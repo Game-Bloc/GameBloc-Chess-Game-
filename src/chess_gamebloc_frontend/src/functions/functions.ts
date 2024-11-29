@@ -12,7 +12,13 @@ export const chessFunctions = () => {
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
 
      
-    const create_player_profile = async(age: string, principal: string, username: string, count: string, description: string) => {
+    const create_player_profile = async(
+        age: string, 
+        principal: string, 
+        username: string, 
+        count: string, 
+        description: string
+    ) => {
         try {
             setUpdatingProfile(true)
 
@@ -39,21 +45,7 @@ export const chessFunctions = () => {
             } else {
                 console.warn("Profile creation returned undefined. Check backend response.");
             }
-            // console.log("age", age);
-            // console.log("principal", principal);
-            // console.log("username", username);
-            // console.log("count", count);
-            // console.log("description", description);
             
-            // if (user) {
-            //     setIsLoading(true);
-            //     if (window.location.pathname === "/game") {
-            //         window.location.reload()
-            //     }
-            //     sessionStorage.setItem("PlayerState", "true")
-            // } else {
-            //     setIsLoading(false)
-            // }
         } catch (err) {
             // setIsLoading(false)
             console.log("Failed to create an account", err);

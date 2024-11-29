@@ -42,11 +42,11 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
 
   const handleProfileUpdate = () => {
     createPlayerProfile(
-      age, 
+      "0", 
       "principal_id", 
-      username, 
-      count, 
-      "kill",
+      "", 
+      "0", 
+      "",
     );
   };
 
@@ -95,7 +95,7 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
   }
 
   const continueFunction = () => {
-    handleProfileUpdate();
+    submit();
     setUsernameSubmitted(true)
     navigate("/game")
   }

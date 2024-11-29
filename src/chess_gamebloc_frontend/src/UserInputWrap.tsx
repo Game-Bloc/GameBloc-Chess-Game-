@@ -9,8 +9,8 @@ const UserInputWrap = () => {
     const [profile, setProfile] = useState<ContextProfile>({
         age: 0,
         principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
-        name: "philip",
-        count: 88,
+        name: "",
+        count: 0,
         description: ""
     })
 
@@ -47,31 +47,17 @@ const UserInputWrap = () => {
             // console.log("testing");
             if (users) {
                 console.log("created profile", users);
-                setProfile({
-                    age: parseInt(age),
-                    principal,
-                    name: username,
-                    count: parseInt(count),
-                    description,
-                });
+                // setProfile({
+                //     age: parseInt(age),
+                //     principal,
+                //     name: username,
+                //     count: parseInt(count),
+                //     description,
+                // });
             } else {
                 console.warn("Profile creation returned undefined. Check backend response.");
             }
-            // console.log("age", age);
-            // console.log("principal", principal);
-            // console.log("username", username);
-            // console.log("count", count);
-            // console.log("description", description);
-            
-            // if (user) {
-            //     setIsLoading(true);
-            //     if (window.location.pathname === "/game") {
-            //         window.location.reload()
-            //     }
-            //     sessionStorage.setItem("PlayerState", "true")
-            // } else {
-            //     setIsLoading(false)
-            // }
+        
         } catch (err) {
             // setIsLoading(false)
             console.log("Failed to create an account", err);
