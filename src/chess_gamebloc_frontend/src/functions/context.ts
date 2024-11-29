@@ -1,17 +1,18 @@
 
 import { createContext, useContext } from "react";
 import { Profile } from "../../../declarations/chess/chess.did"; //ignore
-import { Principal } from "@dfinity/principal";
+// import { ProfileContextType } from "../UserInputForm";
 // import { useAuth } from "../auth/use_auth_client"
 
 // const { isAuthenticated, whoamiActor } = useAuth()
 export interface ContextProfile {
     // const player = whoamiActor.
-    age : number,
+    age : number | undefined,
     principal : string,
     name : string,
     count : number,
     description : string
+    // updateProfile?: (newProfile: Partial<ContextProfile>) => void;
 } // this is related to the user type that was used in the git example
 
 export const profileContext = createContext<ContextProfile | undefined>(undefined);

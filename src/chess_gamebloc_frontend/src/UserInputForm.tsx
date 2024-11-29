@@ -19,6 +19,12 @@ interface PlayerInputProps {
   ) => Promise<void>;
 }
 
+
+// export interface ProfileContextType {
+//   profile: ContextProfile;
+//   updateProfile: (newProfile: Partial<ContextProfile>) => void;
+// }
+
 function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
 
   const navigate = useNavigate()

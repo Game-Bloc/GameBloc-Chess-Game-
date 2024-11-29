@@ -3,6 +3,8 @@ import React from 'react'
 import { ContextProfile, profileContext } from './functions/context'
 import UserInputForm from './UserInputForm'
 import { useAuth } from './auth/use_auth_client'
+import { ProfileContextType } from './UserInputForm'
+
 
 const UserInputWrap = () => {
 
@@ -13,6 +15,10 @@ const UserInputWrap = () => {
         count: 0,
         description: ""
     })
+
+    const updateProfile = (updatedProfile: Partial<ContextProfile>) => {
+        setProfile((prevProfile) => ({ ...prevProfile, ...updateProfile }))
+    }
 
     const { whoamiActor } = useAuth();
     const [updatingProfile, setUpdatingProfile] = useState(false)
@@ -68,7 +74,8 @@ const UserInputWrap = () => {
 
   return (
     
-    <profileContext.Provider value={profile}>
+    <profileContext.Provider value={{ profile, updateProfile }}>
+       
         <UserInputForm createPlayerProfile = {create_player_profile}/>
     </profileContext.Provider>
   )

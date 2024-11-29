@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Principal } from "@dfinity/principal";
 import { ContextProfile, profileContext, UseProfileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
+// import { ProfileContextType } from './UserInputForm';
 import { chessFunctions } from "./functions/functions"
 import { useAuth } from './auth/use_auth_client';
 // import { chessFunctions } from "./functions/functions"
@@ -33,11 +34,9 @@ const ChessPage = ({ modal } : Props) => {
   }, []) 
 
   return (
-    // <profileContext.Provider value={profile}>
       <Container>
         <Game />
       </Container>
-    // </profileContext.Provider>
   );
 }
 
