@@ -31,6 +31,7 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const contextGrab = UseProfileContext()
+  const usernameContext = contextGrab.name
   const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({
@@ -53,7 +54,8 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
 
   const onChangeUsername = (e: any) => {
     e.preventDefault()
-    const userNameInput = e.target.value
+    const userNameInput = e.target.value;
+    // console.log("username", userNameInput);
     setUsername(userNameInput)
   }
 
@@ -62,12 +64,6 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
     const ageInput = e.target.value
     setAge(ageInput)
   }
-
-  // const onChangePrincipal = (e: any) => {
-  //   e.preventDefault()
-  //   const porincipalInput = e.target.value
-  //   setPrincipal(porincipalInput)
-  // }
 
   const onChangeCount = (e: any) => {
     e.preventDefault()
