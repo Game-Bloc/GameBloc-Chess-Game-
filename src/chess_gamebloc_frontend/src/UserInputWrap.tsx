@@ -3,7 +3,7 @@ import React from 'react'
 import { ContextProfile, profileContext } from './functions/context'
 import UserInputForm from './UserInputForm'
 import { useAuth } from './auth/use_auth_client'
-import { ProfileContextType } from './UserInputForm'
+// import { ProfileContextType } from './UserInputForm'
 
 
 const UserInputWrap = () => {
@@ -74,8 +74,7 @@ const UserInputWrap = () => {
 
   return (
     
-    <profileContext.Provider value={{ profile, updateProfile }}>
-       
+    <profileContext.Provider value={ profile }>
         <UserInputForm createPlayerProfile = {create_player_profile}/>
     </profileContext.Provider>
   )

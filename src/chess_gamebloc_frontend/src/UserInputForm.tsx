@@ -3,7 +3,7 @@ import Game from './Game'
 import { Container, TextField } from '@mui/material'
 import { useState } from "react";
 import CustomDialog from "./components/CustomDialog";
-import { ContextProfile, profileContext } from './functions/context';
+import { ContextProfile, profileContext, UseProfileContext } from './functions/context';
 // import { useAuth } from './auth/use_auth_client';
 import { chessFunctions } from "./functions/functions"
 import { useNavigate } from 'react-router';
@@ -19,12 +19,6 @@ interface PlayerInputProps {
   ) => Promise<void>;
 }
 
-
-// export interface ProfileContextType {
-//   profile: ContextProfile;
-//   updateProfile: (newProfile: Partial<ContextProfile>) => void;
-// }
-
 function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
 
   const navigate = useNavigate()
@@ -36,6 +30,7 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
   const [ description, setDescription ] = useState<string>("")
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
+  const contextGrab = UseProfileContext()
   const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({

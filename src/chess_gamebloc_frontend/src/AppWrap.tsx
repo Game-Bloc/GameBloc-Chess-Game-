@@ -7,19 +7,9 @@ import { useAuth } from './auth/use_auth_client'
 
 interface AppWrapProp {}
 const AppWrap = ({} : AppWrapProp) => {
-
-  // const playersUsers = async () => {
-  //   try {
-  //     const userPlayer = await whoamiActor?.update_player_profile(
-        
-  //     )
-  //   } catch (error) {
-      
-  //   }
-  // }
   
   const [profile, setProfile] = useState<ContextProfile>({
-    age: 0,
+    age: 40,
     principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
     name: "",
     count: 0,
