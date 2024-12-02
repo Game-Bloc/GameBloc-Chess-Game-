@@ -13,7 +13,10 @@ const UserInputWrap = () => {
         principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
         name: "",
         count: 0,
-        description: ""
+        description: "",
+        updateProfile: (newProfile) => {
+            setProfile((prevProfile) => ({ ...prevProfile, ...newProfile }));
+        },
     })
 
     const updateProfile = (updatedProfile: Partial<ContextProfile>) => {
@@ -75,7 +78,7 @@ const UserInputWrap = () => {
   return (
     
     <profileContext.Provider value={ profile }>
-        <UserInputForm createPlayerProfile = {create_player_profile}/>
+        <UserInputForm/>
     </profileContext.Provider>
   )
 }

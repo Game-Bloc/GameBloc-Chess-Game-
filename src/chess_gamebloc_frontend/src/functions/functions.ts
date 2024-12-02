@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { profileContext } from "./context";
+import { UseProfileContext } from "./context";
 import { useAuth } from "../auth/use_auth_client";
 // import 
 import swal from 'sweetalert';
@@ -10,6 +10,7 @@ export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
+    const contextGrab = UseProfileContext();
 
      
     const create_player_profile = async(
@@ -22,13 +23,13 @@ export const chessFunctions = () => {
         try {
             setUpdatingProfile(true)
 
-            console.log("Sending data:", {
-                age,
-                principal: principal.toString(),
-                username,
-                count,
-                description,
-            });
+            // console.log("Sending data:", {
+            //     age,
+            //     principal: principal.toString(),
+            //     username,
+            //     count,
+            //     description,
+            // });
 
             // const PlayerUsername = UseProfileContext();
 
@@ -42,6 +43,14 @@ export const chessFunctions = () => {
             // console.log("testing");
             if (users) {
                 console.log("created profile", users);
+
+                contextGrab.updateProfile({
+                    age: parseInt(age),
+                    principal,
+                    name: username,
+                    count: parseInt(count),
+                    description,
+                })
             } else {
                 console.warn("Profile creation returned undefined. Check backend response.");
             }

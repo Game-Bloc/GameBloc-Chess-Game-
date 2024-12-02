@@ -9,17 +9,17 @@ import { chessFunctions } from "./functions/functions"
 import { useNavigate } from 'react-router';
 import { useAuth } from './auth/use_auth_client';
 
-interface PlayerInputProps {
-  createPlayerProfile: (
-      age: string,
-      principal: string,
-      username: string,
-      count: string,
-      description: string
-  ) => Promise<void>;
-}
+// interface PlayerInputProps {
+//   createPlayerProfile: (
+//       age: string,
+//       principal: string,
+//       username: string,
+//       count: string,
+//       description: string
+//   ) => Promise<void>;
+// }
 
-function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
+function UserInputForm() {
 
   const navigate = useNavigate()
   const [username, setUsername] = useState<string>('');  // the player gets to enter a in-game username for the game
@@ -42,15 +42,15 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
   //   description: ""
   // })
 
-  const handleProfileUpdate = () => {
-    createPlayerProfile(
-      "0", 
-      "principal_id", 
-      "", 
-      "0", 
-      "",
-    );
-  };
+  // const handleProfileUpdate = () => {
+  //   createPlayerProfile(
+  //     "0", 
+  //     "principal_id", 
+  //     "", 
+  //     "0", 
+  //     "",
+  //   );
+  // };
 
   const onChangeUsername = (e: any) => {
     e.preventDefault()
@@ -89,6 +89,15 @@ function UserInputForm({ createPlayerProfile } : PlayerInputProps) {
         description,
       )
     }
+    contextGrab.updateProfile({
+      age: parseInt(age),
+      principal: principal || "",
+      name: username,
+      count: parseInt(count),
+      description,
+    })
+
+    console.log("Profile created with context", contextGrab);
   }
 
   const continueFunction = () => {

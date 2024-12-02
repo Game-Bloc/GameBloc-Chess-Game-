@@ -12,7 +12,7 @@ export interface ContextProfile {
     name : string,
     count : number,
     description : string
-    // updateProfile?: (newProfile: Partial<ContextProfile>) => void;
+    updateProfile: (newProfile: Partial<ContextProfile>) => void;
 } // this is related to the user type that was used in the git example
 
 export const profileContext = createContext<ContextProfile | undefined>(undefined);
