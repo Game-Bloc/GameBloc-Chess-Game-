@@ -11,7 +11,7 @@ import { UseProfileContext } from './functions/context';
 
 function Game() {
   const { whoamiActor, isAuthenticated } = useAuth();
-  const { name, description, count, age } = UseProfileContext();
+  const { name, description, count, age, principal } = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
   // window.addEventListener("load", async () => {
@@ -30,15 +30,14 @@ function Game() {
   //   // console.log("Finished loading")
   // })
 
+  const grab = UseProfileContext()
+  const grabName = grab.age
   // this is the snippet to communicate with the backend functions
 
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
-  const { getProfile } = chessFunctions()
-
-
-11
+  const { getProfile } = chessFunctions();
 
   //   const makeAMove = useCallback (
   //     (move) => {
@@ -120,6 +119,9 @@ function Game() {
         getProfile()
       }
     }, [isAuthenticated])
+    
+    console.log("the username", grabName);
+    
   
   // this is the rendered UI of the chessboard
   return (

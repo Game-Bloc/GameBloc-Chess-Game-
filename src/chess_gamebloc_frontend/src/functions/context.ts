@@ -1,5 +1,5 @@
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, Dispatch, SetStateAction } from "react";
 import { Profile } from "../../../declarations/chess/chess.did"; //ignore
 // import { ProfileContextType } from "../UserInputForm";
 // import { useAuth } from "../auth/use_auth_client"
@@ -15,7 +15,14 @@ export interface ContextProfile {
     updateProfile: (newProfile: Partial<ContextProfile>) => void;
 } // this is related to the user type that was used in the git example
 
-export const profileContext = createContext<ContextProfile | undefined>(undefined);
+//this is for the setProfile issue
+export interface ProfileContextType {
+    profile: ContextProfile;
+    setProfile: Dispatch<SetStateAction<ContextProfile>>;
+    updateProfile: (newProfile: Partial<ContextProfile>) => void;
+}
+
+export const profileContext = createContext<ProfileContextType | undefined>(undefined);
 
 export function UseProfileContext () {
     const users = useContext(profileContext)

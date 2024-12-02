@@ -31,7 +31,7 @@ function UserInputForm() {
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const contextGrab = UseProfileContext()
-  const usernameContext = contextGrab.name
+  const usernameContext = contextGrab.profile.name
   const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)
   // const [profile] = useState<ContextProfile>({
@@ -55,6 +55,7 @@ function UserInputForm() {
   const onChangeUsername = (e: any) => {
     e.preventDefault()
     const userNameInput = e.target.value;
+    // const playerGName = contextGrab.name(userNameInput)
     // console.log("username", userNameInput);
     setUsername(userNameInput)
   }
@@ -77,27 +78,33 @@ function UserInputForm() {
     setDescription(countInput)
   }
 
-  const submit = () => {
+  const submit = async () => {
     if (username.trim() === "" || age.trim() === "") {
       console.log("Either age or username is Empty");
-    } else {
-      create_player_profile(
+      return;
+    } 
+
+    try {
+      await create_player_profile(
         age,
         principal || "",
         username,
         count,
         description,
       )
-    }
-    contextGrab.updateProfile({
-      age: parseInt(age),
-      principal: principal || "",
-      name: username,
-      count: parseInt(count),
-      description,
-    })
+      contextGrab.updateProfile({
+        age: parseInt(age),
+        principal: principal || "",
+        name: username,
+        count: parseInt(count),
+        description,
+      });
 
-    console.log("Profile created with context", contextGrab);
+      console.log("Profile created with context", contextGrab);
+    } catch (error) {
+      console.error("failed to create useContext", error)
+    }
+
   }
 
   const continueFunction = () => {
