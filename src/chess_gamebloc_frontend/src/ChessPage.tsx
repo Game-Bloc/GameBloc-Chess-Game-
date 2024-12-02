@@ -19,7 +19,7 @@ const ChessPage = ({ modal } : Props) => {
   const [ age, setAge ] = useState("")
   const {  isAuthenticated } = useAuth()
   const contextTrial = UseProfileContext()
-  const principalVar:any = contextTrial.principal
+  const principalVar:any = contextTrial.profile.principal
   const playerPrincipal = Principal.fromText(principalVar);
   // const principalID = principalVar
   
