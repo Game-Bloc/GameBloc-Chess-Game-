@@ -31,6 +31,7 @@ function UserInputForm() {
   const [usernameSubmitted, setUsernameSubmitted] = useState<boolean>(false); // indicator that the player username has been submitted
   const [welcomeModal, setWelcomeModal] = useState<boolean>(false)
   const contextGrab = UseProfileContext()
+  const { setProfile } = UseProfileContext()
   const usernameContext = contextGrab.profile.name
   const { create_player_profile, updatingProfile } = chessFunctions()
   // const users = useContext(profileContext)

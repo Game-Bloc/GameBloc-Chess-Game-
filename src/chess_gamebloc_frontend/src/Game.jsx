@@ -11,7 +11,7 @@ import { UseProfileContext } from './functions/context';
 
 function Game() {
   const { whoamiActor, isAuthenticated } = useAuth();
-  const { name, description, count, age, principal } = UseProfileContext();
+  const profileContext = UseProfileContext();
 
   // this is the snippet to communicate with the backend functions
   // window.addEventListener("load", async () => {
@@ -144,10 +144,10 @@ function Game() {
           }}>Login with NFID</button> */}
 
             <h1>Player Profile</h1>
-            <p>Username: {name}</p>
-            <p>Age: {age}</p>
-            <p>Description: {description}</p>
-            <p>Count: {count}</p>
+            <p>Username: {profileContext.setProfile.age}</p>
+            {/* <p>Age: {age}</p> */}
+            {/* <p>Description: {description}</p> */}
+            {/* <p>Count: {count}</p> */}
             {/* <p>Principal: {profile.principal}</p> */}
 
           <div>
