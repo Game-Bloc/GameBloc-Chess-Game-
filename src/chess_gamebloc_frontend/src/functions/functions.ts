@@ -39,16 +39,17 @@ export const chessFunctions = () => {
                 username,
                 parseInt(count),
                 description,
-            )
+            ) 
+            // contextGrab.profile.name === users?.name
             // console.log("testing");
             if (users) {
                 console.log("created profile", users);
 
                 contextGrab.updateProfile({
-                    age: parseInt(age),
+                    age: users.age,
                     principal,
-                    name: username,
-                    count: parseInt(count),
+                    name: users.name,
+                    count: users.count,
                     description,
                 })
             } else {
@@ -68,6 +69,7 @@ export const chessFunctions = () => {
             setIsLoading(true)
             const user: any = await whoamiActor?.getPlayerProfile()
             console.log("players profile gotten", user);
+            
             // if (user.name != "") {
             //     console.log("gotten profile:", user);
             // } else {

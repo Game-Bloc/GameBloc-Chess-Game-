@@ -31,7 +31,8 @@ function Game() {
   // })
 
   const grab = UseProfileContext()
-  const grabName = grab.age
+  // const grabMenu = grab.updateProfile();
+  // const grabName = grab.age
   // this is the snippet to communicate with the backend functions
 
   const chesss = useMemo(() => new Chess(), []);
@@ -120,7 +121,7 @@ function Game() {
       }
     }, [isAuthenticated])
     
-    console.log("the username", grabName);
+    // console.log("the username", grabName);
     
   
   // this is the rendered UI of the chessboard

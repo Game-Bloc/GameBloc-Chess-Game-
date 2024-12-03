@@ -15,7 +15,8 @@ const UserInputWrap = () => {
         count: 0,
         description: "",
         updateProfile: (newProfile) => {
-            setProfile((prevProfile) => ({ ...prevProfile, ...newProfile }));
+          // console.log("updating profile with", newProfile)
+          setProfile((prevProfile) => ({ ...prevProfile, ...newProfile }));
         },
     })
 

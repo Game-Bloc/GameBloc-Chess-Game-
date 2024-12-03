@@ -78,6 +78,29 @@ function UserInputForm() {
     setDescription(countInput)
   }
 
+  // const submit = async () => {
+  //   if (username.trim() === "" || age.trim() === "") {
+  //     console.log("Either age or username is Empty");
+  //   } else {
+  //     create_player_profile(
+  //       age,
+  //       principal || "",
+  //       username,
+  //       count,
+  //       description,
+  //     )
+  //   }
+  //   contextGrab.updateProfile({
+  //     age: parseInt(age),
+  //     principal: principal || "",
+  //     name: username,
+  //     count: parseInt(count),
+  //     description,
+  //   })
+
+  //   // console.log("Profile created with context", contextGrab);
+  // }
+
   const submit = async () => {
     if (username.trim() === "" || age.trim() === "") {
       console.log("Either age or username is Empty");
