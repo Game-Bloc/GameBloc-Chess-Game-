@@ -11,6 +11,7 @@ export const chessFunctions = () => {
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
     const contextGrab = UseProfileContext();
+    const { setProfile } = UseProfileContext();
 
      
     const create_player_profile = async(
@@ -39,18 +40,23 @@ export const chessFunctions = () => {
                 username,
                 parseInt(count),
                 description,
-            )
+            ) 
+            // contextGrab.profile.name === users?.name
             // console.log("testing");
             if (users) {
                 console.log("created profile", users);
+                // setProfile({
+                //     name: users.name,
+                //     description: users.description,
+                // })
 
-                contextGrab.updateProfile({
-                    age: parseInt(age),
-                    principal,
-                    name: username,
-                    count: parseInt(count),
-                    description,
-                })
+                // contextGrab.updateProfile({
+                //     age: users.age,
+                //     principal,
+                //     name: users.name,
+                //     count: users.count,
+                //     description,
+                // })
             } else {
                 console.warn("Profile creation returned undefined. Check backend response.");
             }
@@ -67,7 +73,19 @@ export const chessFunctions = () => {
         try {
             setIsLoading(true)
             const user: any = await whoamiActor?.getPlayerProfile()
+            if (user) {
+                contextGrab.updateProfile({
+                    age: user.age,
+                    // principal,
+                    name: user.name,
+                    count: user.count,
+                    // description,
+                })
+            }
             console.log("players profile gotten", user);
+
+
+            
             // if (user.name != "") {
             //     console.log("gotten profile:", user);
             // } else {

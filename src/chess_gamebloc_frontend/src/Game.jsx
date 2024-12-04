@@ -5,13 +5,15 @@ import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
 import { chessFunctions } from "./functions/functions";
+import Swal from "sweetalert2";
 import { UseProfileContext } from './functions/context';
 
 // interface AppProps {{} : AppProps}
 
 function Game() {
   const { whoamiActor, isAuthenticated } = useAuth();
-  const { name, description, count, age, principal } = UseProfileContext();
+  const profileContext = UseProfileContext();
+  const { name, age } = UseProfileContext()
 
   // this is the snippet to communicate with the backend functions
   // window.addEventListener("load", async () => {
@@ -29,15 +31,39 @@ function Game() {
   //   // }
   //   // console.log("Finished loading")
   // })
-
-  const grab = UseProfileContext()
-  const grabName = grab.age
+  // const grabMenu = grab.updateProfile();
+  // const grabName = grab.age
   // this is the snippet to communicate with the backend functions
 
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
+
+  // const notiPopup = (successNoti) => {
+  //   Swal.fire({
+  //     title: 'Success',
+  //     text: successNoti,
+  //     icon: 'success',
+  //     confirmButtonText: 'Continue'
+  //   })
+
+  // }
+ 
+
+  // const Alert = () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You will be redirected",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Okay"
+  //   }).then(function () {
+  //     // Redirect the user
+  //     window.location.href = "/game";
+  //   });
+  // };
 
   //   const makeAMove = useCallback (
   //     (move) => {
@@ -120,7 +146,7 @@ function Game() {
       }
     }, [isAuthenticated])
     
-    console.log("the username", grabName);
+    // console.log("the username", grabName);
     
   
   // this is the rendered UI of the chessboard
@@ -143,10 +169,10 @@ function Game() {
           }}>Login with NFID</button> */}
 
             <h1>Player Profile</h1>
-            <p>Username: {name}</p>
-            <p>Age: {age}</p>
-            <p>Description: {description}</p>
-            <p>Count: {count}</p>
+            <p>Username: {profileContext.profile.age}</p>
+            {/* <p>Age: {age}</p> */}
+            {/* <p>Description: {description}</p> */}
+            {/* <p>Count: {count}</p> */}
             {/* <p>Principal: {profile.principal}</p> */}
 
           <div>
