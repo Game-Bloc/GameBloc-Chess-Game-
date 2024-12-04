@@ -9,7 +9,7 @@ interface AppWrapProp {}
 const AppWrap = ({} : AppWrapProp) => {
   
   const [profile, setProfile] = useState<ContextProfile>({
-    age: 9,
+    age: 9984,
     principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
     name: "",
     count: 0,
