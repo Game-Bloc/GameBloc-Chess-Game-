@@ -4,14 +4,31 @@ import { useAuth } from "../auth/use_auth_client";
 // import 
 import swal from 'sweetalert';
 // import { UseProfileContext } from "./context";
-import { Principal } from "@dfinity/principal"
+import Swal from "sweetalert2";
 
 export const chessFunctions = () => {
     const { whoamiActor, isAuthenticated, principal } = useAuth()
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
     const contextGrab = UseProfileContext();
-    const { setProfile } = UseProfileContext();
+    const setProfile = UseProfileContext();
+
+    const popUp = () => {
+        Swal.fire({
+          position: "center",
+          title: "Success",
+          icon: "success",
+          text: "Account Creation Successful",
+          confirmButtonText: "Continue",
+        //   background: "#01070E",
+        //   color: "#fff",
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //     navigate(route)
+        //   }
+        // })
+        })
+    }
 
      
     const create_player_profile = async(
@@ -44,7 +61,12 @@ export const chessFunctions = () => {
             // contextGrab.profile.name === users?.name
             // console.log("testing");
             if (users) {
+                setProfile.profile.name === username
+                if (window.location.pathname === "/game") {
+                    window.location.reload()
+                }
                 console.log("created profile", users);
+                popUp()
                 // setProfile({
                 //     name: users.name,
                 //     description: users.description,

@@ -75,12 +75,12 @@ function UserInputForm() {
   //   });
   // };
 
-  Swal.fire({
-    title: 'Success',
-    text: "Account Creation Successful",
-    icon: 'success',
-    confirmButtonText: 'Continue'
-  })
+  // Swal.fire({
+  //   title: 'Success',
+  //   text: "Account Creation Successful",
+  //   icon: 'success',
+  //   confirmButtonText: 'Continue'
+  // })
 
 
   const onChangeUsername = (e: any) => {
@@ -169,6 +169,10 @@ function UserInputForm() {
     // Alert();
     setUsernameSubmitted(true)
     navigate("/game")
+    // if (window.location.pathname === "/game") {
+    //   window.location.reload()
+    // }
+    
   }
   
   // console.log("username", setUsername);

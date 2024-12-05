@@ -4,6 +4,8 @@ import {
     createActor as createActor2,
     chess_gamebloc_backend,
 } from "./../../declarations/chess_gamebloc_backend"
+import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
     const {
@@ -58,6 +60,8 @@ const Login = () => {
         },
     })
 
+    const navigate = useNavigate();
+
     // from Gamebloc auth function
 
     async function updateClient(client) {
@@ -101,6 +105,13 @@ const Login = () => {
         }
     }
 
+    const redirect = () => {
+        navigate("/")
+        // if (window.location.pathname === "/game") {
+        //     window.location.reload()
+        // }
+    }
+
     // from Gamebloc auth function
 
     return (
@@ -114,19 +125,13 @@ const Login = () => {
             {authenticated ? (
                 <div className="flex flex-col align-center">
                     <button onClick={() => logout()}>Logout</button>
-                    {identity && <div>{identity.getPrincipal().toText()}</div>}
+                    {/* {identity && <div>{identity.getPrincipal().toText()}</div>} */}
                 </div>
             ) : (
-                <div>
-                    <button
-                        onClick={() =>
-                            login({
-                                identityProvider: "https://identity.ic0.app",
-                            })
-                        }
-                        disabled={authenticating}
-                    >
-                        Login
+                <div className="flex space-x-5">
+                    <p>You're not authenticated</p>
+                    <button className="text-pink-600" onClick={redirect}>
+                        <Link path="/">Login</Link>
                     </button>
                 </div>
             )}

@@ -156,28 +156,11 @@ function Game() {
         {/*<useAuthClient />*/}
       <div className="board">
 
-          {/* <button onClick={() => {
+          
 
-              console.log('login:', loginNFID);
-              login();
-          }}>Login with II</button>
-
-          <button onClick={() => {
-
-              console.log('login:', loginNFID);
-              loginNFID();
-          }}>Login with NFID</button> */}
-
-            <h1>Player Profile</h1>
-            <p>Username: {profileContext.profile.age}</p>
-            {/* <p>Age: {age}</p> */}
-            {/* <p>Description: {description}</p> */}
-            {/* <p>Count: {count}</p> */}
-            {/* <p>Principal: {profile.principal}</p> */}
-
-          <div>
-            {/* <p id="value"></p> */}
-          </div>
+          <h1>Welcome:</h1>
+          <p>{profileContext.profile.name}</p>
+            
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
