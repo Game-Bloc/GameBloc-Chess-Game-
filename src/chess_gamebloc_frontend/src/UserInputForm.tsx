@@ -61,26 +61,26 @@ function UserInputForm() {
   //   confirmButtonText: 'Cool'
   // });
 
-  // const Alert = () => {
-  //   Swal.fire({
-  //     title: "Account Creation Successful",
-  //     text: "You will be redirected",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Okay"
-  //   }).then(function () {
-  //     // Redirect the user
-  //     window.location.href = "/game";
-  //   });
-  // };
+  const Alert = () => {
+    // Swal.fire({
+    //   title: "Account Creation Successful",
+    //   text: "You will be redirected",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Okay"
+    // }).then(function () {
+    //   // Redirect the user
+    //   window.location.href = "/game";
+    // });
+    Swal.fire({
+      title: 'Success',
+      text: "Account Creation Successful",
+      icon: 'success',
+      confirmButtonText: 'Continue'
+    })
+  };
 
-  Swal.fire({
-    title: 'Success',
-    text: "Account Creation Successful",
-    icon: 'success',
-    confirmButtonText: 'Continue'
-  })
 
 
   const onChangeUsername = (e: any) => {
