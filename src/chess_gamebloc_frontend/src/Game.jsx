@@ -158,7 +158,7 @@ function Game() {
 
           
 
-          <h1>Welcome</h1>
+          <h1>Welcome:</h1>
           <p>{profileContext.profile.name}</p>
             
 

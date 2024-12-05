@@ -62,6 +62,9 @@ export const chessFunctions = () => {
             // console.log("testing");
             if (users) {
                 setProfile.profile.name === username
+                if (window.location.pathname === "/game") {
+                    window.location.reload()
+                }
                 console.log("created profile", users);
                 popUp()
                 // setProfile({
