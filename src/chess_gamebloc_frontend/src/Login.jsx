@@ -114,19 +114,13 @@ const Login = () => {
             {authenticated ? (
                 <div className="flex flex-col align-center">
                     <button onClick={() => logout()}>Logout</button>
-                    {identity && <div>{identity.getPrincipal().toText()}</div>}
+                    {/* {identity && <div>{identity.getPrincipal().toText()}</div>} */}
                 </div>
             ) : (
                 <div>
-                    <button
-                        onClick={() =>
-                            login({
-                                identityProvider: "https://identity.ic0.app",
-                            })
-                        }
-                        disabled={authenticating}
-                    >
-                        Login
+                    <p>You're not authenticated</p>
+                    <button>
+                        <Link path="/">Login</Link>
                     </button>
                 </div>
             )}

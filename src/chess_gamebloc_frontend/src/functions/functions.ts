@@ -11,22 +11,24 @@ export const chessFunctions = () => {
     const [updatingProfile, setUpdatingProfile] = useState<boolean>(false)
     const [ isLoadingProfile, setIsLoading ] = useState<boolean>(false)
     const contextGrab = UseProfileContext();
-    const { setProfile } = UseProfileContext();
+    const setProfile = UseProfileContext();
 
     const popUp = () => {
         Swal.fire({
           position: "center",
+          title: "Success",
           icon: "success",
           text: "Account Creation Successful",
-          showConfirmButton: true,
-          background: "#01070E",
-          color: "#fff",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate(route)
-          }
+          confirmButtonText: "Continue",
+        //   background: "#01070E",
+        //   color: "#fff",
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //     navigate(route)
+        //   }
+        // })
         })
-      }
+    }
 
      
     const create_player_profile = async(
@@ -59,7 +61,9 @@ export const chessFunctions = () => {
             // contextGrab.profile.name === users?.name
             // console.log("testing");
             if (users) {
+                setProfile.profile.name === username
                 console.log("created profile", users);
+                popUp()
                 // setProfile({
                 //     name: users.name,
                 //     description: users.description,
