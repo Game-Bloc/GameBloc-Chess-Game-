@@ -67,18 +67,7 @@ export const chessFunctions = () => {
                 }
                 console.log("created profile", users);
                 popUp()
-                // setProfile({
-                //     name: users.name,
-                //     description: users.description,
-                // })
-
-                // contextGrab.updateProfile({
-                //     age: users.age,
-                //     principal,
-                //     name: users.name,
-                //     count: users.count,
-                //     description,
-                // })
+                
             } else {
                 console.warn("Profile creation returned undefined. Check backend response.");
             }
