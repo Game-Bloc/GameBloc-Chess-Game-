@@ -146,16 +146,7 @@ function UserInputForm() {
         count,
         description,
       )
-      // contextGrab.updateProfile({
-      //   setAge
-      // })
-      // contextGrab.updateProfile({
-      //   age: parseInt(age),
-      //   principal: principal || "",
-      //   name: username,
-      //   count: parseInt(count),
-      //   description,
-      // });
+      
 
       console.log("Profile created with context", contextGrab);
     } catch (error) {
@@ -169,34 +160,14 @@ function UserInputForm() {
     // Alert();
     setUsernameSubmitted(true)
     navigate("/game")
-    // if (window.location.pathname === "/game") {
-    //   window.location.reload()
-    // }
+    
     
   }
   
-  // console.log("username", setUsername);
-  // console.log("age", setAge);
-  // console.log("description", setDescription);
-  // console.log("count", setCount);
+  
   
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     // if (username === "") {
-  //     //   getProfile()
-  //     // } else {
-  //     //   create_player_profile(
-  //     //     +age,
-  //     //   principal,
-  //     //   username,
-  //     //   +count, 
-  //     //   description
-  //     //   )
-  //     // }
-  //     getProfile()
-  //   }
-  // }, [isAuthenticated])
+ 
 
   return (
     <Container>
