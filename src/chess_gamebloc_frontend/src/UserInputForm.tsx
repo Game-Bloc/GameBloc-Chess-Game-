@@ -146,16 +146,7 @@ function UserInputForm() {
         count,
         description,
       )
-      // contextGrab.updateProfile({
-      //   setAge
-      // })
-      // contextGrab.updateProfile({
-      //   age: parseInt(age),
-      //   principal: principal || "",
-      //   name: username,
-      //   count: parseInt(count),
-      //   description,
-      // });
+      
 
       console.log("Profile created with context", contextGrab);
     } catch (error) {
