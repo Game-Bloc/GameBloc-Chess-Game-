@@ -108,11 +108,7 @@ export const chessFunctions = () => {
 
 
             
-            // if (user.name != "") {
-            //     console.log("gotten profile:", user);
-            // } else {
-            //     console.log("couldn't listen to the player info");
-            // }
+            
             
         } catch (error) {
             setIsLoading(false)
