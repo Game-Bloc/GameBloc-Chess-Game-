@@ -169,9 +169,7 @@ function UserInputForm() {
     // Alert();
     setUsernameSubmitted(true)
     navigate("/game")
-    // if (window.location.pathname === "/game") {
-    //   window.location.reload()
-    // }
+    
     
   }
   
