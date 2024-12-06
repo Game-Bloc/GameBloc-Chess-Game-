@@ -164,10 +164,7 @@ function UserInputForm() {
     
   }
   
-  // console.log("username", setUsername);
-  // console.log("age", setAge);
-  // console.log("description", setDescription);
-  // console.log("count", setCount);
+  
   
 
   // useEffect(() => {
