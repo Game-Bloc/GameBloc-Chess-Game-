@@ -167,22 +167,7 @@ function UserInputForm() {
   
   
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     // if (username === "") {
-  //     //   getProfile()
-  //     // } else {
-  //     //   create_player_profile(
-  //     //     +age,
-  //     //   principal,
-  //     //   username,
-  //     //   +count, 
-  //     //   description
-  //     //   )
-  //     // }
-  //     getProfile()
-  //   }
-  // }, [isAuthenticated])
+ 
 
   return (
     <Container>
