@@ -125,7 +125,7 @@ const Login = () => {
             {authenticated ? (
                 <div className="flex flex-col align-center">
                     <button onClick={() => logout()}>Logout</button>
-                    {/* {identity && <div>{identity.getPrincipal().toText()}</div>} */}
+                    
                 </div>
             ) : (
                 <div className="flex space-x-5">
