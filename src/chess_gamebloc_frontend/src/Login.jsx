@@ -106,13 +106,8 @@ const Login = () => {
     }
 
     const redirect = () => {
-        navigate("/")
-        // if (window.location.pathname === "/game") {
-        //     window.location.reload()
-        // }
+        navigate("/");
     }
-
-    // from Gamebloc auth function
 
     return (
         <div>
@@ -125,7 +120,7 @@ const Login = () => {
             {authenticated ? (
                 <div className="flex flex-col align-center">
                     <button onClick={() => logout()}>Logout</button>
-                    {/* {identity && <div>{identity.getPrincipal().toText()}</div>} */}
+                    
                 </div>
             ) : (
                 <div className="flex space-x-5">
