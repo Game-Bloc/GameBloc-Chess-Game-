@@ -106,10 +106,7 @@ const Login = () => {
     }
 
     const redirect = () => {
-        navigate("/")
-        // if (window.location.pathname === "/game") {
-        //     window.location.reload()
-        // }
+        navigate("/");
     }
 
     // from Gamebloc auth function
