@@ -109,8 +109,6 @@ const Login = () => {
         navigate("/");
     }
 
-    // from Gamebloc auth function
-
     return (
         <div>
             <h2></h2>
