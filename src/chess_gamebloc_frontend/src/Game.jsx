@@ -17,11 +17,7 @@ function Game() {
 
   
  
-  //   // if (valueElement) {
-  //   //     valueElement.innerHTML = currentPlayer;
-  //   // } else {
-  //   //     console.error('Element with id "value" not found');
-  //   // }
+  
   //   // console.log("Finished loading")
   // })
   // const grabMenu = grab.updateProfile();
