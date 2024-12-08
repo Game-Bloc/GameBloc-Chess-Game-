@@ -15,84 +15,16 @@ function Game() {
   const profileContext = UseProfileContext();
   const { name, age } = UseProfileContext()
 
-  // this is the snippet to communicate with the backend functions
-  // window.addEventListener("load", async () => {
-  //   const profile = { 
-  //     age: 0
-  //    }
-  //   const currentPlayer = await chess.update_player_profile().name
-  //   document.getElementById("value").innerHTML = currentPlayer
-  //   // valueElement.innerHTML = currentPlayer;
-
-  //   // if (valueElement) {
-  //   //     valueElement.innerHTML = currentPlayer;
-  //   // } else {
-  //   //     console.error('Element with id "value" not found');
-  //   // }
-  //   // console.log("Finished loading")
-  // })
-  // const grabMenu = grab.updateProfile();
-  // const grabName = grab.age
-  // this is the snippet to communicate with the backend functions
+  
+ 
+  
+ 
 
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
 
-  // const notiPopup = (successNoti) => {
-  //   Swal.fire({
-  //     title: 'Success',
-  //     text: successNoti,
-  //     icon: 'success',
-  //     confirmButtonText: 'Continue'
-  //   })
-
-  // }
- 
-
-  // const Alert = () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You will be redirected",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Okay"
-  //   }).then(function () {
-  //     // Redirect the user
-  //     window.location.href = "/game";
-  //   });
-  // };
-
-  //   const makeAMove = useCallback (
-  //     (move) => {
-  //         try {
-  //             const result = chess.move(move); // this is the function that updates the chess moves instances
-  //             setFen(chess.fen()); // this works as a re-render trigger the FEN state/notation
-
-  //             console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
-              
-  //             if (chess.isGameOver()) { // this is to check if the pieces movement led to a game over
-  //                 if (chess.isCheckmate()) { // this is to check if the pieces movement led to a checkmate
-  //                     setOver (
-  //                         `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!` // the winner is determined by checking which side/color made the last move
-
-  //                     )                  
-  //                 } else if (chess.isDraw()) {
-  //                     setOver("Draw"); // this sets a message is the game is draw
-  //                 } else {
-  //                     setOver("Game Over");
-  //                 }
-  //             }
-
-  //             return result;
-  //         } catch (e) {
-  //             return null;
-  //         }  // this return null is the move was illegal or invalid
-  //     },
-  //     [chess]
-  //   );
 
   const makeAMove = useCallback(
     (move) => {
