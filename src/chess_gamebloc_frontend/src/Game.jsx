@@ -18,11 +18,7 @@ function Game() {
   
  
   
-  //   // console.log("Finished loading")
-  // })
-  // const grabMenu = grab.updateProfile();
-  // const grabName = grab.age
-  // this is the snippet to communicate with the backend functions
+ 
 
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
