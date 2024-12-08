@@ -41,35 +41,6 @@ function Game() {
   const { getProfile } = chessFunctions();
 
 
-  //   const makeAMove = useCallback (
-  //     (move) => {
-  //         try {
-  //             const result = chess.move(move); // this is the function that updates the chess moves instances
-  //             setFen(chess.fen()); // this works as a re-render trigger the FEN state/notation
-
-  //             console.log("over, checkmate", chess.isGameOver(), chess.isCheckmate());
-              
-  //             if (chess.isGameOver()) { // this is to check if the pieces movement led to a game over
-  //                 if (chess.isCheckmate()) { // this is to check if the pieces movement led to a checkmate
-  //                     setOver (
-  //                         `Checkmate! ${chess.turn() === "w" ? "black" : "white"} wins!` // the winner is determined by checking which side/color made the last move
-
-  //                     )                  
-  //                 } else if (chess.isDraw()) {
-  //                     setOver("Draw"); // this sets a message is the game is draw
-  //                 } else {
-  //                     setOver("Game Over");
-  //                 }
-  //             }
-
-  //             return result;
-  //         } catch (e) {
-  //             return null;
-  //         }  // this return null is the move was illegal or invalid
-  //     },
-  //     [chess]
-  //   );
-
   const makeAMove = useCallback(
     (move) => {
       try {
