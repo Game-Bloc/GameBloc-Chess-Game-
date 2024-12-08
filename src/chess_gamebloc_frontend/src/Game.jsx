@@ -16,10 +16,7 @@ function Game() {
   const { name, age } = UseProfileContext()
 
   
-  //   const currentPlayer = await chess.update_player_profile().name
-  //   document.getElementById("value").innerHTML = currentPlayer
-  //   // valueElement.innerHTML = currentPlayer;
-
+ 
   //   // if (valueElement) {
   //   //     valueElement.innerHTML = currentPlayer;
   //   // } else {
