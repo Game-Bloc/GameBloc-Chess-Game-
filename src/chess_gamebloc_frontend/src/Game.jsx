@@ -39,16 +39,6 @@ function Game() {
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
-
-  // const notiPopup = (successNoti) => {
-  //   Swal.fire({
-  //     title: 'Success',
-  //     text: successNoti,
-  //     icon: 'success',
-  //     confirmButtonText: 'Continue'
-  //   })
-
-  // }
  
 
   // const Alert = () => {
