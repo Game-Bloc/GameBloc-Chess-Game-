@@ -39,21 +39,7 @@ function Game() {
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
- 
 
-  // const Alert = () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You will be redirected",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Okay"
-  //   }).then(function () {
-  //     // Redirect the user
-  //     window.location.href = "/game";
-  //   });
-  // };
 
   //   const makeAMove = useCallback (
   //     (move) => {
