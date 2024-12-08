@@ -15,11 +15,7 @@ function Game() {
   const profileContext = UseProfileContext();
   const { name, age } = UseProfileContext()
 
-  // this is the snippet to communicate with the backend functions
-  // window.addEventListener("load", async () => {
-  //   const profile = { 
-  //     age: 0
-  //    }
+  
   //   const currentPlayer = await chess.update_player_profile().name
   //   document.getElementById("value").innerHTML = currentPlayer
   //   // valueElement.innerHTML = currentPlayer;
