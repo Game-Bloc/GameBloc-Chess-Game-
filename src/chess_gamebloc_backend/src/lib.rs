@@ -15,6 +15,7 @@ use tanton::tools::Searcher;
 // from the ic-cdk on icp 
 
 mod getrandom_fail;
+// mod handler;
 
 type GameStore = BTreeMap<String, GameInternal>; // from cdk-chess
 type IdStore = BTreeMap<String, Principal>;

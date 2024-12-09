@@ -10,3 +10,28 @@ use ic_websocket_cdk::{
 pub struct AppMessage {
     pub text: String,
 }
+
+impl AppMessage {
+    fn candid_serialize (&self) -> Vec<u8> {
+        encode_one(&self).unwrap();
+    }
+}
+
+pub fn on_open(args: OnMessageCallbackArgs) {
+    let msg = AppMessage {
+        text: String("ping")
+    };
+    send_app_message(args.client_principal, new_msg)
+}
+
+pub fn on_message ( args: OnMessageCallbackArgs ) {
+    let app_msg: AppMessage = decode_one(&args.message).unwrap();
+    let new_msg = AppMessage {
+        text: String::from("ping"),
+    };
+}
+
+
+
+
+
