@@ -1,3 +1,23 @@
+type AppMessage = record { "text" : text };
+type CanisterOutputCertifiedMessages = record {
+  messages : vec CanisterOutputMessage;
+  cert : blob;
+  tree : blob;
+  is_end_of_queue : bool;
+};
+type CanisterOutputMessage = record {
+  key : text;
+  content : blob;
+  client_key : ClientKey;
+};
+type CanisterWsCloseArguments = record { client_key : ClientKey };
+type CanisterWsGetMessagesArguments = record { nonce : nat64 };
+type CanisterWsMessageArguments = record { msg : WebsocketMessage };
+type CanisterWsOpenArguments = record {
+  gateway_principal : principal;
+  client_nonce : nat64;
+};
+type ClientKey = record { client_principal : principal; client_nonce : nat64 };
 type ManualReply = record {
   age : nat8;
   "principal" : text;
@@ -12,11 +32,20 @@ type Profile = record {
   count : nat8;
   description : text;
 };
+type Result = variant { Ok; Err : text };
+type Result_1 = variant { Ok : CanisterOutputCertifiedMessages; Err : text };
+type WebsocketMessage = record {
+  sequence_num : nat64;
+  content : blob;
+  client_key : ClientKey;
+  timestamp : nat64;
+  is_service_message : bool;
+};
 service : () -> {
   aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;
   getFen : (text) -> (opt text) query;
-  getPlayerProfile : () -> (Profile) query;
+  getPlayerProfile : () -> (ManualReply) query;
   get_player : (text) -> (opt Profile) query;
   inc : () -> ();
   move : (text, text) -> (bool);
@@ -26,4 +55,8 @@ service : () -> {
   update_player_profile : (nat8, text, text, nat8, text) -> (Profile);
   whoami : () -> (principal) query;
   write : (nat) -> ();
+  ws_close : (CanisterWsCloseArguments) -> (Result); // the returns here are not the same as supposed 
+  ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_1) query;
+  ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result);
+  ws_open : (CanisterWsOpenArguments) -> (Result);
 }
