@@ -31,6 +31,15 @@ export default defineConfig({
     environment("all", { prefix: "DFX_" }),
   ],
   resolve: {
+    // extensions: [".js", ".ts", ".jsx", ".tsx"],  // this is also for the websocket integration
+    // fallback: {
+    //   assert: require.resolve("assert/"),
+    //   buffer: require.resolve("buffer/"),
+    //   events: require.resolve("events/"),
+    //   stream: require.resolve("stream-browserify/"),
+    //   util: require.resolve("util/"),
+    //   crypto: require.resolve("crypto-browserify/"),  // <- add this line
+    // },  // this is for the websocket integration
     alias: [
       {
         find: "declarations",

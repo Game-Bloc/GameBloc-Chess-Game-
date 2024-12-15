@@ -55,7 +55,7 @@ service : () -> {
   update_player_profile : (nat8, text, text, nat8, text) -> (Profile);
   whoami : () -> (principal) query;
   write : (nat) -> ();
-  ws_close : (CanisterWsCloseArguments) -> (Result); // the returns here are not the same as supposed 
+  ws_close : (CanisterWsCloseArguments) -> (Result);
   ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_1) query;
   ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result);
   ws_open : (CanisterWsOpenArguments) -> (Result);

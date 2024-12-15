@@ -8,7 +8,9 @@
     "start": "vite --port 3000",
     "prebuild": "dfx generate",
     "build": "tsc && vite build",
-    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\""
+    "format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\"",
+    "test": "npm test --workspaces --if-present",
+    "generate": "node generate.js"
   },
   "dependencies": {
     "react-dom": "^18.3.1",

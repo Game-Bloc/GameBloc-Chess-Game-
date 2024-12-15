@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import environment from 'vite-plugin-environment';
 import dotenv from 'dotenv';
+// import {resolve4} from "node:dns";
 
 dotenv.config({ path: '../../.env' });
 
@@ -31,13 +32,22 @@ export default defineConfig({
     environment("all", { prefix: "DFX_" }),
   ],
   resolve: {
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
+    fallback: {
+      assert: require.resolve("assert/"),
+      buffer: require.resolve("buffer/"),
+      events: require.resolve("events/"),
+      stream: require.resolve("stream-browserify/"),
+      util: require.resolve("util/"),
+      crypto: require.resolve("crypto-browserify/"),  // <- add this line
+    },
     alias: [
       {
         find: "declarations",
         replacement: fileURLToPath(
           new URL("../declarations", import.meta.url)
         ),
-      },
+      }, 
     ],
   },
 });
