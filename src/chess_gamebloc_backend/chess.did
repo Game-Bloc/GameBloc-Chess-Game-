@@ -1,3 +1,6 @@
+
+
+
 type AppMessage = record { "text" : text };
 type CanisterOutputCertifiedMessages = record {
   messages : vec CanisterOutputMessage;
@@ -10,6 +13,7 @@ type CanisterOutputMessage = record {
   content : blob;
   client_key : ClientKey;
 };
+
 type CanisterWsCloseArguments = record { client_key : ClientKey };
 type CanisterWsGetMessagesArguments = record { nonce : nat64 };
 type CanisterWsMessageArguments = record { msg : WebsocketMessage };
