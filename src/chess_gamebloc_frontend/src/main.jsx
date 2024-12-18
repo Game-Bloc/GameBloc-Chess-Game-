@@ -6,6 +6,8 @@ import { AgentProvider } from "@ic-reactor/react"
 import { BrowserRouter as Router } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./redux/store"
+import { canisterId } from "../../declarations/chess_gamebloc_backend"
+import IcWebsocket ,{ generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 // import { ProfileProvider } from './UserInputWrap';
 import { profileContext } from './functions/context';
 import { AuthProvider } from "./auth/use_auth_client.tsx"
