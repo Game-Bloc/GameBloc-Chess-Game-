@@ -13,7 +13,6 @@ type CanisterOutputMessage = record {
   content : blob;
   client_key : ClientKey;
 };
-
 type CanisterWsCloseArguments = record { client_key : ClientKey };
 type CanisterWsGetMessagesArguments = record { nonce : nat64 };
 type CanisterWsMessageArguments = record { msg : WebsocketMessage };
@@ -53,6 +52,16 @@ type CanisterWsMessageResult = variant {
   Ok : null;
   Err : text;
 };
+type CanisterWsCloseResult = variant {
+  Ok : null;
+  Err : text;
+};
+type CanisterWsOpenResult = variant {
+  Ok : null;
+  Err : text;
+};
+type ClientPrincipal = principal;
+type GatewayPrincipal = principal;
 service : () -> {
   aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;

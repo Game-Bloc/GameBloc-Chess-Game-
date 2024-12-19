@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { Provider } from "react-redux"
 import store from "./redux/store"
 import { canisterId } from "../../declarations/chess_gamebloc_backend"
-import IcWebsocket ,{ generateRandomIdentity, createWsConfig } from "ic-websocket-js"
+import { IcWebSocket,generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 
 import { chess } from "../../declarations/chess"
 import { profileContext } from './functions/context';
