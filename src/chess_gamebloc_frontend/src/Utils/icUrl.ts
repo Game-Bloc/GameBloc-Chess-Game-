@@ -1,0 +1,1 @@
+export const icUrl = "https://icp0.io"
