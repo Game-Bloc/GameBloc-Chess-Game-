@@ -45,6 +45,14 @@ type WebsocketMessage = record {
   timestamp : nat64;
   is_service_message : bool;
 };
+type CanisterWsGetMessagesResult = variant {
+  Ok : CanisterOutputCertifiedMessages;
+  Err : text;
+};
+type CanisterWsMessageResult = variant {
+  Ok : null;
+  Err : text;
+};
 service : () -> {
   aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;
