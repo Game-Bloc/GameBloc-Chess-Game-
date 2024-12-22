@@ -6,7 +6,7 @@ import UserInputForm from './UserInputForm'
 import UserInputWrap from './UserInputWrap'
 import AppWrap from './AppWrap'
 import {  } from "@dfinity/identity"
-import { canisterId } from "../../declarations/chess_gamebloc_backend"
+import { canisterId } from "../../declarations/chess"
 import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 import { chess } from "../../declarations/chess"
 
@@ -23,10 +23,20 @@ const App = () => {
       networkUrl: icUrl,
     });
 
-    console.log("Gateway;", gatewayUrl);
+    try {
+      const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
+    } catch (error) {
+      console.error("Websocket not working", error)
+    }
+
+    // console.log(
+    //   "wsConfig;", wsConfig
+    // );
+
+    // console.log("error");
     
-    const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
     
+
     return (
     <div>
       <Routes>
