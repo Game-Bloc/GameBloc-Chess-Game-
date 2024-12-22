@@ -14,7 +14,7 @@ import { chess } from "../../declarations/chess"
 const App = () => {
 
     const gatewayUrl = "http://127.0.0.1:4943";
-    const icUrl = "http://localhost:3000/";
+    const icUrl = "http://localhost:4943/";
 
     const wsConfig = createWsConfig({
       canisterId: canisterId,
@@ -23,9 +23,10 @@ const App = () => {
       networkUrl: icUrl,
     });
 
+    console.log("Gateway;", gatewayUrl);
+    
     const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
     
-    console.warn("ws is not working");
     return (
     <div>
       <Routes>
