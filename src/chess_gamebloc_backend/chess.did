@@ -1,6 +1,3 @@
-
-
-
 type AppMessage = record { "text" : text };
 type CanisterOutputCertifiedMessages = record {
   messages : vec CanisterOutputMessage;
@@ -44,24 +41,6 @@ type WebsocketMessage = record {
   timestamp : nat64;
   is_service_message : bool;
 };
-type CanisterWsGetMessagesResult = variant {
-  Ok : CanisterOutputCertifiedMessages;
-  Err : text;
-};
-type CanisterWsMessageResult = variant {
-  Ok : null;
-  Err : text;
-};
-type CanisterWsCloseResult = variant {
-  Ok : null;
-  Err : text;
-};
-type CanisterWsOpenResult = variant {
-  Ok : null;
-  Err : text;
-};
-type ClientPrincipal = principal;
-type GatewayPrincipal = principal;
 service : () -> {
   aiMove : (text) -> ();
   get : (text) -> (ManualReply) query;

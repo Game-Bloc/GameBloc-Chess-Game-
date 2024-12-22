@@ -19,7 +19,6 @@ const LandingPage = () => {
         console.log('login:', loginNFID);
         loginNFID();
         }}>Login with NFID</button>
-          console.log("the page starts")
       </div>
       <div className='item-center text-center'>
       <Typewriter
