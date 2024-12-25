@@ -10,8 +10,13 @@ import { canisterId } from "../../declarations/chess"
 import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 import { chess } from "../../declarations/chess"
 
+export interface AppMessage {
+  AppMessage: String,
+}
 
 const App = () => {
+
+
 
     const gatewayUrl = "http://127.0.0.1:4943";
     const icUrl = "http://localhost:4943/";
@@ -22,13 +27,21 @@ const App = () => {
       identity: generateRandomIdentity(),
       networkUrl: icUrl,
     });
-
+    
     try {
       const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
     } catch (error) {
       console.error("Websocket not working", error)
-    }
+    };
 
+    const msg_type: AppMessage | null = {
+      AppMessage: "moves",
+    }
+    
+    const msgTypeWrapped = msg_type ? Some(msg_type) :  None;
+    ws(args, msgTypeWrapped)
+    
+    
     // console.log(
     //   "wsConfig;", wsConfig
     // );

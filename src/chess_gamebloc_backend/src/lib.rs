@@ -402,14 +402,12 @@ fn ws_message(args: CanisterWsMessageArguments, msg_type: Option<AppMessage>) ->
     ic_websocket_cdk::ws_message(args, msg_type)
 }
 
+
 // this function get messages across for all clients
 #[query]
 fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessagesResult {
     ic_websocket_cdk::ws_get_messages(args)
 }
-
-
-
 
 
 // integrating websocket 
