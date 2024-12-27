@@ -18,7 +18,7 @@ const App = () => {
 
 
 
-    const gatewayUrl = "http://127.0.0.1:4943";
+    let gatewayUrl:string = "http://127.0.0.1:4943";
     const icUrl = "http://localhost:4943/";
 
     const wsConfig = createWsConfig({
@@ -28,18 +28,44 @@ const App = () => {
       networkUrl: icUrl,
     });
     
-    try {
-      const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
-    } catch (error) {
-      console.error("Websocket not working", error)
-    };
-
-    const msg_type: AppMessage | null = {
-      AppMessage: "moves",
-    }
+    // try {
+    //   const ws = new IcWebSocket(gatewayUrl, "", wsConfig); 
+    // } catch (err) {
+    //   console.log("Websocket not working", err);
     
-    const msgTypeWrapped = msg_type ? Some(msg_type) :  None;
-    ws(args, msgTypeWrapped)
+    // }
+
+    // ws.onopen = () => {
+    //   console.log("Connected to the canister");
+    // };
+    
+    // ws.onmessage = async (event) => {
+    //   console.log("Received message:", event.data);
+    
+    //   const messageToSend = {
+    //     text: event.data.text + "-pong",
+    //   };
+    //   ws.send(messageToSend);
+    // };
+    
+    // ws.onclose = () => {
+    //   console.log("Disconnected from the canister");
+    // };
+    
+    // ws.onerror = (error) => {
+    //   console.log("Error:", error);
+    // };
+    // try {
+    // } catch (error) {
+    //   console.error("Websocket not working", error)
+    // };
+
+    // const msg_type: AppMessage | null = {
+    //   AppMessage: "moves",
+    // }
+    
+    // const msgTypeWrapped:any = msg_type ? Some(msg_type) :  None;
+    // ws(args, msgTypeWrapped)
     
     
     // console.log(
