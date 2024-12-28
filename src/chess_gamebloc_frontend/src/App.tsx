@@ -52,13 +52,7 @@ const App = () => {
     //   console.log("Disconnected from the canister");
     // };
     
-    // ws.onerror = (error) => {
-    //   console.log("Error:", error);
-    // };
-    // try {
-    // } catch (error) {
-    //   console.error("Websocket not working", error)
-    // };
+   
 
     // const msg_type: AppMessage | null = {
     //   AppMessage: "moves",
