@@ -62,11 +62,6 @@ const App = () => {
     // ws(args, msgTypeWrapped)
     
     
-    // console.log(
-    //   "wsConfig;", wsConfig
-    // );
-
-    // console.log("error");
     
     
 
