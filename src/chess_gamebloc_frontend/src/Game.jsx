@@ -5,7 +5,6 @@ import CustomDialog from "./components/CustomDialog";
 import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
 import { chessFunctions } from "./functions/functions";
-import Swal from "sweetalert2";
 import { UseProfileContext } from './functions/context';
 
 // interface AppProps {{} : AppProps}
@@ -14,12 +13,6 @@ function Game() {
   const { whoamiActor, isAuthenticated } = useAuth();
   const profileContext = UseProfileContext();
   const { name, age } = UseProfileContext()
-
-  
- 
-  
- 
-
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
@@ -94,6 +87,7 @@ function Game() {
         <h1>Welcome:</h1>
         <p>{profileContext.profile.name}</p>
             
+        {gameRender ? <Chessboard position={fen} onPieceDrop={onDrop} /> :  }
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
       </div>
