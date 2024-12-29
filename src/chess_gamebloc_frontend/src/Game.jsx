@@ -79,7 +79,8 @@ function Game() {
     }, [isAuthenticated])
     
     // console.log("the username", grabName);
-    
+    const [gameRender, setGameRender] = useState(false)
+
   
   // this is the rendered UI of the chessboard
   return (
@@ -90,8 +91,8 @@ function Game() {
 
           
 
-          <h1>Welcome:</h1>
-          <p>{profileContext.profile.name}</p>
+        <h1>Welcome:</h1>
+        <p>{profileContext.profile.name}</p>
             
 
         <Chessboard position={fen} onPieceDrop={onDrop} />
