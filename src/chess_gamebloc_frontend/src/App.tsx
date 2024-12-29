@@ -28,12 +28,12 @@ const App = () => {
       networkUrl: icUrl,
     });
     
-    // try {
-    //   const ws = new IcWebSocket(gatewayUrl, "", wsConfig); 
-    // } catch (err) {
-    //   console.log("Websocket not working", err);
+    try {
+      const ws = new IcWebSocket(gatewayUrl, "", wsConfig); 
+    } catch (err) {
+      console.log("Websocket not working", err);
     
-    // }
+    }
 
     // ws.onopen = () => {
     //   console.log("Connected to the canister");
@@ -77,4 +77,4 @@ const App = () => {
 }
 
 
-export default App
+export default App;
