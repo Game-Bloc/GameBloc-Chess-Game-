@@ -73,7 +73,7 @@ function Game() {
     }, [isAuthenticated])
     
     // console.log("the username", grabName);
-    const [gameRender, setGameRender] = useState(false)
+    const [gameRender, setGameRender] = useState(true)
 
   
   // this is the rendered UI of the chessboard
