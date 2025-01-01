@@ -17,9 +17,7 @@ export interface AppMessage {
 
 const App = () => {
 
-
-
-  let gatewayUrl:string = "http://127.0.0.1:4943";
+  let gatewayUrl = "http://127.0.0.1:4943";
   const icUrl = "http://localhost:4943/";
 
   const wsConfig = createWsConfig({
@@ -30,7 +28,7 @@ const App = () => {
   });
   
   try {
-    const ws = new IcWebSocket(gatewayUrl, "", wsConfig); 
+    const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig); 
   } catch (err) {
     console.log("Websocket not working", err);
   
