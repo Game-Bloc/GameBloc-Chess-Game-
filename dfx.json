@@ -5,10 +5,7 @@
       "package": "chess",
       "type": "rust"
     },
-    "Chess_Kitchen": {
-      "main": "src/Odins_Kitchen/main.mo",
-      "type": "motoko"
-    },
+    
     "chess_gamebloc_frontend": {
       "dependencies": [
         "chess"                                                   
