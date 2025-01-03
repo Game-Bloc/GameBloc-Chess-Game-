@@ -1,0 +1,12 @@
+type ClientPrincipal = principal;
+type GatewayPrincipal = principal;
+type ClientKey = record {
+  client_principal : ClientPrincipal;
+  client_nonce : nat64;
+};
+
+
+
+
+
+

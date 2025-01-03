@@ -160,8 +160,6 @@ function UserInputForm() {
     // Alert();
     setUsernameSubmitted(true)
     navigate("/game")
-    
-    
   }
   
   

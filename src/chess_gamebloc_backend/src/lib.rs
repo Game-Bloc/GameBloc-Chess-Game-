@@ -1,6 +1,6 @@
 
-use candid::{CandidType, Principal};
-use ic_cdk::{api::call::ManualReply, init, query, update};
+use candid::{CandidType, Principal, encode_one, decode_one};
+use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade, print, api::time};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
@@ -11,10 +11,19 @@ use std::collections::BTreeMap;
 // from the ic-cdk on icp 
 
 use tanton::tools::Searcher;
+// websocket
+use handlers::{on_close, on_message, on_open, AppMessage};
+use ic_websocket_cdk::{
+    WsHandlers, WsInitParams, CanisterWsCloseArguments, CanisterWsCloseResult, CanisterWsGetMessagesArguments,
+    CanisterWsGetMessagesResult, CanisterWsMessageArguments, CanisterWsMessageResult,
+    CanisterWsOpenArguments, CanisterWsOpenResult, send, OnCloseCallbackArgs, OnMessageCallbackArgs, OnOpenCallbackArgs, ClientPrincipal
+};
+// websocket
 
 // from the ic-cdk on icp 
 
 mod getrandom_fail;
+mod handlers;
 
 type GameStore = BTreeMap<String, GameInternal>; // from cdk-chess
 type IdStore = BTreeMap<String, Principal>;
@@ -270,10 +279,10 @@ fn get_player(text: String) -> ManualReply<Option<Profile>> {
 // }
 
 // for the counter functions
-#[init] // the 'init' function is used when I want a function to run before main
-fn init() {
-    OWNER.with(|owner| owner.set(ic_cdk::api::caller()));
-}
+// #[init] // the 'init' function is used when I want a function to run before main
+// fn init() {
+//     OWNER.with(|owner| owner.set(ic_cdk::api::caller()));
+// }
 
 #[update]
 fn inc() {
@@ -356,7 +365,60 @@ fn get_fen(name: String) -> Option<String> {
 
 // cdk-chess
 
+// integrating websocket 
+
+#[init]
+fn initialise() { // I changed the fn name from 'init' to 'initialise'
+    let handlers = WsHandlers {
+        on_open: Some(on_open),
+        on_message: Some(on_message),
+        on_close: Some(on_close),
+    };
+
+    let params = WsInitParams::new(handlers);
+    ic_websocket_cdk::init(params);
+}
+
+#[post_upgrade]
+fn post_upgrade() {
+    initialise(); // I changed the keyword here to 'initialise' from the original keyword 'init'
+}
+
+// this is the function for users to open the w_s 
+#[update]
+fn ws_open(args: CanisterWsOpenArguments) -> CanisterWsOpenResult {
+    ic_websocket_cdk::ws_open(args)
+}
+
+// function to close the w_s connection
+#[update]
+fn ws_close (args: CanisterWsCloseArguments) -> CanisterWsCloseResult {
+    ic_websocket_cdk::ws_close(args)
+}
+
+//function clients used to send or relay messages
+#[update]
+fn ws_message(args: CanisterWsMessageArguments, msg_type: Option<AppMessage>) -> CanisterWsMessageResult {
+    ic_websocket_cdk::ws_message(args, msg_type)
+}
+
+
+// this function get messages across for all clients
+#[query]
+fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessagesResult {
+    ic_websocket_cdk::ws_get_messages(args)
+}
+
+
+// integrating websocket 
+
 ic_cdk::export_candid!();
+
+// This is from the chess.did file that was removed incase of error
+// ws_close : (CanisterWsCloseArguments) -> (Result); // the returns here are not the same as supposed
+// ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_1) query;
+// ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result);
+// ws_open : (CanisterWsOpenArguments) -> (Result);
 
 
 
