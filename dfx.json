@@ -5,7 +5,10 @@
       "package": "chess",
       "type": "rust"
     },
-    
+    "Chess_Kitchen": {
+      "main": "src/chess_kitchen/main.mo",
+      "type": "motoko"
+    },
     "chess_gamebloc_frontend": {
       "dependencies": [
         "chess"                                                   
