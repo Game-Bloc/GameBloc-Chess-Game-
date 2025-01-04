@@ -10,6 +10,7 @@ import { canisterId, createActor } from "../../../declarations/chess"
 //   canisterId as ledgerId,
 //   createActor as createLedgerActor,
 // } from "../../../declarations/chess"
+import IcWebSocket from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE } from "../../../declarations/chess/chess.did"
 import { useAppDispatch } from "../redux/hooks"

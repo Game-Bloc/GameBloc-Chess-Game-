@@ -109,6 +109,10 @@ const Login = () => {
         navigate("/");
     }
 
+    const logoutReload = () => {
+        window.location.reload();
+    }
+
     return (
         <div>
             <h2></h2>
@@ -118,7 +122,7 @@ const Login = () => {
 
             </div>
             {authenticated ? (
-                <div className="flex flex-col align-center">
+                <div onClick={logoutReload} className="flex flex-col align-center">
                     <button onClick={() => logout()}>Logout</button>
                     
                 </div>
