@@ -9,6 +9,7 @@ import {  } from "@dfinity/identity"
 import { canisterId } from "../../declarations/chess"
 import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 import { chess } from "../../declarations/chess"
+import { Chess_Kitchen } from "../../declarations/Chess_Kitchen"
 import { useState } from "react"
 
 export interface AppMessage {
@@ -20,19 +21,19 @@ const App = () => {
   let gatewayUrl = "http://127.0.0.1:4943";
   const icUrl = "http://localhost:4943/";
 
-  const wsConfig = createWsConfig({
-    canisterId: canisterId,
-    canisterActor: chess,
-    identity: generateRandomIdentity(),
-    networkUrl: icUrl,
-  });
+  // const wsConfig = createWsConfig({
+  //   canisterId: canisterId,
+  //   canisterActor: Chess_Kitchen,
+  //   identity: generateRandomIdentity(),
+  //   networkUrl: icUrl,
+  // });
   
-  try {
-    const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig); 
-  } catch (err) {
-    console.log("Websocket not working", err);
+  // try {
+  //   const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig); 
+  // } catch (err) {
+  //   console.log("Websocket not working", err);
   
-  }
+  // }
 
   // ws.onopen = () => {
   //   console.log("Connected to the canister");

@@ -12,7 +12,8 @@ import { canisterId, createActor } from "../../../declarations/chess"
 // } from "../../../declarations/chess"
 import IcWebSocket from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
-import { _SERVICE } from "../../../declarations/chess/chess.did"
+import { _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
+import { _SERVICE, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
 import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
@@ -26,7 +27,8 @@ const AuthContext = React.createContext<{
   authClient: any
   identity: any
   principal: any
-  whoamiActor: ActorSubclass<_SERVICE> | null
+  whoamiActor: ActorSubclass<ActorService> | null
+  // ws: IcWebSocket<any, kitc> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -36,6 +38,7 @@ const AuthContext = React.createContext<{
   identity: null,
   principal: null,
   whoamiActor: null,
+  // ws: null,
 })
 const network = process.env.DFX_NETWORK || "local"
 const APPLICATION_NAME = "chess_gamebloc"

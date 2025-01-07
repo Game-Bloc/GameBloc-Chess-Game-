@@ -17,7 +17,7 @@
     "src/chess_gamebloc_frontend"
   ],
   "dependencies": {
-    "@dfinity/agent": "^2.1.3",
+    "@dfinity/agent": "^2.2.0",
     "@dfinity/auth-client": "^1.0.1",
     "@dfinity/candid": "^2.1.3",
     "@dfinity/identity": "^1.0.1",
