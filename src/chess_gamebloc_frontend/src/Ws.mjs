@@ -25,11 +25,22 @@ const handleMessage = (bytes, uuid) => {
     const message = JSON.parse(bytes.toString())
     const user = users[uuid]
     user.state = message
-    console.log(message)
+
+    broadcast()
+
+    console.log(`${users.username} updated their state ${JSON.stringify(user.state)}`)
 }
 
-const handleClose = () => {
+const handleClose = uuid => {
 
+    console.log(`${users[uuid].username} disconnected`);
+    
+    delete connections[uuid]
+    delete users[uuid]
+
+    // write a logic/function to make sure that a message is sent when a user disconnets
+    // also write a function that can show that a user was currently active or active atm
+    broadcast()
 }
 
 wsServer.on("connection", (connection, request) => {
