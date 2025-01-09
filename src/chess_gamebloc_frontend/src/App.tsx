@@ -1,16 +1,9 @@
-import React from 'react'
 import { Routes, Route } from "react-router-dom"
-import ChessPage from './ChessPage'
 import LandingPage from './LandingPage'
-import UserInputForm from './UserInputForm'
 import UserInputWrap from './UserInputWrap'
 import AppWrap from './AppWrap'
 import {  } from "@dfinity/identity"
-import { canisterId } from "../../declarations/chess"
-import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
-import { chess } from "../../declarations/chess"
-import { Chess_Kitchen } from "../../declarations/Chess_Kitchen"
-import { useState } from "react"
+import WsTesting from "./components/WsTesting"
 
 export interface AppMessage {
   AppMessage: String,
@@ -64,7 +57,8 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<LandingPage />} />
+        {/* <Route path='/' element={<LandingPage />} /> */}
+        <Route path='/' element={<WsTesting />} />
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
       </Routes>
