@@ -3,10 +3,10 @@
 import * as React from "react"
 import { usePerfectCursor } from "../hooks/usePerfectCursors"
 
-export function Cursor({ point }: { point: number[] }) {
+export function Cursor({ point }) {
   const rCursor = React.useRef<SVGSVGElement>(null)
 
-  const animateCursor = React.useCallback((point: number[]) => {
+  const animateCursor = React.useCallback((point) => {
     const elm = rCursor.current
     if (!elm) return
     elm.style.setProperty(
