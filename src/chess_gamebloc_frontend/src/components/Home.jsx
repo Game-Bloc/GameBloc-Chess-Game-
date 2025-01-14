@@ -21,16 +21,16 @@ import throttle from "lodash.throttle"
 import { Cursor } from "./Cursor"
 
 
-const renderedCursors = users => {
-    return Object.keys(users).map( uuid => {
-        const users = users[uuid]
+// const renderedCursors = users => {
+//     return Object.keys(users).map( uuid => {
+//         const users = users[uuid]
 
-        return (
-            <Cursor key={uuid} point={[users.state.x, users.state.y]} />
-        )
+//         return (
+//             <Cursor key={uuid} point={[users.state.x, users.state.y]} />
+//         )
 
-    })
-}
+//     })
+// }
 
 const renderCursors = (users) => {
     return Object.keys(users).map((uuid) => {

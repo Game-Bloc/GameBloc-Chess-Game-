@@ -1,7 +1,7 @@
 
 
 import * as React from "react"
-import { usePerfectCursor } from "../hooks/usePerfectCursors"
+import { usePerfectCursor } from "../hooks/useCursors"
 
 export function Cursor({ point }) {
   const rCursor = React.useRef<SVGSVGElement>(null)
