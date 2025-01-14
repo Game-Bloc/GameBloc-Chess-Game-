@@ -44,5 +44,5 @@ export function Home({ username }) {
     })
   }, [])
 
-  return <h1>Home</h1>
+  return <h1>Hello, {username}</h1>
 }
