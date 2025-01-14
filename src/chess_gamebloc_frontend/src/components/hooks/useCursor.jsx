@@ -1,6 +1,7 @@
 // hooks/usePerfectCursor
 
 import { PerfectCursor } from "perfect-cursors"
+import React from "react"
 
 export function usePerfectCursor(
   cb,
