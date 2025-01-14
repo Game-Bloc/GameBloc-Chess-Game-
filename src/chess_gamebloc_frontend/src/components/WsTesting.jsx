@@ -1,9 +1,11 @@
-import React from 'react'
 
-export default function WsTesting() {
+export default function WsTesting({username}) {
+
   return (
-    <div>
-        Hello 
-    </div>
-  )
+
+    <>
+      <h1>Home</h1>
+    </>
+   
+  );
 }

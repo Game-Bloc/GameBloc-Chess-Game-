@@ -4,6 +4,9 @@ import UserInputWrap from './UserInputWrap'
 import AppWrap from './AppWrap'
 import {  } from "@dfinity/identity"
 import WsTesting from "./components/WsTesting"
+import Login from "./components/Login"
+import  {Home}  from "./components/Home"
+import { useState } from "react"
 
 export interface AppMessage {
   AppMessage: String,
@@ -53,18 +56,18 @@ const App = () => {
   
   // const msgTypeWrapped:any = msg_type ? Some(msg_type) :  None;
   // ws(args, msgTypeWrapped)
+  const [username, setUsername] = useState("")
   
-  return (
+  return username ? 
+  (<Home  username={username} />)  : (
     <div>
       <Routes>
         {/* <Route path='/' element={<LandingPage />} /> */}
-        <Route path='/' element={<WsTesting />} />
+        <Route path='/' element={<Login onSubmit={setUsername}/>} />
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
       </Routes>
     </div>
   )
 }
-
-
 export default App;

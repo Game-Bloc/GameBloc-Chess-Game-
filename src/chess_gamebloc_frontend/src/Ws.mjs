@@ -31,16 +31,6 @@ const handleMessage = (bytes, uuid) => {
     console.log(`${users[uuid].username} updated their state ${JSON.stringify(user.state)}`)
 }
 
-// const handleClose = uuid => {
-
-//     console.log(`${users[uuid].username} disconnected`);
-    
-//     delete connections[uuid]
-//     delete users[uuid]
-
-    
-//     broadcast()
-// }
 
 const handleClose = (uuid) => {
     console.log(`${users[uuid].username} disconnected`)
@@ -48,8 +38,6 @@ const handleClose = (uuid) => {
     delete users[uuid]
     broadcast()
 
-    // write a logic/function to make sure that a message is sent when a user disconnets
-    // also write a function that can show that a user was currently active or active atm
   }
 
 wsServer.on("connection", (connection, request) => {
