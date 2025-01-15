@@ -44,12 +44,7 @@ const App = () => {
   //   ws.send(messageToSend);
   // };
   
-  // ws.onclose = () => {
-  //   console.log("Disconnected from the canister");
-  // };
-  
-  // const msgTypeWrapped:any = msg_type ? Some(msg_type) :  None;
-  // ws(args, msgTypeWrapped)
+
   const [username, setUsername] = useState()
   
   return username ? 
