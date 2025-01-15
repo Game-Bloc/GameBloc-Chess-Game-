@@ -23,4 +23,4 @@ export default function CustomDialog ({open, children, title, contentText, handl
   )
 }
 
-//　refer to this url: https://mui.com/material-ui/react-dialog/ for more explaination about the codes above - it explains it well
+//　contact Sukuna or refer to this url: https://mui.com/material-ui/react-dialog/ for more explaination about the codes above - it explains it well

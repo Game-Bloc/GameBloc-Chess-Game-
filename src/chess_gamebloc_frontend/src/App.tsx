@@ -56,7 +56,7 @@ const App = () => {
   
   // const msgTypeWrapped:any = msg_type ? Some(msg_type) :  None;
   // ws(args, msgTypeWrapped)
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState()
   
   return username ? 
   (<Home  username={username} />) : (

@@ -1,5 +1,5 @@
 
-use candid::{CandidType, Principal, encode_one, decode_one};
+use candid::{CandidType, Principal};
 use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade, print, api::time};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
