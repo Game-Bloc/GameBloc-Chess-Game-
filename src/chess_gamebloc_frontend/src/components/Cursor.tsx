@@ -1,13 +1,12 @@
-
+// components/Cursor
 
 import * as React from "react"
-import { useRef } from "react"
 import { usePerfectCursor } from "./hooks/useCursor"
 
-export function Cursor({ point }) {
+export function Cursor({ point }: { point: number[] }) {
   const rCursor = React.useRef<SVGSVGElement>(null)
 
-  const animateCursor = React.useCallback((point) => {
+  const animateCursor = React.useCallback((point: number[]) => {
     const elm = rCursor.current
     if (!elm) return
     elm.style.setProperty(

@@ -8,12 +8,12 @@ import { Cursor } from "./Cursor"
 
 
 const renderCursors = (users) => {
-    return Object.keys(users).map((uuid) => {
-      const user = users[uuid]
-      return (
-        <Cursor key={uuid} userId={uuid} point={[user.state.x, user.state.y]} />
-      )
-    })
+  return Object.keys(users).map((uuid) => {
+    const user = users[uuid]
+    return (
+      <Cursor key={uuid} userId={uuid} point={[user.state.x, user.state.y]} />
+    )
+  })
 }
 
 export function Home({ username }) {
@@ -23,7 +23,7 @@ export function Home({ username }) {
       queryParams: { username },
     })
   
-    const THROTTLE = 50
+    const THROTTLE = 10
     const sendJsonMessageThrottled = useRef(throttle(sendJsonMessage, THROTTLE))
   
     useEffect(() => {
