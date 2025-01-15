@@ -1,36 +1,11 @@
-// import useWebSocket from "react-use-websocket"
 
-// export function Home ( {username} ) {
-
-//     const WS_URL = 'ws://127.0.0.1:8000'
-//     const { sendJsonMessage } = useWebSocket(WS_URL, {
-//         queryParams: {username}
-//     });
-
-    
-//     return(
-//         <>
-//             <h1>Hello, {username}</h1>
-//         </>
-//     )
-// }
 
 import useWebSocket from "react-use-websocket"
+import useWe from "react-use-websocket"
 import React, { useEffect, useRef } from "react"
 import throttle from "lodash.throttle"
 import { Cursor } from "./Cursor"
 
-
-// const renderedCursors = users => {
-//     return Object.keys(users).map( uuid => {
-//         const users = users[uuid]
-
-//         return (
-//             <Cursor key={uuid} point={[users.state.x, users.state.y]} />
-//         )
-
-//     })
-// }
 
 const renderCursors = (users) => {
     return Object.keys(users).map((uuid) => {

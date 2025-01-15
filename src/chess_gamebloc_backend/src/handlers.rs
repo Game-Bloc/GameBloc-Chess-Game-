@@ -1,5 +1,5 @@
 use candid::{CandidType, encode_one, decode_one};
-use ic_cdk::{print, api::time};
+use ic_cdk::{print};
 use serde::{Deserialize, Serialize};
 use ic_websocket_cdk::{
     send, ClientPrincipal, OnCloseCallbackArgs, OnMessageCallbackArgs,OnOpenCallbackArgs
