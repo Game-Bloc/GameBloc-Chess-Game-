@@ -48,12 +48,6 @@ const App = () => {
   //   console.log("Disconnected from the canister");
   // };
   
-  
-
-  // const msg_type: AppMessage | null = {
-  //   AppMessage: "moves",
-  // }
-  
   // const msgTypeWrapped:any = msg_type ? Some(msg_type) :  None;
   // ws(args, msgTypeWrapped)
   const [username, setUsername] = useState()
