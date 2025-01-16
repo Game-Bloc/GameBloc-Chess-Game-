@@ -6,7 +6,7 @@ import {  } from "@dfinity/identity"
 import WsTesting from "./components/WsTesting"
 import Login from "./components/Login"
 import  {Home}  from "./components/Home"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import socket from "./components/stuntPull/socket"
 
 export interface AppMessage {
@@ -18,6 +18,9 @@ const App = () => {
   let gatewayUrl = "http://127.0.0.1:4943";
   const icUrl = "http://localhost:4943/";
   const [players, setPlayers] = useState([])
+  const [ room, setRoom ] = useState("")
+  const [ orientation, setOrientation ] = useState("")
+
 
   // const wsConfig = createWsConfig({
   //   canisterId: canisterId,
@@ -45,6 +48,11 @@ const App = () => {
   //   };
   //   ws.send(messageToSend);
   // };
+  const cleanup = useCallback(() => {
+    setRoom("");
+    setOrientation("");
+    setPlayers([]);
+  }, []);
 
   useEffect(() => {
 
@@ -54,8 +62,6 @@ const App = () => {
     });
   }, []);
 
-  
-  
 
   const [username, setUsername] = useState()
   
