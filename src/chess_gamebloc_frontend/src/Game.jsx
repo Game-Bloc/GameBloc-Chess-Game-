@@ -7,6 +7,7 @@ import { useAuth } from "./auth/use_auth_client";
 import { chessFunctions } from "./functions/functions";
 import { UseProfileContext } from './functions/context';
 import { GameError } from "./components/Noti/GameError";
+import InitGame from "./components/stuntPull/InitGame";
 
 // interface AppProps {{} : AppProps}
 
@@ -73,7 +74,7 @@ function Game() {
     }, [isAuthenticated])
     
     // console.log("the username", grabName);
-    const [gameRender, setGameRender] = useState(true)
+    const [gameRender, setGameRender] = useState(false)
 
   
   // this is the rendered UI of the chessboard
@@ -88,7 +89,7 @@ function Game() {
         <h1>Welcome:</h1>
         <p>{profileContext.profile.name}</p>
             
-        {gameRender ? <Chessboard position={fen} onPieceDrop={onDrop} /> : <GameError /> }
+        {gameRender ? <Chessboard position={fen} onPieceDrop={onDrop} /> : <InitGame /> }
 
         {/* <Chessboard position={fen} onPieceDrop={onDrop} /> */}
       </div>

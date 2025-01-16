@@ -51,8 +51,8 @@ const App = () => {
   (<Home  username={username} />) : (
     <div>
       <Routes>
-        {/* <Route path='/' element={<LandingPage />} /> */}
-        <Route path='/' element={<Login onSubmit={setUsername}/>} />
+        <Route path='/' element={<LandingPage />} />
+        {/* <Route path='/' element={<Login onSubmit={setUsername}/>} /> */}
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
       </Routes>
