@@ -2,6 +2,7 @@ import { Button, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import CustomDialog from "../CustomDialog"
 import socket from "./socket";
+import warningerror from "../../../public/error.png"
 
 export default function InitGame({ setRoom, setOrientation, setPlayers }) {
   const [roomDialogOpen, setRoomDialogOpen] = useState(false);
@@ -52,6 +53,10 @@ export default function InitGame({ setRoom, setOrientation, setPlayers }) {
         />
       </CustomDialog>
       {/* Button for starting a game */}
+
+      <div className="errorImg">
+          <img className='opacity-35 w-fit place-content-center' src={warningerror} alt="No Game Available" />
+        </div>
       <Button
         variant="contained"
         onClick={() => {

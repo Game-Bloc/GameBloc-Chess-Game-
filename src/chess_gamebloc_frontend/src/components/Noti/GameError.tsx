@@ -5,7 +5,7 @@ export const GameError = () => {
   return (
     <>
         <div className="errorImg">
-            <img className='opacity-35 w-fit place-content-center' src={warningerror} alt="No Game Available" />
+          <img className='opacity-35 w-fit place-content-center' src={warningerror} alt="No Game Available" />
         </div>
         <div>
             <div className='flex item-center  justify-center space-x-3'>

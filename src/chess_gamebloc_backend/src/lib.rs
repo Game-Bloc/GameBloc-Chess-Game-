@@ -1,6 +1,6 @@
 
 use candid::{CandidType, Principal};
-use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade, print, api::time};
+use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
@@ -16,7 +16,7 @@ use handlers::{on_close, on_message, on_open, AppMessage};
 use ic_websocket_cdk::{
     WsHandlers, WsInitParams, CanisterWsCloseArguments, CanisterWsCloseResult, CanisterWsGetMessagesArguments,
     CanisterWsGetMessagesResult, CanisterWsMessageArguments, CanisterWsMessageResult,
-    CanisterWsOpenArguments, CanisterWsOpenResult, send, OnCloseCallbackArgs, OnMessageCallbackArgs, OnOpenCallbackArgs, ClientPrincipal
+    CanisterWsOpenArguments, CanisterWsOpenResult
 };
 // websocket
 
