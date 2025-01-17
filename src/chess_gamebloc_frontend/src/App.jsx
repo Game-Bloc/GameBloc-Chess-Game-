@@ -8,10 +8,12 @@ import Login from "./components/Login"
 import  {Home}  from "./components/Home"
 import { useState, useEffect, useCallback } from "react"
 import socket from "./components/stuntPull/socket"
+import InitGame from "./components/stuntPull/InitGame"
+import MainGame from "./components/stuntPull/MainGame"
 
-export interface AppMessage {
-  AppMessage: String,
-}
+// export interface AppMessage {
+//   AppMessage: String,
+// }
 
 const App = () => {
 
@@ -63,16 +65,31 @@ const App = () => {
   }, []);
 
 
-  const [username, setUsername] = useState()
+  const [username, setUsername] = useState("")
   
-  return username ? 
-  (<Home  username={username} />) : (
+  return (
     <div>
       <Routes>
         <Route path='/' element={<LandingPage />} />
         {/* <Route path='/' element={<Login onSubmit={setUsername}/>} /> */}
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
+        {room ? (
+        <MainGame
+          room={room}
+          orientation={orientation}
+          username={username}
+          players={players}
+          // the cleanup function will be used by Game to reset the state when a game is over
+          cleanup={cleanup}
+        />
+      ) : (
+        <InitGame
+          setRoom={setRoom}
+          setOrientation={setOrientation}
+          setPlayers={setPlayers}
+        />
+      )}
       </Routes>
     </div>
   )
