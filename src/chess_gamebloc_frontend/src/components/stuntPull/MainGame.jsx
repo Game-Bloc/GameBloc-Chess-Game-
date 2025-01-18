@@ -13,9 +13,9 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { Chessboard } from "react-chessboard";
 import { Chess } from "chess.js";
 import CustomDialog from "../CustomDialog";
-import socket from "./socket";
+import socket from "../stuntPull/socket";
 
-function MainGame({ players, room, orientation, cleanup }) {
+function MainGame({ players, room, orientation, cleanup, username }) {
 const chess = useMemo(() => new Chess(), []); // <- 1
 const [fen, setFen] = useState(chess.fen()); // <- 2
 const [over, setOver] = useState("");

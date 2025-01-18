@@ -10,6 +10,9 @@ import { useState, useEffect, useCallback } from "react"
 import socket from "./components/stuntPull/socket"
 import InitGame from "./components/stuntPull/InitGame"
 import MainGame from "./components/stuntPull/MainGame"
+import { TextField} from "@mui/material"
+import Container from "@mui/material/Container";
+import CustomDialog from "./components/CustomDialog"
 
 // export interface AppMessage {
 //   AppMessage: String,
@@ -22,6 +25,7 @@ const App = () => {
   const [players, setPlayers] = useState([])
   const [ room, setRoom ] = useState("")
   const [ orientation, setOrientation ] = useState("")
+  const [ usernameSubmitted, setUsernameSubmitted ] = useState()
 
 
   // const wsConfig = createWsConfig({
@@ -74,22 +78,52 @@ const App = () => {
         {/* <Route path='/' element={<Login onSubmit={setUsername}/>} /> */}
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
-        {room ? (
-        <MainGame
-          room={room}
-          orientation={orientation}
-          username={username}
-          players={players}
-          // the cleanup function will be used by Game to reset the state when a game is over
-          cleanup={cleanup}
-        />
-      ) : (
-        <InitGame
-          setRoom={setRoom}
-          setOrientation={setOrientation}
-          setPlayers={setPlayers}
-        />
-      )}
+        <Route path="/ws" element= {
+          <Container>
+            <CustomDialog
+              open={!usernameSubmitted}
+              handleClose={() => setUsernameSubmitted(true)}
+              title="Pick a username"
+              contentText="Please select a username"
+              handleContinue={() => {
+                if (!username) return;
+                socket.emit("username", username);
+                setUsernameSubmitted(true);
+              }}
+            >
+              <TextField
+                autoFocus
+                margin="dense"
+                id="username"
+                label="Username"
+                name="username"
+                value={username}
+                required
+                onChange={(e) => setUsername(e.target.value)}
+                type="text"
+                fullWidth
+                variant="standard"
+              />
+            </CustomDialog>
+            {room ? (
+              <MainGame
+                room={room}
+                orientation={orientation}
+                username={username}
+                players={players}
+                // the cleanup function will be used by Game to reset the state when a game is over
+                cleanup={cleanup}
+              />
+            ) : (
+              <InitGame
+                setRoom={setRoom}
+                setOrientation={setOrientation}
+                setPlayers={setPlayers}
+              />
+            )}
+        </Container>
+        } />
+        
       </Routes>
     </div>
   )

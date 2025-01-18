@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "setup": "npm i && dfx canister create chess_gamebloc_backend && dfx generate chess_gamebloc_backend && dfx deploy",
-    "start": "vite --port 3000",
+    "start": "nodemon server.js",
     "ws": "nodemon server.js",
     "prebuild": "dfx generate",
     "build": "tsc && vite build",
@@ -12,6 +12,7 @@
     "test": "npm test --workspaces --if-present",
     "generate": "node generate.js"
   },
+  "type": "module",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@babel/eslint-parser": "^7.23.3",
