@@ -159,7 +159,7 @@ function UserInputForm() {
     submit();
     // Alert();
     setUsernameSubmitted(true)
-    navigate("/ws")
+    navigate("/game")
   }
   
   

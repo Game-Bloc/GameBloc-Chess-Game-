@@ -6,7 +6,7 @@ import Login from "./Login.jsx"
 import { useAuth } from "./auth/use_auth_client";
 import { chessFunctions } from "./functions/functions";
 import { UseProfileContext } from './functions/context';
-import { GameError } from "./components/Noti/GameError";
+import  GameError  from "./components/Noti/GameError";
 import InitGame from "./components/stuntPull/InitGame";
 
 // interface AppProps {{} : AppProps}
@@ -89,7 +89,7 @@ function Game() {
         <h1>Welcome:</h1>
         <p>{profileContext.profile.name}</p>
             
-        {gameRender ? <Chessboard position={fen} onPieceDrop={onDrop} /> : <InitGame /> }
+        {gameRender ? <Chessboard position={fen} onPieceDrop={onDrop} /> : <GameError /> }
 
         {/* <Chessboard position={fen} onPieceDrop={onDrop} /> */}
       </div>
