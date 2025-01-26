@@ -36,7 +36,7 @@ function Game() {
             ); 
             // chess.turn checks for the last move made
           } else if (chesss.isDraw()) { // if it is a draw...
-            setOver("Draw"); // set message to "Draw"
+            setOver("Draw"); 
           } else {
             setOver("Game over");
           }
