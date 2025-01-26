@@ -51,7 +51,7 @@ function Game() {
   );
 
 
-    // the function that handles the pieces movement on the chessboard
+    
     const onDrop = (sourceSquare, targetSquare) => {
       const moveData = {
           from: sourceSquare,
