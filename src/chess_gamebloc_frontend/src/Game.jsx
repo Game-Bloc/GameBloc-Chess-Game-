@@ -45,7 +45,7 @@ function Game() {
         return result;
       } catch (e) {
         return null;
-      } // returns an empty response if the move is illegal.
+      } 
     },
     [chesss]
   );
