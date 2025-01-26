@@ -13,6 +13,9 @@ import MainGame from "./components/stuntPull/MainGame"
 import { TextField} from "@mui/material"
 import Container from "@mui/material/Container";
 import CustomDialog from "./components/CustomDialog"
+import { canisterId } from "../../declarations/chess"
+import { chess } from "../../declarations/chess"
+import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 
 // export interface AppMessage {
 //   AppMessage: String,
@@ -20,20 +23,22 @@ import CustomDialog from "./components/CustomDialog"
 
 const App = () => {
 
-  let gatewayUrl = "http://127.0.0.1:4943";
-  const icUrl = "http://localhost:4943/";
+  let gatewayUrl = "wss://gateway.icws.io";
+  const icUrl = "http://127.0.0.1:3001/";
   const [players, setPlayers] = useState([])
   const [ room, setRoom ] = useState("")
   const [ orientation, setOrientation ] = useState("")
   const [ usernameSubmitted, setUsernameSubmitted ] = useState()
 
 
-  // const wsConfig = createWsConfig({
-  //   canisterId: canisterId,
-  //   canisterActor: Chess_Kitchen,
-  //   identity: generateRandomIdentity(),
-  //   networkUrl: icUrl,
-  // });
+  const wsConfig = createWsConfig({
+    canisterId: canisterId,
+    canisterActor: chess,
+    identity: generateRandomIdentity(),
+    networkUrl: icUrl,
+  });
+
+  const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
   
   // try {
   //   const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig); 
@@ -42,31 +47,40 @@ const App = () => {
   
   // }
 
-  // ws.onopen = () => {
-  //   console.log("Connected to the canister");
-  // };
+  ws.onopen = () => {
+    console.log("Connected to the canister");
+  };
   
-  // ws.onmessage = async (event) => {
-  //   console.log("Received message:", event.data);
+  ws.onmessage = async (event) => {
+    console.log("Received message:", event.data);
   
-  //   const messageToSend = {
-  //     text: event.data.text + "-pong",
-  //   };
-  //   ws.send(messageToSend);
-  // };
+    const messageToSend = {
+      text: event.data.text + "-pong",
+    };
+    ws.send(messageToSend);
+  };
+
+  ws.onclose = () => {
+    console.log("Disconnected from the canister");
+  };
+  
+  ws.onerror = (error) => {
+    console.log("Error:", error);
+  }; 
+
   const cleanup = useCallback(() => {
     setRoom("");
     setOrientation("");
     setPlayers([]);
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    socket.on("opponentJoined", (roomData) => {
-      console.log("roomData", roomData)
-      setPlayers(roomData.players);
-    });
-  }, []);
+  //   socket.on("opponentJoined", (roomData) => {
+  //     console.log("roomData", roomData)
+  //     setPlayers(roomData.players);
+  //   });
+  // }, []);
 
 
   const [username, setUsername] = useState("")

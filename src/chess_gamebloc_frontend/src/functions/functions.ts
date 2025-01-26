@@ -106,6 +106,10 @@ export const chessFunctions = () => {
         }
     }
 
+    const ws_open = () => {
+
+    }
+
     return {
         create_player_profile,
         updatingProfile, 

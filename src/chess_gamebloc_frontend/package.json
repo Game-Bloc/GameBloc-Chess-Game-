@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "setup": "npm i && dfx canister create chess_gamebloc_backend && dfx generate chess_gamebloc_backend && dfx deploy",
-    "start": "nodemon server.js",
+    "start": "vite --port 3000",
     "ws": "nodemon server.js",
     "prebuild": "dfx generate",
     "build": "tsc && vite build",
