@@ -52,20 +52,20 @@ function Game() {
 
 
     
-    const onDrop = (sourceSquare, targetSquare) => {
-      const moveData = {
-          from: sourceSquare,
-          to: targetSquare,
-          color: chesss.turn(),
-          promotion: "q",
-      }
-      const move = makeAMove(moveData);
-      if (move === null) {
-        return false;  // this function handles any false or illegal pieces movement
-      } else {
-        return true;
-      }
+  const onDrop = (sourceSquare, targetSquare) => {
+    const moveData = {
+        from: sourceSquare,
+        to: targetSquare,
+        color: chesss.turn(),
+        promotion: "q",
     }
+    const move = makeAMove(moveData);
+    if (move === null) {
+      return false;  // this function handles any false or illegal pieces movement
+    } else {
+      return true;
+    }
+  }
 
     useEffect (() => {
       if (isAuthenticated) {  
@@ -74,7 +74,7 @@ function Game() {
     }, [isAuthenticated])
     
     // console.log("the username", grabName);
-    const [gameRender, setGameRender] = useState(false)
+    const [gameRender, setGameRender] = useState(true)
 
   
   // this is the rendered UI of the chessboard

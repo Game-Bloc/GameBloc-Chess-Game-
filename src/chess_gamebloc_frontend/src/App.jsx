@@ -23,8 +23,8 @@ import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocke
 
 const App = () => {
 
-  let gatewayUrl = "wss://gateway.icws.io";
-  const icUrl = "http://127.0.0.1:3001/";
+  const gatewayUrl = "0.0.0.0:8080";
+  const icUrl = "http://127.0.0.1:3000/";
   const [players, setPlayers] = useState([])
   const [ room, setRoom ] = useState("")
   const [ orientation, setOrientation ] = useState("")
