@@ -68,11 +68,11 @@ const App = () => {
     console.log("Error:", error);
   }; 
 
-  const cleanup = useCallback(() => {
-    setRoom("");
-    setOrientation("");
-    setPlayers([]);
-  }, []);
+  // const cleanup = useCallback(() => {
+  //   setRoom("");
+  //   setOrientation("");
+  //   setPlayers([]);
+  // }, []);
 
   // useEffect(() => {
 

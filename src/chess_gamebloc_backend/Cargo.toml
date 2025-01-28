@@ -11,16 +11,18 @@ crate-type = ["cdylib"]
 
 [dependencies]
 candid = "0.10.9"
-ic-cdk = "0.16.0"
+ic-cdk = "0.17.0"
 serde = { version = "1.0.193", features = []}
 lazy_static = "1.4.0"
 # from the ic-cdk for chess
 
-getrandom = { version = "0.2", features = [
-    "custom",
-] } # tanton requires this to compile on wasm target
+# getrandom  = "0.3.0" # tanton requires this to compile on wasm target
+
+getrandom = { version = "0.2.0", features = ["custom"] }
 
 tanton = "1.0.0"
 ic-websocket-cdk = "0.4.1"
+# ic-websocket-cdk = "0.4.1"
 
 # from the ic-cdk for chess
+ 

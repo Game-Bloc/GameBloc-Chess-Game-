@@ -49,9 +49,7 @@ function Game() {
     },
     [chesss]
   );
-
-
-    
+ 
   const onDrop = (sourceSquare, targetSquare) => {
     const moveData = {
         from: sourceSquare,
