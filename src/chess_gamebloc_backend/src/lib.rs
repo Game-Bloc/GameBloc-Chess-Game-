@@ -14,9 +14,9 @@ use tanton::tools::Searcher;
 // websocket
 use handlers::{on_close, on_message, on_open, AppMessage};
 use ic_websocket_cdk::{
-    WsHandlers, WsInitParams, CanisterWsCloseArguments, CanisterWsCloseResult, CanisterWsGetMessagesArguments,
+    CanisterWsCloseArguments, CanisterWsCloseResult, CanisterWsGetMessagesArguments,
     CanisterWsGetMessagesResult, CanisterWsMessageArguments, CanisterWsMessageResult,
-    CanisterWsOpenArguments, CanisterWsOpenResult
+    CanisterWsOpenArguments, CanisterWsOpenResult, WsHandlers, WsInitParams,
 };
 // websocket
 
