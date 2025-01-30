@@ -87,6 +87,30 @@ const App = () => {
 
 
   const [username, setUsername] = useState("")
+
+  setTimeout(async () => {
+    if (isClosed) {
+      return;
+    }
+
+    const messageToSend: AppMessage = {
+      text: "pong",
+      timestamp: BigInt(Date.now()),
+    };
+    addMessageToUI(messageToSend, 'frontend');
+
+    try {
+      ws.send(messageToSend);
+    } catch (error) {
+      if (isClosed) {
+        return;
+      }
+
+      console.error("Error in onmessage callback:", error);
+
+      displayErrorMessage(JSON.stringify(error));
+    }
+  }, 1000);
   
   return (
     <div>
