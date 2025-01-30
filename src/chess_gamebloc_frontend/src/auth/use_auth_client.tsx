@@ -28,7 +28,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
-  // ws: IcWebSocket<any, kitc> | null
+  ws: IcWebSocket<any, AppMessage> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -38,7 +38,7 @@ const AuthContext = React.createContext<{
   identity: null,
   principal: null,
   whoamiActor: null,
-  // ws: null,
+  ws: null,
 })
 const network = process.env.DFX_NETWORK || "local"
 const APPLICATION_NAME = "chess_gamebloc"
