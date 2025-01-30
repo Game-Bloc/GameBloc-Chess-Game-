@@ -413,7 +413,3 @@ fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessage
 // integrating websocket 
 
 ic_cdk::export_candid!();
-
-
-
-
