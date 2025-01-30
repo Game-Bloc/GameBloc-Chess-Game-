@@ -3,18 +3,19 @@ import LandingPage from './LandingPage'
 import UserInputWrap from './UserInputWrap'
 import AppWrap from './AppWrap'
 import {  } from "@dfinity/identity"
-import WsTesting from "./components/WsTesting"
-import Login from "./components/Login"
-import  {Home}  from "./components/Home"
+// import WsTesting from "./components/WsTesting"
+// import Login from "./components/Login"
+// import  {Home}  from "./components/Home"
 import { useState, useEffect, useCallback } from "react"
-import socket from "./components/stuntPull/socket"
-import InitGame from "./components/stuntPull/InitGame"
-import MainGame from "./components/stuntPull/MainGame"
-import { TextField} from "@mui/material"
-import Container from "@mui/material/Container";
-import CustomDialog from "./components/CustomDialog"
+// import socket from "./components/stuntPull/socket"
+// import InitGame from "./components/stuntPull/InitGame"
+// import MainGame from "./components/stuntPull/MainGame"
+// import { TextField} from "@mui/material"
+// import Container from "@mui/material/Container";
+// import CustomDialog from "./components/CustomDialog"
 import { canisterId } from "../../declarations/chess"
 import { chess } from "../../declarations/chess"
+import { AppMessage} from "../../declarations/chess/chess.did"
 import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
 
 // export interface AppMessage {
@@ -119,7 +120,7 @@ const App = () => {
         {/* <Route path='/' element={<Login onSubmit={setUsername}/>} /> */}
         <Route path='/landingPage' element={<UserInputWrap />} />
         <Route path='/game' element={<AppWrap />} />
-        <Route path="/ws" element= {
+        {/* <Route path="/ws" element= {
           <Container>
             <CustomDialog
               open={!usernameSubmitted}
@@ -163,7 +164,7 @@ const App = () => {
               />
             )}
         </Container>
-        } />
+        } /> */}
         
       </Routes>
     </div>
