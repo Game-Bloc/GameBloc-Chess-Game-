@@ -27,10 +27,10 @@ const App = () => {
   const gatewayUrl = "ws://127.0.0.1:8080";
   const icUrl = "http://127.0.0.1:4943";
 
-  const [players, setPlayers] = useState([])
-  const [ room, setRoom ] = useState("")
-  const [ orientation, setOrientation ] = useState("")
-  const [ usernameSubmitted, setUsernameSubmitted ] = useState()
+  // const [players, setPlayers] = useState([])
+  // const [ room, setRoom ] = useState("")
+  // const [ orientation, setOrientation ] = useState("")
+  // const [ usernameSubmitted, setUsernameSubmitted ] = useState()
 
 
   const wsConfig = createWsConfig({
