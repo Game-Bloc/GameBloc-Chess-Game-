@@ -23,8 +23,9 @@ import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocke
 
 const App = () => {
 
-  const gatewayUrl = "0.0.0.0:8080";
-  const icUrl = "http://127.0.0.1:3000/";
+  const gatewayUrl = "ws://127.0.0.1:8080";
+  const icUrl = "http://127.0.0.1:4943";
+
   const [players, setPlayers] = useState([])
   const [ room, setRoom ] = useState("")
   const [ orientation, setOrientation ] = useState("")
@@ -37,6 +38,8 @@ const App = () => {
     identity: generateRandomIdentity(),
     networkUrl: icUrl,
   });
+
+  console.log(canisterId)
 
   const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
   
