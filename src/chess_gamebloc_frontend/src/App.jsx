@@ -39,7 +39,7 @@ const App = () => {
     networkUrl: icUrl,
   });
 
-  console.log(canisterId)
+  // console.log("canisterId", identity)
 
   const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
   

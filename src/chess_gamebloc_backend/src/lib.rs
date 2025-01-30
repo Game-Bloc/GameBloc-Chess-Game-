@@ -414,15 +414,6 @@ fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessage
 
 ic_cdk::export_candid!();
 
-// This is from the chess.did file that was removed incase of error
-// ws_close : (CanisterWsCloseArguments) -> (Result); // the returns here are not the same as supposed
-// ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_1) query;
-// ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result);
-// ws_open : (CanisterWsOpenArguments) -> (Result);
-
-
-
-
 
 
 
