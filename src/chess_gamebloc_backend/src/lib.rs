@@ -368,7 +368,7 @@ fn get_fen(name: String) -> Option<String> {
 // integrating websocket 
 
 #[init]
-fn initialise() { // I changed the fn name from 'init' to 'initialise'
+fn init() {
     let handlers = WsHandlers {
         on_open: Some(on_open),
         on_message: Some(on_message),
@@ -376,34 +376,37 @@ fn initialise() { // I changed the fn name from 'init' to 'initialise'
     };
 
     let params = WsInitParams::new(handlers);
+
     ic_websocket_cdk::init(params);
 }
 
 #[post_upgrade]
 fn post_upgrade() {
-    initialise(); // I changed the keyword here to 'initialise' from the original keyword 'init'
+    init();
 }
 
-// this is the function for users to open the w_s 
+// method called by the client to open a WS connection to the canister (relayed by the WS Gateway)
 #[update]
 fn ws_open(args: CanisterWsOpenArguments) -> CanisterWsOpenResult {
     ic_websocket_cdk::ws_open(args)
 }
 
-// function to close the w_s connection
+// method called by the Ws Gateway when closing the IcWebSocket connection for a client
 #[update]
-fn ws_close (args: CanisterWsCloseArguments) -> CanisterWsCloseResult {
+fn ws_close(args: CanisterWsCloseArguments) -> CanisterWsCloseResult {
     ic_websocket_cdk::ws_close(args)
 }
 
-//function clients used to send or relay messages
+// method called by the client to send a message to the canister (relayed by the WS Gateway)
 #[update]
-fn ws_message(args: CanisterWsMessageArguments, msg_type: Option<AppMessage>) -> CanisterWsMessageResult {
+fn ws_message(
+    args: CanisterWsMessageArguments,
+    msg_type: Option<AppMessage>,
+) -> CanisterWsMessageResult {
     ic_websocket_cdk::ws_message(args, msg_type)
 }
 
-
-// this function get messages across for all clients
+// method called by the WS Gateway to get messages for all the clients it serves
 #[query]
 fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessagesResult {
     ic_websocket_cdk::ws_get_messages(args)
