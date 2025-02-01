@@ -1,6 +1,6 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { canisterId, createActor } from "../../../declarations/chess"
+import { canisterId, chess, createActor } from "../../../declarations/chess"
 // import {
 //   canisterId as canisterId2,
 //   createActor as createActor2,
@@ -18,6 +18,7 @@ import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
 import {isAnyOf} from "@reduxjs/toolkit";
+import { gatewayUrl, icUrl, localGatewayUrl, localICUrl } from "../utils/ws"
 
 const AuthContext = React.createContext<{
   isAuthenticated: boolean
@@ -28,7 +29,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
-  ws: IcWebSocket<any, AppMessage> | null
+  // ws: IcWebSocket<any, AppMessage> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -38,7 +39,7 @@ const AuthContext = React.createContext<{
   identity: null,
   principal: null,
   whoamiActor: null,
-  ws: null,
+  // ws: null,
 })
 const network = process.env.DFX_NETWORK || "local"
 const APPLICATION_NAME = "chess_gamebloc"
@@ -93,6 +94,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [ ws, setWs ] = useState<IcWebSocket<any, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
 
   useEffect(() => {
@@ -150,12 +152,33 @@ export const useAuthClient = (options = defaultOptions) => {
           identity,
         },
       })
-      
-
-     
-
+    
       console.log("Actor", actor)
       setWhoamiActor(actor);
+
+      // const _ws = new IcWebSocket(
+      //   network === "local" ? localGatewayUrl : gatewayUrl,
+      //   undefined,
+      //   {
+      //     canisterId: canisterId,
+      //     canisterActor: chess,
+      //     identity: identity as SignIdentity,
+      //     networkUrl: network === "local" ? localICUrl : icUrl,
+      //   },
+      // )
+
+      // _ws.onopen = () => {
+      //   console.log(
+      //     "WebSocket state:",
+      //     ws.readyState,
+      //     "is open:",
+      //     ws.readyState === ws.OPEN,
+      //   )
+      // }
+
+      // console.log("web socket status", _ws)
+
+      // setWs(_ws)
       
     } catch (err) {
       console.log("Error on auth:", err)

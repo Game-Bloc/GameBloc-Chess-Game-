@@ -26,6 +26,8 @@ const App = () => {
 
   const gatewayUrl = "ws://127.0.0.1:8080";
   const icUrl = "http://127.0.0.1:4943";
+  // const [ isClosed, setIsclosed ] = useState()
+  let isClosed = false;
 
   // const [players, setPlayers] = useState([])
   // const [ room, setRoom ] = useState("")
@@ -33,16 +35,16 @@ const App = () => {
   // const [ usernameSubmitted, setUsernameSubmitted ] = useState()
 
 
-  const wsConfig = createWsConfig({
-    canisterId: canisterId,
-    canisterActor: chess,
-    identity: generateRandomIdentity(),
-    networkUrl: icUrl,
-  });
+  // const wsConfig = createWsConfig({
+  //   canisterId: canisterId,
+  //   canisterActor: chess,
+  //   identity: generateRandomIdentity(),
+  //   networkUrl: icUrl,
+  // });
 
   // console.log("canisterId", identity)
 
-  const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig);
+  // const ws = new IcWebSocket(selectedGateway[0], undefined, wsConfig);
   
   // try {
   //   const ws = new IcWebSocket(gatewayUrl, undefined, wsConfig); 
@@ -51,26 +53,26 @@ const App = () => {
   
   // }
 
-  ws.onopen = () => {
-    console.log("Connected to the canister");
-  };
+  // ws.onopen = () => {
+  //   console.log("Connected to the canister");
+  // };
   
-  ws.onmessage = async (event) => {
-    console.log("Received message:", event.data);
+  // ws.onmessage = async (event) => {
+  //   console.log("Received message:", event.data);
   
-    const messageToSend = {
-      text: event.data.text + "-pong",
-    };
-    ws.send(messageToSend);
-  };
+  //   const messageToSend = {
+  //     text: event.data.text + "-pong",
+  //   };
+  //   ws.send(messageToSend);
+  // };
 
-  ws.onclose = () => {
-    console.log("Disconnected from the canister");
-  };
+  // ws.onclose = () => {
+  //   console.log("Disconnected from the canister");
+  // };
   
-  ws.onerror = (error) => {
-    console.log("Error:", error);
-  }; 
+  // ws.onerror = (error) => {
+  //   console.log("Error:", error);
+  // }; 
 
   // const cleanup = useCallback(() => {
   //   setRoom("");
@@ -89,29 +91,29 @@ const App = () => {
 
   const [username, setUsername] = useState("")
 
-  setTimeout(async () => {
-    if (isClosed) {
-      return;
-    }
+  // setTimeout(async () => {
+  //   if (isClosed) {
+  //     return;
+  //   }
 
-    const messageToSend: AppMessage = {
-      text: "pong",
-      timestamp: BigInt(Date.now()),
-    };
-    addMessageToUI(messageToSend, 'frontend');
+  //   const messageToSend: AppMessage = {
+  //     text: "pong",
+  //     timestamp: BigInt(Date.now()),
+  //   };
+  //   addMessageToUI(messageToSend, 'frontend');
 
-    try {
-      ws.send(messageToSend);
-    } catch (error) {
-      if (isClosed) {
-        return;
-      }
+  //   try {
+  //     ws.send(messageToSend);
+  //   } catch (error) {
+  //     if (isClosed) {
+  //       return;
+  //     }
 
-      console.error("Error in onmessage callback:", error);
+  //     console.error("Error in onmessage callback:", error);
 
-      displayErrorMessage(JSON.stringify(error));
-    }
-  }, 1000);
+  //     displayErrorMessage(JSON.stringify(error));
+  //   }
+  // }, 1000);
   
   return (
     <div>
