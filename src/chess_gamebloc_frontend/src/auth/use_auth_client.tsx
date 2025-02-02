@@ -29,7 +29,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
-  // ws: IcWebSocket<any, AppMessage> | null
+  ws: IcWebSocket<any, AppMessage> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -39,7 +39,7 @@ const AuthContext = React.createContext<{
   identity: null,
   principal: null,
   whoamiActor: null,
-  // ws: null,
+  ws: null,
 })
 const network = process.env.DFX_NETWORK || "local"
 const APPLICATION_NAME = "chess_gamebloc"
@@ -156,29 +156,29 @@ export const useAuthClient = (options = defaultOptions) => {
       console.log("Actor", actor)
       setWhoamiActor(actor);
 
-      // const _ws = new IcWebSocket(
-      //   network === "local" ? localGatewayUrl : gatewayUrl,
-      //   undefined,
-      //   {
-      //     canisterId: canisterId,
-      //     canisterActor: chess,
-      //     identity: identity as SignIdentity,
-      //     networkUrl: network === "local" ? localICUrl : icUrl,
-      //   },
-      // )
+      const _ws = new IcWebSocket(
+        network === "local" ? localGatewayUrl : gatewayUrl,
+        undefined,
+        {
+          canisterId: canisterId,
+          canisterActor: chess,
+          identity: identity as SignIdentity,
+          networkUrl: network === "local" ? localICUrl : icUrl,
+        },
+      )
 
-      // _ws.onopen = () => {
-      //   console.log(
-      //     "WebSocket state:",
-      //     ws.readyState,
-      //     "is open:",
-      //     ws.readyState === ws.OPEN,
-      //   )
-      // }
+      _ws.onopen = () => {
+        console.log(
+          "WebSocket state:",
+          _ws.readyState,
+          "is open:",
+          _ws.readyState === _ws.OPEN,
+        )
+      }
 
-      // console.log("web socket status", _ws)
+      console.log("web socket status", _ws)
 
-      // setWs(_ws)
+      setWs(_ws)
       
     } catch (err) {
       console.log("Error on auth:", err)
@@ -200,6 +200,7 @@ export const useAuthClient = (options = defaultOptions) => {
     identity,
     principal,
     whoamiActor,
+    ws,
   }
 }
 
