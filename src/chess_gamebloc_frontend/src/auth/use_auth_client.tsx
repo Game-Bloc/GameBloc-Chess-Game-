@@ -29,7 +29,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
-  ws: IcWebSocket<any, AppMessage> | null
+  ws: IcWebSocket<ActorService, AppMessage> | null
 }>({
   isAuthenticated: false,
   login: null,
