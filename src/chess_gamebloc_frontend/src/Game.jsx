@@ -65,14 +65,14 @@ function Game() {
     }
   }
 
-    useEffect (() => {
-      if (isAuthenticated) {  
-        getProfile()
-      }
-    }, [isAuthenticated])
-    
-    // console.log("the username", grabName);
-    const [gameRender, setGameRender] = useState(true)
+  useEffect (() => {
+    if (isAuthenticated) {  
+      getProfile()
+    }
+  }, [isAuthenticated])
+  
+  // console.log("the username", grabName);
+  const [gameRender, setGameRender] = useState(true)
 
   
   // this is the rendered UI of the chessboard

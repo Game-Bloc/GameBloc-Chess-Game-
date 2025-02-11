@@ -1,19 +1,10 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { canisterId, chess, createActor } from "../../../declarations/chess"
-// import {
-//   canisterId as canisterId2,
-//   createActor as createActor2,
-//   chess,
-// } from "../../../declarations/chess"
-// import {
-//   canisterId as ledgerId,
-//   createActor as createLedgerActor,
-// } from "../../../declarations/chess"
 import IcWebSocket from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
-import { _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
-import { _SERVICE, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
+import { _SERVICE, _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
+// import { _SERVICE, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
 import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
@@ -86,7 +77,7 @@ const defaultOptions = {
  * @param {AuthClientCreateOptions} options.createOptions - Options for the AuthClient.create() method
  * @param {AuthClientLoginOptions} options.loginOptions - Options for the AuthClient.login() method
  * @returns
- */
+*/
 export const useAuthClient = (options = defaultOptions) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [authClient, setAuthClient] = useState<AuthClient | null>(null)
@@ -94,7 +85,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [ ws, setWs ] = useState<IcWebSocket<any, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
+  const [ ws, setWs ] = useState<IcWebSocket<_SERVICE, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
 
   useEffect(() => {
@@ -156,29 +147,29 @@ export const useAuthClient = (options = defaultOptions) => {
       console.log("Actor", actor)
       setWhoamiActor(actor);
 
-      const _ws = new IcWebSocket(
-        network === "local" ? localGatewayUrl : gatewayUrl,
-        undefined,
-        {
-          canisterId: canisterId,
-          canisterActor: chess,
-          identity: identity as SignIdentity,
-          networkUrl: network === "local" ? localICUrl : icUrl,
-        },
-      )
+      // const _ws = new IcWebSocket(
+      //   network === "local" ? localGatewayUrl : gatewayUrl,
+      //   undefined,
+      //   {
+      //     canisterId: canisterId,
+      //     canisterActor: chess,
+      //     identity: identity as SignIdentity,
+      //     networkUrl: network === "local" ? localICUrl : icUrl,
+      //   },
+      // );
 
-      _ws.onopen = () => {
-        console.log(
-          "WebSocket state:",
-          _ws.readyState,
-          "is open:",
-          _ws.readyState === _ws.OPEN,
-        )
-      }
+      // _ws.onopen = () => {
+      //   console.log(
+      //     "WebSocket state:",
+      //     _ws.readyState,
+      //     "is open:",
+      //     _ws.readyState === _ws.OPEN,
+      //   )
+      // }
 
-      console.log("web socket status", _ws)
+      // console.log("web socket status", _ws)
 
-      setWs(_ws)
+      // setWs(_ws)
       
     } catch (err) {
       console.log("Error on auth:", err)
