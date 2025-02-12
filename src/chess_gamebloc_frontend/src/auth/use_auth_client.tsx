@@ -147,16 +147,16 @@ export const useAuthClient = (options = defaultOptions) => {
       console.log("Actor", actor)
       setWhoamiActor(actor);
 
-      // const _ws = new IcWebSocket(
-      //   network === "local" ? localGatewayUrl : gatewayUrl,
-      //   undefined,
-      //   {
-      //     canisterId: canisterId,
-      //     canisterActor: chess,
-      //     identity: identity as SignIdentity,
-      //     networkUrl: network === "local" ? localICUrl : icUrl,
-      //   },
-      // );
+      const _ws = new IcWebSocket(
+        network === "local" ? localGatewayUrl : gatewayUrl,
+        undefined,
+        {
+          canisterId: canisterId,
+          canisterActor: chess,
+          identity: identity as SignIdentity,
+          networkUrl: network === "local" ? localICUrl : icUrl,
+        },
+      );
 
       // _ws.onopen = () => {
       //   console.log(

@@ -40,17 +40,6 @@ export const chessFunctions = () => {
     ) => {
         try {
             setUpdatingProfile(true)
-
-            // console.log("Sending data:", {
-            //     age,
-            //     principal: principal.toString(),
-            //     username,
-            //     count,
-            //     description,
-            // });
-
-            // const PlayerUsername = UseProfileContext();
-
             const users = await whoamiActor?.update_player_profile(
                 parseInt(age),
                 principal.toString(),
@@ -58,8 +47,6 @@ export const chessFunctions = () => {
                 parseInt(count),
                 description,
             ) 
-            // contextGrab.profile.name === users?.name
-            // console.log("testing");
             if (users) {
                 setProfile.profile.name === username
                 if (window.location.pathname === "/game") {
@@ -94,15 +81,9 @@ export const chessFunctions = () => {
                 })
             }
             console.log("players profile gotten", user);
-
-
-            
-            
-            
         } catch (error) {
             setIsLoading(false)
-            console.log("couldn't get player profile", error);
-            
+            console.log("couldn't get player profile", error);   
         }
     }
 
