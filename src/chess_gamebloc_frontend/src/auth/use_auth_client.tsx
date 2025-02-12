@@ -1,10 +1,11 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { canisterId, chess, createActor } from "../../../declarations/chess"
+import { canisterId as KitchenCanisterId } from "../../../declarations/Chess_Kitchen"
 import IcWebSocket from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE, _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
-// import { _SERVICE, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
+import { _SERVICE as KitchenService, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
 import { useAppDispatch } from "../redux/hooks"
 import { updateAuth } from "../redux/slice/authClient"
 import { useNavigate } from "react-router-dom"
@@ -20,6 +21,7 @@ const AuthContext = React.createContext<{
   identity: any
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
+  whoamiActor1: ActorSubclass<KitchenService> | null
   ws: IcWebSocket<ActorService, AppMessage> | null
 }>({
   isAuthenticated: false,
@@ -31,6 +33,7 @@ const AuthContext = React.createContext<{
   principal: null,
   whoamiActor: null,
   ws: null,
+  whoamiActor1: null
 })
 const network = process.env.DFX_NETWORK || "local"
 const APPLICATION_NAME = "chess_gamebloc"
@@ -87,6 +90,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const navigate = useNavigate()
   const [ ws, setWs ] = useState<IcWebSocket<_SERVICE, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
+  const [whoamiActor1, setWhoamiActor1] = useState<ActorSubclass<KitchenService>>()
 
   useEffect(() => {
     // Initialize AuthClient
@@ -143,6 +147,12 @@ export const useAuthClient = (options = defaultOptions) => {
           identity,
         },
       })
+
+      const actor2 = createActor2(KitchenCanisterId, {
+        agentOptions: {
+          identity,
+        },
+      })
     
       console.log("Actor", actor)
       setWhoamiActor(actor);
@@ -191,6 +201,7 @@ export const useAuthClient = (options = defaultOptions) => {
     identity,
     principal,
     whoamiActor,
+    whoamiActor1,
     ws,
   }
 }
