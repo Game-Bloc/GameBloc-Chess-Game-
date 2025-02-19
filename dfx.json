@@ -7,11 +7,13 @@
     },
     "Chess_Kitchen": {
       "main": "src/chess_kitchen/main.mo",
+      "package": "Chess_Kitchen",
       "type": "motoko"
     },
     "chess_gamebloc_frontend": {
       "dependencies": [
-        "chess"
+        "chess",
+        "Chess_Kitchen"
       ],
       "source": [
         "src/chess_gamebloc_frontend/dist"

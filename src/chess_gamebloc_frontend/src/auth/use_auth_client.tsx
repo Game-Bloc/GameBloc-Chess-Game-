@@ -1,7 +1,7 @@
 import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { canisterId, chess, createActor } from "../../../declarations/chess"
-import { canisterId as KitchenCanisterId } from "../../../declarations/Chess_Kitchen"
+import { canisterId as KitchenCanisterId, createActor as kitchenActor, Chess_Kitchen } from "../../../declarations/Chess_Kitchen"
 import IcWebSocket from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE, _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
@@ -90,7 +90,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const navigate = useNavigate()
   const [ ws, setWs ] = useState<IcWebSocket<_SERVICE, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
-  const [whoamiActor1, setWhoamiActor1] = useState<ActorSubclass<KitchenService>>()
+  const [whoamiActor1, setWhoamiActor1] = useState<any>()
 
   useEffect(() => {
     // Initialize AuthClient
@@ -148,11 +148,15 @@ export const useAuthClient = (options = defaultOptions) => {
         },
       })
 
-      const actor2 = createActor2(KitchenCanisterId, {
+      const actor2 = kitchenActor(KitchenCanisterId, {
         agentOptions: {
           identity,
         },
       })
+
+      console.log("KitchenActor", actor2);
+      setWhoamiActor1(actor2)
+      
     
       console.log("Actor", actor)
       setWhoamiActor(actor);
@@ -162,7 +166,7 @@ export const useAuthClient = (options = defaultOptions) => {
         undefined,
         {
           canisterId: canisterId,
-          canisterActor: chess,
+          canisterActor: Chess_Kitchen,
           identity: identity as SignIdentity,
           networkUrl: network === "local" ? localICUrl : icUrl,
         },
