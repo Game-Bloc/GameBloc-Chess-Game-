@@ -85,15 +85,15 @@ function Game() {
     console.log("ws ended ", ws)
 
 
+    ws.onopen()
     ws.onopen = () => {
       console.log("Connected to the canister")
-      setWsIsConnected(true)
-      setWsIsConnecting(false)
     }
+
+    // console.log("on open check", ws.onopen)
 
     ws.onclose = () => {
       console.log("Disconnected from the canister")
-      setWsIsConnected(false)
     }
 
     ws.onerror = (error) => {
@@ -103,40 +103,40 @@ function Game() {
       }
     }
 
-    ws.onmessage = async (event) => {
-      try {
-        const recievedMessage = event.data
+    // ws.onmessage = async (event) => {
+    //   try {
+    //     const recievedMessage = event.data
 
-        // If the message is a GroupMessage, check if it is a typing message
-        if ("GroupMessage" in recievedMessage) {
-          if (recievedMessage.GroupMessage.isTyping) {
-            handleIsTypingMessage(recievedMessage.GroupMessage)
-          } else {
-            if (recievedMessage.GroupMessage.message.username !== userName) {
-              setMessages((prev) => [...prev, recievedMessage.GroupMessage])
-            }
-          }
-        }
-        // If the message is a JoinedChat message, add it to the messages
-        if ("JoinedChat" in recievedMessage) {
-          const chat: GroupChatMessage = {
-            message: {
-              id: [],
-              username: recievedMessage.JoinedChat,
-              body: "_joined_the_chat_",
-              f_id: chatId,
-              time: time,
-              sender: principal,
-            },
-            isTyping: false,
-          }
-          setMessages((prev) => [...prev, chat])
-        }
-      } catch (error) {
-        console.log("Error deserializing message", error)
-      }
-    }
-  }, [ws, userName])
+    //     // If the message is a GroupMessage, check if it is a typing message
+    //     if ("GroupMessage" in recievedMessage) {
+    //       if (recievedMessage.GroupMessage.isTyping) {
+    //         handleIsTypingMessage(recievedMessage.GroupMessage)
+    //       } else {
+    //         if (recievedMessage.GroupMessage.message.username !== userName) {
+    //           setMessages((prev) => [...prev, recievedMessage.GroupMessage])
+    //         }
+    //       }
+    //     }
+    //     // If the message is a JoinedChat message, add it to the messages
+    //     if ("JoinedChat" in recievedMessage) {
+    //       const chat: GroupChatMessage = {
+    //         message: {
+    //           id: [],
+    //           username: recievedMessage.JoinedChat,
+    //           body: "_joined_the_chat_",
+    //           f_id: chatId,
+    //           time: time,
+    //           sender: principal,
+    //         },
+    //         isTyping: false,
+    //       }
+    //       setMessages((prev) => [...prev, chat])
+    //     }
+    //   } catch (error) {
+    //     console.log("Error deserializing message", error)
+    //   }
+    // }
+  }, [ws])
 
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////

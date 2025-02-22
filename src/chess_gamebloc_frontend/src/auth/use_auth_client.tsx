@@ -22,7 +22,7 @@ const AuthContext = React.createContext<{
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
   whoamiActor1: ActorSubclass<KitchenService> | null
-  ws: IcWebSocket<ActorService, AppMessage> | null
+  ws: IcWebSocket<KitchenService, kitc> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -88,7 +88,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [ ws, setWs ] = useState<IcWebSocket<_SERVICE, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
+  const [ ws, setWs ] = useState<IcWebSocket<KitchenService, kitc> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
   const [whoamiActor1, setWhoamiActor1] = useState<any>()
 
@@ -172,18 +172,18 @@ export const useAuthClient = (options = defaultOptions) => {
         },
       );
 
-      // _ws.onopen = () => {
-      //   console.log(
-      //     "WebSocket state:",
-      //     _ws.readyState,
-      //     "is open:",
-      //     _ws.readyState === _ws.OPEN,
-      //   )
-      // }
+      _ws.onopen = () => {
+        console.log(
+          "WebSocket state:",
+          _ws.readyState,
+          "is open:",
+          _ws.readyState === _ws.OPEN,
+        )
+      }
 
       // console.log("web socket status", _ws)
 
-      // setWs(_ws)
+      setWs(_ws)
       
     } catch (err) {
       console.log("Error on auth:", err)

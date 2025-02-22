@@ -44,7 +44,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "framer-motion": "^11.11.11",
-    "ic-websocket-js": "github:omnia-network/ic-websocket-sdk-js",
+    "ic-websocket-js": "^0.4.1",
     "jsx-to-string": "^1.4.0",
     "lodash.throttle": "^4.1.1",
     "perfect-cursors": "^1.0.5",
