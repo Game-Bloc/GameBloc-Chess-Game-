@@ -7,6 +7,7 @@ import { useAuth } from "./auth/use_auth_client";
 import { chessFunctions } from "./functions/functions";
 import { UseProfileContext } from './functions/context';
 import  GameError  from "./components/Noti/GameError";
+import { AppMessage } from "../../declarations/Chess_Kitchen/Chess_Kitchen.did"
 import InitGame from "./components/stuntPull/InitGame";
 
 // interface AppProps {{} : AppProps}
@@ -14,15 +15,16 @@ import InitGame from "./components/stuntPull/InitGame";
 function Game() {
   const { whoamiActor, isAuthenticated, ws } = useAuth();
   const profileContext = UseProfileContext();
-  const { name, age } = UseProfileContext()
+  UseProfileContext()
   const chesss = useMemo(() => new Chess(), []);
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
+  // const [ wsTest, setWsTest ] = useState(false);
 
 
   const makeAMove = useCallback(
-    (move) => {
+    (move: string | { from: string; to: string; promotion?: string; }) => {
       try {
         const result = chesss.move(move); // renders the chess instance
         setFen(chesss.fen()); // set the chessboard to the default position
@@ -50,7 +52,7 @@ function Game() {
     [chesss]
   );
  
-  const onDrop = (sourceSquare, targetSquare) => {
+  const onDrop = (sourceSquare: any, targetSquare: any) => {
     const moveData = {
         from: sourceSquare,
         to: targetSquare,
@@ -65,9 +67,19 @@ function Game() {
     }
   }
 
+  const sendJoinedChatMessage = async () => {
+    const msg: AppMessage = {
+      message: "chess moves",
+    }
+    // console.log("AppMessage", msg);
+    
+    ws?.send(msg)
+  }
+
   useEffect (() => {
     if (isAuthenticated) {  
       getProfile()
+      sendJoinedChatMessage()
     }
   }, [isAuthenticated])
 
@@ -85,10 +97,19 @@ function Game() {
     console.log("ws ended ", ws)
 
 
-    ws.onopen()
-    ws.onopen = () => {
-      console.log("Connected to the canister")
+    // ws.onopen()
+    const wsTestt = () => {
+      if (ws.onopen) {
+        console.log("Connected to the canister")
+      } else {
+        console.log("ws not working well");
+      }
     }
+
+    wsTestt()
+
+    // ws.onopen = () => {
+    // }
 
     // console.log("on open check", ws.onopen)
 
@@ -99,43 +120,38 @@ function Game() {
     ws.onerror = (error) => {
       try {
       } catch (err) {
-        console.log("Error:", error)
+        console.log("Error on websocket:", error)
       }
     }
 
-    // ws.onmessage = async (event) => {
-    //   try {
-    //     const recievedMessage = event.data
+    ws.onmessage = async (event) => {
+      try {
+        const recievedMessage = event.data
+        console.log("received message content", recievedMessage);
+        
 
-    //     // If the message is a GroupMessage, check if it is a typing message
-    //     if ("GroupMessage" in recievedMessage) {
-    //       if (recievedMessage.GroupMessage.isTyping) {
-    //         handleIsTypingMessage(recievedMessage.GroupMessage)
-    //       } else {
-    //         if (recievedMessage.GroupMessage.message.username !== userName) {
-    //           setMessages((prev) => [...prev, recievedMessage.GroupMessage])
-    //         }
-    //       }
-    //     }
-    //     // If the message is a JoinedChat message, add it to the messages
-    //     if ("JoinedChat" in recievedMessage) {
-    //       const chat: GroupChatMessage = {
-    //         message: {
-    //           id: [],
-    //           username: recievedMessage.JoinedChat,
-    //           body: "_joined_the_chat_",
-    //           f_id: chatId,
-    //           time: time,
-    //           sender: principal,
-    //         },
-    //         isTyping: false,
-    //       }
-    //       setMessages((prev) => [...prev, chat])
-    //     }
-    //   } catch (error) {
-    //     console.log("Error deserializing message", error)
-    //   }
-    // }
+        // If the message is a GroupMessage, check if it is a typing message
+        // if ("message" in recievedMessage) {
+        //   if (recievedMessage.message) {
+        //     handleIsTypingMessage(recievedMessage.GroupMessage)
+        //   } else {
+        //     if (recievedMessage.GroupMessage.message.username !== userName) {
+        //       setMessages((prev: any) => [...prev, recievedMessage.GroupMessage])
+        //     }
+        //   }
+        // }
+        // If the message is a JoinedChat message, add it to the messages
+        // if ("JoinedChat" in recievedMessage) {
+        //   const chat: AppMessage = {
+        //     message: "users"
+        //   }
+        //   setMessages((prev: any) => [...prev, chat])
+        // }
+      } catch (error) {
+        console.log("Error deserializing message", error)
+      }
+    }
+
   }, [ws])
 
   ///////////////////////////////////////////////////////////////////

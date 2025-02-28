@@ -132,14 +132,14 @@ export const useAuthClient = (options = defaultOptions) => {
 
       const identity = client.getIdentity()
       setIdentity(identity)
-      console.log("identity", identity)
+      // console.log("identity", identity)
       const principal = identity.getPrincipal()
 
       setPrincipal(principal)
-      console.log("Principal", principal)
+      // console.log("Principal", principal)
       setAuthClient(client)
 
-      console.log("canisterId", canisterId )
+      // console.log("canisterId", canisterId )
       
 
       const actor  = createActor(canisterId, {
@@ -154,11 +154,11 @@ export const useAuthClient = (options = defaultOptions) => {
         },
       })
 
-      console.log("KitchenActor", actor2);
+      // console.log("KitchenActor", actor2);
       setWhoamiActor1(actor2)
       
     
-      console.log("Actor", actor)
+      // console.log("Actor", actor)
       setWhoamiActor(actor);
 
       const _ws = new IcWebSocket(
