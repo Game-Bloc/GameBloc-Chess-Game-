@@ -20,6 +20,7 @@ function Game() {
   const [fen, setFen] = useState(chesss.fen()); 
   const [over, setOver] = useState("");
   const { getProfile } = chessFunctions();
+  const [ playerName, setPlayerName ] = useState("")
   // const [ wsTest, setWsTest ] = useState(false);
 
 
@@ -67,26 +68,49 @@ function Game() {
     }
   }
 
-  const sendJoinedChatMessage = async () => {
-    const msg: AppMessage = {
-      message: "chess moves",
-    }
-    // console.log("AppMessage", msg);
+  // const sendJoinedChatMessage = async () => {
+  //   const msg: AppMessage = {
+  //     message: JSON.stringify("msg"),
+  //   }
+  //   console.log("AppMessage", msg);
     
-    ws?.send(msg)
-  }
+  //   ws?.send(msg)
+  // }
+
+  // sendJoinedChatMessage()
 
   useEffect (() => {
     if (isAuthenticated) {  
       getProfile()
-      sendJoinedChatMessage()
+      // sendJoinedChatMessage()
     }
-  }, [isAuthenticated])
+  }, [isAuthenticated, ws])
 
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   //  WEBSOCKET / ///////////////////////////////////////////////////
+
+  // const sendJoinedChatMessage = async () => {
+  //   try {
+  //     const msg: AppMessage = {
+  //       message: "chess moves",
+  //     };
+  //     console.log("AppMessage", msg);
+  
+  //     ws?.send((msg));
+  //   } catch (err) {
+  //     console.error("Failed to send message:", err);
+  //   }
+  // };
+
+  // if (ws && ws.readyState === WebSocket.OPEN) {
+  //   await ws.send(JSON.stringify(msg));
+  // } else {
+  //   console.error("WebSocket is not open");
+  // }
+  
+  // sendJoinedChatMessage();
 
   useEffect(() => {
 
@@ -127,26 +151,12 @@ function Game() {
     ws.onmessage = async (event) => {
       try {
         const recievedMessage = event.data
-        console.log("received message content", recievedMessage);
+        // console.log("received message content", recievedMessage);
         
+        if ('message' in recievedMessage) {
+          console.log("message is valid")
+        }
 
-        // If the message is a GroupMessage, check if it is a typing message
-        // if ("message" in recievedMessage) {
-        //   if (recievedMessage.message) {
-        //     handleIsTypingMessage(recievedMessage.GroupMessage)
-        //   } else {
-        //     if (recievedMessage.GroupMessage.message.username !== userName) {
-        //       setMessages((prev: any) => [...prev, recievedMessage.GroupMessage])
-        //     }
-        //   }
-        // }
-        // If the message is a JoinedChat message, add it to the messages
-        // if ("JoinedChat" in recievedMessage) {
-        //   const chat: AppMessage = {
-        //     message: "users"
-        //   }
-        //   setMessages((prev: any) => [...prev, chat])
-        // }
       } catch (error) {
         console.log("Error deserializing message", error)
       }
@@ -187,6 +197,8 @@ function Game() {
           setOver("");
         }}
       />
+
+      <input type="button" value="WSTest"/>
     </>
   );
 }

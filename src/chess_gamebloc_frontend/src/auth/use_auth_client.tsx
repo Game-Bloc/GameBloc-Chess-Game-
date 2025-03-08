@@ -2,7 +2,7 @@ import { AuthClient } from "@dfinity/auth-client"
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { canisterId, chess, createActor } from "../../../declarations/chess"
 import { canisterId as KitchenCanisterId, createActor as kitchenActor, Chess_Kitchen } from "../../../declarations/Chess_Kitchen"
-import IcWebSocket from "ic-websocket-js"
+import IcWebSocket, { createWsConfig } from "ic-websocket-js"
 import { Actor, ActorSubclass, SignIdentity } from "@dfinity/agent"
 import { _SERVICE, _SERVICE as ActorService, AppMessage } from "../../../declarations/chess/chess.did"
 import { _SERVICE as KitchenService, AppMessage as kitc } from "../../../declarations/Chess_Kitchen/Chess_Kitchen.did"
@@ -22,7 +22,7 @@ const AuthContext = React.createContext<{
   principal: any
   whoamiActor: ActorSubclass<ActorService> | null
   whoamiActor1: ActorSubclass<KitchenService> | null
-  ws: IcWebSocket<KitchenService, kitc> | null
+  ws: IcWebSocket<_SERVICE, AppMessage> | null
 }>({
   isAuthenticated: false,
   login: null,
@@ -88,7 +88,7 @@ export const useAuthClient = (options = defaultOptions) => {
   const [principal, setPrincipal] = useState(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [ ws, setWs ] = useState<IcWebSocket<KitchenService, kitc> | null>(null)   // i applied any here instead of '_SERVICE'
+  const [ ws, setWs ] = useState<IcWebSocket<_SERVICE, AppMessage> | null>(null)   // i applied any here instead of '_SERVICE'
   const [whoamiActor, setWhoamiActor] = useState<any>()
   const [whoamiActor1, setWhoamiActor1] = useState<any>()
 
@@ -160,16 +160,18 @@ export const useAuthClient = (options = defaultOptions) => {
     
       // console.log("Actor", actor)
       setWhoamiActor(actor);
+      const localGatewayUrl = "ws://127.0.0.1:8080";
+      const localICUrl = "http://127.0.0.1:4943";
 
       const _ws = new IcWebSocket(
-        network === "local" ? localGatewayUrl : gatewayUrl,
+        localGatewayUrl,
         undefined,
-        {
+        createWsConfig({
           canisterId: canisterId,
-          canisterActor: Chess_Kitchen,
+          canisterActor: chess,
           identity: identity as SignIdentity,
-          networkUrl: network === "local" ? localICUrl : icUrl,
-        },
+          networkUrl: localICUrl,
+        }),
       );
 
       _ws.onopen = () => {
@@ -180,6 +182,20 @@ export const useAuthClient = (options = defaultOptions) => {
           _ws.readyState === _ws.OPEN,
         )
       }
+
+      _ws.onmessage = async (event) => {
+        console.log("Received message:", event.data);
+      
+        const messageToSend:AppMessage = {
+          text: event.data.text + "-pong",
+          timestamp: 0n
+        };
+        _ws.send(messageToSend);
+      };
+
+      _ws.onerror = (error) => {
+        console.log("Error:", error);
+      };
 
       // console.log("web socket status", _ws)
 
