@@ -5,6 +5,16 @@ use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
 
+// for cronos stunt
+
+use ic_cdk::api::management_canister::ecdsa::{
+    ecdsa_public_key, sign_with_ecdsa, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,
+    SignWithEcdsaArgument,
+};
+use std::convert::TryFrom;
+
+// for cronos stunt
+
 
 use tanton::tools::Searcher;
 // websocket
@@ -50,6 +60,15 @@ pub struct GameInternal {
 }
 // from the rust chess ic-cdk
 
+// for the cronos evm stunt
+
+#[derive(CandidType, Serialize, Debug)]
+struct PublicKeyReply {
+    pub public_key_hex: String,
+}
+
+// for the cronos evm stunt
+
 thread_local! {
     static PROFILE_STORE: RefCell<ProfileStore> = RefCell::default();
     static ID_STORE: RefCell<IdStore> = RefCell::default(); // is it the same IdStore above we are calling here also
@@ -60,17 +79,6 @@ thread_local! {
     static STORE: RefCell<GameStore> = RefCell::default();
 }
 
-// #[query(name = "getPlayerProfile", manual_reply = true)]
-// fn player_info() -> ManualReply<String> {
-//     let id = ic_cdk::api::caller();
-//     PROFILE_STORE.with(| profile_store | {
-//         if let Some(profile) = profile_store.borrow().get(&id) {
-//             ManualReply::one(profile.clone())
-//         } else {
-//             ManualReply::one(Profile::default())
-//         }
-//     })
-// }
 
 #[query(name = "getPlayerProfile", manual_reply = true)]
 fn player_info() -> ManualReply<Profile> {
@@ -106,57 +114,6 @@ fn get(name:String) -> ManualReply<Profile> {
     })
 }
 
-// #[update]
-// fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
-//     let principal_id = ic_cdk::api::caller();
-//     ic_cdk::println!("Caller Principal: {:?}", principal_id);
-//     ID_STORE.with(|id_store| {
-//         id_store.borrow_mut().insert(name.clone(), principal_id);
-//     });
-//     PROFILE_STORE.with(|profile_store| {
-//         profile_store.borrow_mut().insert(principal_id, Profile {
-//             name,
-//             description,
-//             count,
-//             age,
-//             principal,
-//         });
-//     });
-//     "Player Profile Created Successfully".to_string()
-// }
-
-// #[update]
-// fn update_player_profile(
-//     age: u8,
-//     principal: String,
-//     name: String,
-//     count: u8,
-//     description: String,
-// ) -> String {
-//     let caller_principal = Principal::from_text(&principal)
-//         .unwrap_or_else(|_| ic_cdk::api::caller());
-
-//     ic_cdk::println!("Caller Principal: {:?}", caller_principal);
-//     ic_cdk::println!(
-//         "Received data: age={}, principal={}, name={}, count={}, description={}",
-//         age, principal, name, count, description
-//     );
-
-//     PROFILE_STORE.with(|profile_store| {
-//         profile_store.borrow_mut().insert(
-//             caller_principal,
-//             Profile {
-//                 name,
-//                 description,
-//                 count,
-//                 age,
-//                 principal,
-//             },
-//         );
-//     });
-
-//     format!("Player profile updated successfully for principal: {}", caller_principal.to_text())
-// }
 
 #[update]
 fn update_player_profile(
@@ -191,37 +148,6 @@ fn update_player_profile(
 }
 
 
-
-// #[query]
-// fn source (name: String, description: String, count: u8, age: u8, principal: String, description:String) 
-// ic_cdk::println!("Storing profile: {:?}", Profile {
-//     name,
-//     description,
-//     count,
-//     age,
-//     principal,
-// });
-
-
-// #[update] // this is the adjusted update_player_profile fn
-// fn update_player_profile(age: u8, principal: String, name: String, count: u8, description: String) -> String {
-//     let principal_id = ic_cdk::api::caller();
-//     ic_cdk::println!("Caller Principal: {:?}", principal_id);
-//     ID_STORE.with(|id_store| {
-//         id_store.borrow_mut().insert(name.clone(), principal_id);
-//     });
-//     PROFILE_STORE.with(|profile_store| {
-//         profile_store.borrow_mut().insert(principal_id, Profile {
-//             name,
-//             description,
-//             count,
-//             age,
-//             principal,
-//         });
-//     });
-//     "Player Profile Created Successfully".to_string()
-// }
-
 #[query(manual_reply = true)]
 fn search(text: String) -> ManualReply<Option<Profile>> {
     let text = text.to_lowercase();
@@ -230,12 +156,6 @@ fn search(text: String) -> ManualReply<Option<Profile>> {
             if p.name.to_lowercase().contains(&text) || p.description.to_lowercase().contains(&text) {
                 return ManualReply::one(Some(p));
             }
-
-            // for x in p.keywords.iter() {
-            //     if x.to_lowercase() == text {
-            //         return ManualReply::one(Some(p));
-            //     }
-            // }
         }
         ManualReply::one(None::<Profile>)
     })
@@ -249,36 +169,10 @@ fn get_player(text: String) -> ManualReply<Option<Profile>> {
             if p.name.to_lowercase().contains(&text) || p.description.to_lowercase().contains(&text) {
                 return ManualReply::one(Some(p));
             }
-
-            // for x in p.keywords.iter() {
-            //     if x.to_lowercase() == text {
-            //         return ManualReply::one(Some(p));
-            //     }
-            // }
         }
         ManualReply::one(None::<Profile>)
     })
 }
-
-// #[update]
-// fn store_username(name: String, player_name: Profile, description: String) {
-//     let principal_id = ic_cdk::api::caller();
-//     PROFILE_STORE.with(|profile_store| {
-//         profile_store.borrow_mut().insert(
-//             player_name.name.clone(),
-//             Profile {
-//                 name,
-//                 description,
-//             },
-//         );
-//     });
-// }
-
-// for the counter functions
-// #[init] // the 'init' function is used when I want a function to run before main
-// fn init() {
-//     OWNER.with(|owner| owner.set(ic_cdk::api::caller()));
-// }
 
 #[update]
 fn inc() {
@@ -408,7 +302,27 @@ fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessage
     ic_websocket_cdk::ws_get_messages(args)
 }
 
-
 // integrating websocket 
+
+// for cronos evm integration
+
+#[update]
+async fn public_key() -> Result<PublicKeyReply, String> {
+    let request = EcdsaPublicKeyArgument {
+        canister_id: None,
+        derivation_path: vec![],
+        key_id: EcdsaKeyIds::TestKeyLocalDevelopment.to_key_id(),
+    };
+
+    let (response,) = ecdsa_public_key(request)
+        .await
+        .map_err(|e| format!("ecdsa_public_key failed {}", e.1))?;
+
+    Ok(PublicKeyReply {
+        public_key_hex: hex::encode(response.public_key),
+    })
+}
+
+// for cronos evm integration
 
 ic_cdk::export_candid!();
