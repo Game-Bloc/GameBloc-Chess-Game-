@@ -4,11 +4,7 @@ use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
-// use ic_cdk::export::Principal;
-// use ic_cdk_macros::update;
-// use std::cell::RefCell;
-// use std::collections::HashMap;
-// from the ic-cdk on icp 
+
 
 use tanton::tools::Searcher;
 // websocket

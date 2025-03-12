@@ -8,9 +8,11 @@ import { useAuth } from './auth/use_auth_client'
 
 const UserInputWrap = () => {
 
+  const { whoamiActor, principal } = useAuth();
+
     const [profile, setProfile] = useState<ContextProfile>({
         age: 0,
-        principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
+        principal: principal,
         name: "",
         count: 0,
         description: "",
@@ -24,7 +26,6 @@ const UserInputWrap = () => {
     //     setProfile((prevProfile) => ({ ...prevProfile, ...updateProfile }))
     // }
 
-    const { whoamiActor } = useAuth();
     const [updatingProfile, setUpdatingProfile] = useState(false)
 
     // const create_player_profile = async(

@@ -161,7 +161,7 @@ export const useAuthClient = (options = defaultOptions) => {
       // console.log("Actor", actor)
       setWhoamiActor(actor);
       const localGatewayUrl = "ws://127.0.0.1:8080";
-      const localICUrl = "http://127.0.0.1:4943";
+      const localICUrl = "http://127.0.0.1:49406";
 
       const _ws = new IcWebSocket(
         localGatewayUrl,
@@ -183,15 +183,15 @@ export const useAuthClient = (options = defaultOptions) => {
         )
       }
 
-      _ws.onmessage = async (event) => {
-        console.log("Received message:", event.data);
+      // _ws.onmessage = async (event) => {
+      //   console.log("Received message:", event.data);
       
-        const messageToSend:AppMessage = {
-          text: event.data.text + "-pong",
-          timestamp: 0n
-        };
-        _ws.send(messageToSend);
-      };
+      //   const messageToSend:AppMessage = {
+      //     text: event.data.text + "-pong",
+      //     timestamp: 0n
+      //   };
+      //   _ws.send(messageToSend);
+      // };
 
       _ws.onerror = (error) => {
         console.log("Error:", error);

@@ -120,6 +120,8 @@ function Game() {
     }
     console.log("ws ended ", ws)
 
+    
+
 
     // ws.onopen()
     const wsTestt = () => {

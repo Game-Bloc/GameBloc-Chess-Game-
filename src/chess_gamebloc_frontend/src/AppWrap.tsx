@@ -3,14 +3,17 @@ import React from 'react'
 import ChessPage from './ChessPage'
 import { ContextProfile, profileContext } from './functions/context'
 import { useAuth } from './auth/use_auth_client'
+import { Principal } from '@dfinity/principal'
 
 
 interface AppWrapProp {}
 const AppWrap = ({} : AppWrapProp) => {
+
+  const { whoamiActor, principal } = useAuth()
   
   const [profile, setProfile] = useState<ContextProfile>({
     age: 9984,
-    principal: "pgxil-f2rpy-neu2v-jb4m7-lvlee-vjvqy-ocpe7-rfohg-tujw3-lhz2l-tae",
+    principal: principal,
     name: "",
     count: 0,
     description: "",
@@ -19,7 +22,6 @@ const AppWrap = ({} : AppWrapProp) => {
     },
   })
 
-  const { whoamiActor } = useAuth()
   const [ updatingProfile, setUpdatingProfile ] = useState(false)
 
 //   const create_player_profile = async (

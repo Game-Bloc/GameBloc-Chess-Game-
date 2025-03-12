@@ -14,18 +14,18 @@ const ChessPage = ({ modal } : Props) => {
 
   const { isAuthenticated } = useAuth()
   const contextTrial = UseProfileContext()
-  const principalVar:any = contextTrial.profile.principal
-  const playerPrincipal = Principal.fromText(principalVar);
+  // const principalVar:any = contextTrial.profile.principal
+  // const playerPrincipal = Principal.fromText(principalVar);
   
-  const principalCheck = () => {
-    if (isAuthenticated) {
-      console.log("Player Principal To Text", playerPrincipal)
-    }
-  }
+  // const principalCheck = () => {
+  //   if (isAuthenticated) {
+  //     console.log("Player Principal To Text", playerPrincipal)
+  //   }
+  // }
 
-  useEffect (() => {
-    principalCheck()
-  }, []) 
+  // useEffect (() => {
+  //   principalCheck()
+  // }, []) 
 
   return (
       <Container>
