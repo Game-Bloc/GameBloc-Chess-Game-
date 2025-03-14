@@ -32,8 +32,10 @@ type Profile = record {
   count : nat8;
   description : text;
 };
-type Result = variant { Ok; Err : text };
-type Result_1 = variant { Ok : CanisterOutputCertifiedMessages; Err : text };
+type PublicKeyReply = record { public_key_hex : text };
+type Result = variant { Ok : PublicKeyReply; Err : text };
+type Result_1 = variant { Ok; Err : text };
+type Result_2 = variant { Ok : CanisterOutputCertifiedMessages; Err : text };
 type WebsocketMessage = record {
   sequence_num : nat64;
   content : blob;
@@ -50,13 +52,14 @@ service : () -> {
   inc : () -> ();
   move : (text, text) -> (bool);
   new : (text, bool) -> ();
+  public_key : () -> (Result);
   read : () -> (nat) query;
   search : (text) -> (opt Profile) query;
   update_player_profile : (nat8, text, text, nat8, text) -> (Profile);
   whoami : () -> (principal) query;
   write : (nat) -> ();
-  ws_close : (CanisterWsCloseArguments) -> (Result);
-  ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_1) query;
-  ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result);
-  ws_open : (CanisterWsOpenArguments) -> (Result);
+  ws_close : (CanisterWsCloseArguments) -> (Result_1);
+  ws_get_messages : (CanisterWsGetMessagesArguments) -> (Result_2) query;
+  ws_message : (CanisterWsMessageArguments, opt AppMessage) -> (Result_1);
+  ws_open : (CanisterWsOpenArguments) -> (Result_1);
 }

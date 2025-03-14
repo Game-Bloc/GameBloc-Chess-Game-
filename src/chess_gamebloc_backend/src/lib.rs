@@ -12,6 +12,7 @@ use ic_cdk::api::management_canister::ecdsa::{
     SignWithEcdsaArgument,
 };
 use std::convert::TryFrom;
+use ethers_core::abi::ethereum_types::{Address, U256};
 
 // for cronos stunt
 
@@ -344,6 +345,22 @@ async fn public_key() -> Result<PublicKeyReply, String> {
     Ok(PublicKeyReply {
         public_key_hex: hex::encode(response.public_key),
     })
+}
+
+pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
+    use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
+    use ethers_core::k256::PublicKey;
+
+    let key =
+        PublicKey::from_sec1_bytes(pubkey_bytes).expect("failed to parse the public key as SEC1");
+    let point = key.to_encoded_point(false);
+    // we re-encode the key to the decompressed representation.
+    let point_bytes = point.as_bytes();
+    assert_eq!(point_bytes[0], 0x04);
+
+    let hash = keccak256(&point_bytes[1..]);
+
+    ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None)
 }
 
 // for cronos evm integration

@@ -25,6 +25,7 @@ getrandom = { version = "0.2.0", features = ["custom"] }
 
 tanton = "1.0.0"
 ic-websocket-cdk = "0.4.1"
+# ethers-core.workspace = true
 # ic-websocket-cdk = "0.4.1"
 
 # from the ic-cdk for chess
