@@ -13,6 +13,7 @@ use ic_cdk::api::management_canister::ecdsa::{
 };
 use std::convert::TryFrom;
 use ethers_core::abi::ethereum_types::{Address, U256};
+use ethers_core::utils::{hex, keccak256};
 
 // for cronos stunt
 
