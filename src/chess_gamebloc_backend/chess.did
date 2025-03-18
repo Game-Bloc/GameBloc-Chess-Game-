@@ -32,8 +32,7 @@ type Profile = record {
   count : nat8;
   description : text;
 };
-type PublicKeyReply = record { public_key_hex : text };
-type Result = variant { Ok : PublicKeyReply; Err : text };
+type Result = variant { Ok : text; Err : text };
 type Result_1 = variant { Ok; Err : text };
 type Result_2 = variant { Ok : CanisterOutputCertifiedMessages; Err : text };
 type WebsocketMessage = record {
@@ -52,6 +51,7 @@ service : () -> {
   inc : () -> ();
   move : (text, text) -> (bool);
   new : (text, bool) -> ();
+  pubkey_bytes_to_address : (blob) -> (text) query;
   public_key : () -> (Result);
   read : () -> (nat) query;
   search : (text) -> (opt Profile) query;

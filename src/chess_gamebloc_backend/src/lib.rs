@@ -1,5 +1,7 @@
 
 use candid::{CandidType, Principal};
+use ethers_core::k256::elliptic_curve::{point, PublicKey};
+use ethers_core::k256::Secp256k1;
 use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
@@ -14,7 +16,7 @@ use ic_cdk::api::management_canister::ecdsa::{
 use std::convert::TryFrom;
 use ethers_core::abi::ethereum_types::{Address, U256};
 use ethers_core::utils::{hex, keccak256};
-
+use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
 // for cronos stunt
 
 
@@ -331,8 +333,62 @@ fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessage
 
 // for cronos evm integration
 
+// #[update]
+// async fn public_key() -> Result<PublicKeyReply, String> {
+//     let request = EcdsaPublicKeyArgument {
+//         canister_id: None,
+//         derivation_path: vec![],
+//         key_id: EcdsaKeyIds::TestKeyLocalDevelopment.to_key_id(),
+//     };
+
+//     let (response,) = ecdsa_public_key(request)
+//         .await
+//         .map_err(|e| format!("ecdsa_public_key failed {}", e.1))?;
+
+//     Ok(PublicKeyReply {
+//         public_key_hex: hex::encode(response.public_key),
+//     })
+// }
+
+// #[query]
+// pub fn pubkey_bytes_to_address(pubkey_bytes: Vec<u8>) -> String {
+//     use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
+//     use ethers_core::k256::PublicKey;
+
+//     let key =
+//         PublicKey::from_sec1_bytes(&pubkey_bytes).expect("failed to parse the public key as SEC1");
+//     let point = key.to_encoded_point(false);
+//     // we re-encode the key to the decompressed representation.
+//     let point_bytes = point.as_bytes();
+//     assert_eq!(point_bytes[0], 0x04);
+
+//     let hash = keccak256(&point_bytes[1..]);
+
+//     ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None)
+// }
+
+#[query]
+pub fn pubkey_bytes_to_address(pubkey_bytes: Vec<u8>) -> String {
+    // Parse the public key bytes into a PublicKey struct (decompresses if needed)
+    let key = PublicKey::<Secp256k1>::from_sec1_bytes(&pubkey_bytes)
+        .expect("Failed to parse the public key as SEC1");
+
+    // Convert to uncompressed format (65 bytes, starts with 0x04)
+    let point = key.to_encoded_point(false);
+    let point_bytes = point.as_bytes();
+
+    // Ensure first byte is 0x04 (uncompressed format)
+    assert_eq!(point_bytes[0], 0x04, "Public key is not uncompressed");
+
+    // Compute Keccak-256 hash of the x/y coordinates (skip the first byte)
+    let hash = keccak256(&point_bytes[1..]);
+
+    // Take last 20 bytes and convert to Ethereum checksum address
+    ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None)
+}
+
 #[update]
-async fn public_key() -> Result<PublicKeyReply, String> {
+async fn public_key() -> Result<String, String> {
     let request = EcdsaPublicKeyArgument {
         canister_id: None,
         derivation_path: vec![],
@@ -343,26 +399,20 @@ async fn public_key() -> Result<PublicKeyReply, String> {
         .await
         .map_err(|e| format!("ecdsa_public_key failed {}", e.1))?;
 
-    Ok(PublicKeyReply {
-        public_key_hex: hex::encode(response.public_key),
-    })
+    // Convert the public key bytes to an Ethereum address
+    let eth_address = pubkey_bytes_to_address(response.public_key);
+
+    Ok(eth_address)
 }
 
-pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
-    use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
-    use ethers_core::k256::PublicKey;
-
-    let key =
-        PublicKey::from_sec1_bytes(pubkey_bytes).expect("failed to parse the public key as SEC1");
-    let point = key.to_encoded_point(false);
-    // we re-encode the key to the decompressed representation.
-    let point_bytes = point.as_bytes();
-    assert_eq!(point_bytes[0], 0x04);
-
-    let hash = keccak256(&point_bytes[1..]);
-
-    ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None)
-}
+// pub fn pubkey_bytes_address(pubkey_bytes: &[u8]) -> String {
+//     let key = PublicKey::from_sec1_bytes(pubkey_bytes).expect("Failed to load pub key");
+//     let point = key.to_encoded_point(false);
+//     let point_bytes = point.as_bytes();
+//     assert_eq!(point_bytes[0], 0x04, "Public key is not uncomppressed");
+//     let hash = keccak256(&point_bytes[1..]);
+//     ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None);
+// }
 
 // for cronos evm integration
 

@@ -14,7 +14,8 @@
   },
   "type": "module",
   "workspaces": [
-    "src/chess_gamebloc_frontend"
+    "src/chess_gamebloc_frontend",
+    "src/chess_gamebloc_frontend/chessEngine"
   ],
   "dependencies": {
     "@dfinity/agent": "^2.3.0",

@@ -172,7 +172,7 @@ function Game() {
   //  WEBSOCKET / ///////////////////////////////////////////////////
   
   // console.log("the username", grabName);
-  const [gameRender, setGameRender] = useState(true)
+  const [gameRender, setGameRender] = useState(false)
 
   
   // this is the rendered UI of the chessboard
@@ -200,7 +200,7 @@ function Game() {
         }}
       />
 
-      <input type="button" value="WSTest"/>
+      {/* <input type="button" value="WSTest"/> */}
     </>
   );
 }

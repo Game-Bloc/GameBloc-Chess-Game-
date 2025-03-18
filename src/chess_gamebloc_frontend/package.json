@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "setup": "npm i && dfx canister create chess_gamebloc_backend && dfx generate chess_gamebloc_backend && dfx deploy",
-    "start": "vite --port 3000",
+    "start": "vite --port 5000",
     "ws": "nodemon server.js",
     "prebuild": "dfx generate",
     "build": "tsc && vite build",
@@ -79,6 +79,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
+    "concurrently": "^9.1.2",
     "dotenv": "^16.4.5",
     "nodemon": "^3.1.9",
     "sass": "^1.79.4",
