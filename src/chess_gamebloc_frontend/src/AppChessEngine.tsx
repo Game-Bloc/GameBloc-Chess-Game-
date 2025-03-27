@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Chessengine } from './Chessengine';
 import Footer from './Footer';
-import { Chessboard, RightColl } from './Game';
+import { Chessboard, RightColl } from './GameFolder';
 
 function ChessApp ()  {
   return (

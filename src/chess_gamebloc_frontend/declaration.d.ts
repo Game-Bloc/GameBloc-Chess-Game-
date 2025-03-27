@@ -140,7 +140,7 @@ declare module 'js-chess-engine' {
      * Returns all played moves in array with chess board configuration like [{from:'A2',to:'A3',configuration:{...}},{from:'A7',to:'A6',configuration:{...}}].
      * @param reversed (optional) - When false, last move is the last element in returned array. When true, last move is first. Default false.
      */
-    getHistory(reversed: boolean = false): {
+    getHistory(reversed: boolean): {
       from: string;
       to: string;
       configuration: configObj;

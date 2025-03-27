@@ -2,13 +2,17 @@
 use candid::{CandidType, Principal};
 use ethers_core::k256::elliptic_curve::{point, PublicKey};
 use ethers_core::k256::Secp256k1;
+// use evm_rpc_canister_types::RpcService;
 use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
+use ic_cdk::api::call::CallResult;
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
 
 // for cronos stunt
 
+mod evm_signer;
+mod fees;
 use ic_cdk::api::management_canister::ecdsa::{
     ecdsa_public_key, sign_with_ecdsa, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,
     SignWithEcdsaArgument,
@@ -17,6 +21,18 @@ use std::convert::TryFrom;
 use ethers_core::abi::ethereum_types::{Address, U256};
 use ethers_core::utils::{hex, keccak256};
 use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
+use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
+use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
+use evm_signer::SignedTransaction;
+// use crate::evm_signer::SignedTransaction;
+use crate::{
+    evm_signer::sign_eip1559_transaction,
+    fees::{estimate_transaction_fees, FeeEstimates},
+};
+
+pub trait IntoChainId {
+    fn chain_id(&self) -> U64;
+}
 // for cronos stunt
 
 
@@ -93,6 +109,14 @@ impl EcdsaKeyIds {
         }
     }
 }
+
+pub struct TransferArgs {
+    pub value: U256,
+    pub to: Option<NameOrAddress>,
+    pub gas: Option<U256>,
+}
+
+pub type TransactionHash = String;
 
 // for the cronos evm stunt
 
@@ -369,21 +393,18 @@ fn ws_get_messages(args: CanisterWsGetMessagesArguments) -> CanisterWsGetMessage
 
 #[query]
 pub fn pubkey_bytes_to_address(pubkey_bytes: Vec<u8>) -> String {
-    // Parse the public key bytes into a PublicKey struct (decompresses if needed)
-    let key = PublicKey::<Secp256k1>::from_sec1_bytes(&pubkey_bytes)
-        .expect("Failed to parse the public key as SEC1");
+    
+    let key = PublicKey::<Secp256k1>::from_sec1_bytes(&pubkey_bytes).expect("Failed to parse the public key as SEC1");
 
-    // Convert to uncompressed format (65 bytes, starts with 0x04)
+   
     let point = key.to_encoded_point(false);
     let point_bytes = point.as_bytes();
 
-    // Ensure first byte is 0x04 (uncompressed format)
     assert_eq!(point_bytes[0], 0x04, "Public key is not uncompressed");
 
-    // Compute Keccak-256 hash of the x/y coordinates (skip the first byte)
     let hash = keccak256(&point_bytes[1..]);
 
-    // Take last 20 bytes and convert to Ethereum checksum address
+    
     ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None)
 }
 
@@ -394,12 +415,12 @@ async fn public_key() -> Result<String, String> {
         derivation_path: vec![],
         key_id: EcdsaKeyIds::TestKeyLocalDevelopment.to_key_id(),
     };
+    // you can access the rpc provider from your canister directly through the assitance of the evm rpc canister deployed on the project
+    // the rpc provider was used mainly in the ic-alloy.
+    
+    let (response,) = ecdsa_public_key(request).await.map_err(|e| format!("ecdsa_public_key failed {}", e.1))?;
 
-    let (response,) = ecdsa_public_key(request)
-        .await
-        .map_err(|e| format!("ecdsa_public_key failed {}", e.1))?;
-
-    // Convert the public key bytes to an Ethereum address
+    
     let eth_address = pubkey_bytes_to_address(response.public_key);
 
     Ok(eth_address)
@@ -413,6 +434,62 @@ async fn public_key() -> Result<String, String> {
 //     let hash = keccak256(&point_bytes[1..]);
 //     ethers_core::utils::to_checksum(&Address::from_slice(&hash[12..32]), None);
 // }
+
+// this is the function to send_raw_transaction
+pub async fn send_raw_transaction(
+    tx: SignedTransaction,
+    rpc_services: RpcServices,
+    evm_rpc: EvmRpcCanister,
+) -> CallResult<TransactionHash> {
+    let cycles = 10_000_000_000;
+
+    match evm_rpc
+        .eth_send_raw_transaction(rpc_services, None, tx.tx_hex, cycles)
+        .await
+    {
+        Ok((_res,)) => {
+            ic_cdk::println!("Transaction hash: {}", tx.tx_hash);
+            Ok(tx.tx_hash)
+        }
+        Err(e) => Err(e),
+    }
+}
+///////////////
+
+// this is the function for the transfer eth 
+pub async fn transfer_eth(
+    transfer_args: TransferArgs,
+    rpc_services: RpcServices,
+    key_id: EcdsaKeyId,
+    derivation_path: Vec<Vec<u8>>,
+    nonce: U256,
+    evm_rpc: EvmRpcCanister,
+) -> CallResult<TransactionHash> {
+    // use the user provided gas_limit or fallback to default 210000
+    let gas = transfer_args.gas.unwrap_or(U256::from(21000));
+    // estimate the transaction fees by calling eth_feeHistory
+    let FeeEstimates {
+        max_fee_per_gas,
+        max_priority_fee_per_gas,
+    } = estimate_transaction_fees(9, rpc_services.clone(), evm_rpc.clone()).await;
+    // assemble the EIP 1559 transaction to be signed with t-ECDSA
+    let tx = Eip1559TransactionRequest {
+        from: None,
+        to: transfer_args.to,
+        value: Some(transfer_args.value),
+        max_fee_per_gas: Some(max_fee_per_gas),
+        max_priority_fee_per_gas: Some(max_priority_fee_per_gas),
+        gas: Some(gas),
+        nonce: Some(nonce),
+        chain_id: Some(rpc_services.EthSepolia()),
+        data: Default::default(),
+        access_list: Default::default(),
+    };
+
+    let tx = sign_eip1559_transaction(tx, key_id, derivation_path).await;
+
+    send_raw_transaction(tx.clone(), rpc_services, evm_rpc).await
+}
 
 // for cronos evm integration
 

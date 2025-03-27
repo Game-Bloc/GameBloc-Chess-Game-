@@ -16,7 +16,7 @@ const usePrintHelper = () => {
   if (data == null || selectedCell === '' || data.moves[selectedCell] == null)
     return null;
 
-  const listOfSuggest = data.moves[selectedCell].map((cellId) => {
+  const listOfSuggest = data.moves[selectedCell].map((cellId: any) => {
     const seeHelper = data.pieces[cellId] == null;
     const onClickHandler: MouseEventHandler = (event) => {
       if (seeHelper) {
