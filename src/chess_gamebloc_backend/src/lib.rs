@@ -459,7 +459,7 @@ pub async fn send_raw_transaction(
 // this is the function for the transfer eth 
 pub async fn transfer_eth(
     transfer_args: TransferArgs,
-    rpc_services: RpcServices,
+    rpc_services: &RpcServices,
     key_id: EcdsaKeyId,
     derivation_path: Vec<Vec<u8>>,
     nonce: U256,
@@ -473,22 +473,35 @@ pub async fn transfer_eth(
         max_priority_fee_per_gas,
     } = estimate_transaction_fees(9, rpc_services.clone(), evm_rpc.clone()).await;
     // assemble the EIP 1559 transaction to be signed with t-ECDSA
-    let tx = Eip1559TransactionRequest {
-        from: None,
-        to: transfer_args.to,
-        value: Some(transfer_args.value),
-        max_fee_per_gas: Some(max_fee_per_gas),
-        max_priority_fee_per_gas: Some(max_priority_fee_per_gas),
-        gas: Some(gas),
-        nonce: Some(nonce),
-        chain_id: Some(rpc_services.EthSepolia()),
-        data: Default::default(),
-        access_list: Default::default(),
-    };
 
-    let tx = sign_eip1559_transaction(tx, key_id, derivation_path).await;
+    match rpc_services {
+        RpcServices::Custom { chainId, services: _ } => {
 
-    send_raw_transaction(tx.clone(), rpc_services, evm_rpc).await
+                let tx = Eip1559TransactionRequest {
+                    from: None,
+                    to: transfer_args.to,
+                    value: Some(transfer_args.value),
+                    max_fee_per_gas: Some(max_fee_per_gas),
+                    max_priority_fee_per_gas: Some(max_priority_fee_per_gas),
+                    gas: Some(gas),
+                    nonce: Some(nonce),
+                    chain_id: Some((*chainId).into()),
+                    data: Default::default(),
+                    access_list: Default::default(),
+                };
+                let tx = sign_eip1559_transaction(tx, key_id, derivation_path).await;
+        
+                send_raw_transaction(tx.clone(), rpc_services.clone(), evm_rpc).await
+            }
+        RpcServices::EthSepolia(_) => todo!(),
+        RpcServices::BaseMainnet(_) => todo!(),
+        RpcServices::OptimismMainnet(_) => todo!(),
+        RpcServices::ArbitrumOne(_) => todo!(),
+        RpcServices::EthMainnet(_) => todo!(),
+    }
+
+
+
 }
 
 // for cronos evm integration
