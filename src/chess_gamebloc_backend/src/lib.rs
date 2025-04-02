@@ -12,6 +12,7 @@ use std::collections::BTreeMap;
 // for cronos stunt
 
 mod evm_signer;
+mod conversion;
 mod fees;
 use ic_cdk::api::management_canister::ecdsa::{
     ecdsa_public_key, sign_with_ecdsa, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,

@@ -8,7 +8,7 @@ use evm_rpc_canister_types::{
 use serde_bytes::ByteBuf;
 use std::ops::Add;
 
-use crate::conversions::nat_to_u256;
+use crate::conversion::nat_to_u256;
 
 /// The minimum suggested maximum priority fee per gas.
 const MIN_SUGGEST_MAX_PRIORITY_FEE_PER_GAS: u32 = 1_500_000_000;
