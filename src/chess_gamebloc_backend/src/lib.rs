@@ -1,6 +1,6 @@
 
 use candid::{CandidType, Principal};
-use ethers_core::k256::elliptic_curve::{point, PublicKey};
+use ethers_core::k256::elliptic_curve::{ PublicKey};
 use ethers_core::k256::Secp256k1;
 // use evm_rpc_canister_types::RpcService;
 use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
@@ -15,12 +15,10 @@ mod evm_signer;
 mod conversion;
 mod fees;
 use ic_cdk::api::management_canister::ecdsa::{
-    ecdsa_public_key, sign_with_ecdsa, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,
-    SignWithEcdsaArgument,
+    ecdsa_public_key, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,
 };
-use std::convert::TryFrom;
 use ethers_core::abi::ethereum_types::{Address, U256};
-use ethers_core::utils::{hex, keccak256};
+use ethers_core::utils::keccak256;
 use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
 use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
 use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
