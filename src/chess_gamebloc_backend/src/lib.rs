@@ -444,10 +444,7 @@ pub async fn send_raw_transaction(
 ) -> CallResult<TransactionHash> {
     let cycles = 10_000_000_000;
 
-    match evm_rpc
-        .eth_send_raw_transaction(rpc_services, None, tx.tx_hex, cycles)
-        .await
-    {
+    match evm_rpc.eth_send_raw_transaction(rpc_services, None, tx.tx_hex, cycles).await{
         Ok((_res,)) => {
             ic_cdk::println!("Transaction hash: {}", tx.tx_hash);
             Ok(tx.tx_hash)
