@@ -5,6 +5,7 @@ use evm_rpc_canister_types::{
     BlockTag, EvmRpcCanister, FeeHistory, FeeHistoryArgs, FeeHistoryResult, MultiFeeHistoryResult,
     RpcServices,
 };
+use ic_cdk::query;
 use serde_bytes::ByteBuf;
 use std::ops::Add;
 
@@ -26,6 +27,7 @@ const MIN_SUGGEST_MAX_PRIORITY_FEE_PER_GAS: u32 = 1_500_000_000;
 /// # Returns
 ///
 /// The fee history.
+#[query]
 pub async fn fee_history(
     block_count: Nat,
     newest_block: BlockTag,
@@ -61,6 +63,7 @@ pub async fn fee_history(
 }
 
 /// Represents the fee estimates.
+#[derive(candid::Deserialize, candid::CandidType, Clone, Debug)] 
 pub struct FeeEstimates {
     pub max_fee_per_gas: U256,
     pub max_priority_fee_per_gas: U256,
@@ -75,6 +78,7 @@ pub struct FeeEstimates {
 /// # Returns
 ///
 /// The median index.
+#[query]
 fn median_index(length: usize) -> usize {
     if length == 0 {
         panic!("Cannot find a median index for an array of length zero.");
@@ -89,6 +93,8 @@ fn median_index(length: usize) -> usize {
 /// * `block_count` - The number of historical blocks to base the fee estimates on.
 /// * `rpc_services` - The RPC services used to interact with the EVM.
 /// * `evm_rpc` - The EVM RPC canister.
+
+#[query]
 pub async fn estimate_transaction_fees(
     block_count: u8,
     rpc_services: RpcServices,

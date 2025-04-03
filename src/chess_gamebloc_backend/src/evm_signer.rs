@@ -136,6 +136,8 @@ pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
 /// # Returns
 ///
 /// The parity bit.
+
+#[query]
 fn y_parity(prehash: &[u8], sig: &[u8], pubkey: &[u8]) -> u64 {
     use ethers_core::k256::ecdsa::{RecoveryId, Signature, VerifyingKey};
 
