@@ -57,7 +57,7 @@ pub async fn get_canister_public_key(
 /// # Returns
 ///
 /// The signed transaction.
-#[update]
+// #[update]
 pub async fn sign_eip1559_transaction(
     tx: Eip1559TransactionRequest,
     key_id: EcdsaKeyId,
@@ -109,9 +109,10 @@ pub async fn sign_eip1559_transaction(
 /// The Ethereum address with a checksum.
 
 #[query]
-pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
+pub fn pubkey_bytes_to_address(pubkey: String) -> String {
     use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
     use ethers_core::k256::PublicKey;
+    let pubkey_bytes: &[u8] = pubkey.as_bytes();
 
     let key =
         PublicKey::from_sec1_bytes(pubkey_bytes).expect("failed to parse the public key as SEC1");
@@ -137,7 +138,7 @@ pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
 ///
 /// The parity bit.
 
-#[query]
+// #[query]
 fn y_parity(prehash: &[u8], sig: &[u8], pubkey: &[u8]) -> u64 {
     use ethers_core::k256::ecdsa::{RecoveryId, Signature, VerifyingKey};
 
