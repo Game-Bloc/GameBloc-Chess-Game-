@@ -30,7 +30,8 @@ ethers-core.workspace = true
 num-traits = "0.2.19"
 serde_bytes.workspace = true
 serde_json.workspace = true
-evm-rpc-canister-types.workspace = true
+# evm-rpc-canister-types.workspace = true
+evm-rpc-canister-types = "4.0.1"
 # ic-websocket-cdk = "0.4.1"
 
 # from the ic-cdk for chess

@@ -17,3 +17,7 @@ ic-cdk = "0.14"
 lto = true
 opt-level = 'z'
 panic = 'abort'
+
+[dependencies]
+serde = { version = "1.0.193", features = []}
+candid = "0.10.9"

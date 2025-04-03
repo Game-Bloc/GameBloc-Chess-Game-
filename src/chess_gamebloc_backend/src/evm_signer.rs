@@ -1,5 +1,5 @@
 //! This module provides functions for signing EIP-1559 transactions using t-ECDSA, getting the public key of the canister, and converting the public key to an Ethereum address.
-use candid::Principal;
+use candid::{CandidType, Principal};
 use ethers_core::abi::ethereum_types::{Address, U256};
 use ethers_core::types::transaction::eip1559::Eip1559TransactionRequest;
 use ethers_core::types::Signature;
@@ -8,9 +8,12 @@ use ethers_core::utils::{hex, keccak256};
 use ic_cdk::api::management_canister::ecdsa::{
     ecdsa_public_key, sign_with_ecdsa, EcdsaKeyId, EcdsaPublicKeyArgument, SignWithEcdsaArgument,
 };
+use ic_cdk::{query, update};
+use serde::Deserialize;
 
 /// A signed transaction.
-#[derive(Debug, Clone)]
+// #[derive(Debug, Clone, CandidType, Deserialize)]
+#[derive(candid::Deserialize, candid::CandidType, Clone, Debug)]
 pub struct SignedTransaction {
     pub tx_hex: String,
     pub tx_hash: String,
@@ -27,6 +30,7 @@ pub struct SignedTransaction {
 /// # Returns
 ///
 /// The public key of the ECDSA key.
+#[query]
 pub async fn get_canister_public_key(
     key_id: EcdsaKeyId,
     canister_id: Option<Principal>,
@@ -53,6 +57,7 @@ pub async fn get_canister_public_key(
 /// # Returns
 ///
 /// The signed transaction.
+#[update]
 pub async fn sign_eip1559_transaction(
     tx: Eip1559TransactionRequest,
     key_id: EcdsaKeyId,
@@ -102,6 +107,8 @@ pub async fn sign_eip1559_transaction(
 /// # Returns
 ///
 /// The Ethereum address with a checksum.
+
+#[query]
 pub fn pubkey_bytes_to_address(pubkey_bytes: &[u8]) -> String {
     use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
     use ethers_core::k256::PublicKey;

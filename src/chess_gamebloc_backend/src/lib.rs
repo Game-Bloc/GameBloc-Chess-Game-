@@ -1,6 +1,6 @@
 
 use candid::{CandidType, Principal};
-use ethers_core::k256::elliptic_curve::{ PublicKey};
+use ethers_core::k256::elliptic_curve::PublicKey;
 use ethers_core::k256::Secp256k1;
 // use evm_rpc_canister_types::RpcService;
 use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
@@ -435,6 +435,7 @@ async fn public_key() -> Result<String, String> {
 // }
 
 // this is the function to send_raw_transaction
+#[update]
 pub async fn send_raw_transaction(
     tx: SignedTransaction,
     rpc_services: RpcServices,
@@ -453,6 +454,7 @@ pub async fn send_raw_transaction(
 ///////////////
 
 // this is the function for the transfer eth 
+#[update]
 pub async fn transfer_eth(
     transfer_args: TransferArgs,
     rpc_services: &RpcServices,
