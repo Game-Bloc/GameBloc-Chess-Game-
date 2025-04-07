@@ -435,7 +435,7 @@ async fn public_key() -> Result<String, String> {
 // }
 
 // this is the function to send_raw_transaction
-#[update]
+// #[update]
 pub async fn send_raw_transaction(
     tx: SignedTransaction,
     rpc_services: RpcServices,
@@ -454,7 +454,7 @@ pub async fn send_raw_transaction(
 ///////////////
 
 // this is the function for the transfer eth 
-#[update]
+// #[update]
 pub async fn transfer_eth(
     transfer_args: TransferArgs,
     rpc_services: &RpcServices,

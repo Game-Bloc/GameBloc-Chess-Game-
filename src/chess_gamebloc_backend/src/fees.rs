@@ -27,7 +27,7 @@ const MIN_SUGGEST_MAX_PRIORITY_FEE_PER_GAS: u32 = 1_500_000_000;
 /// # Returns
 ///
 /// The fee history.
-#[query]
+// #[query]
 pub async fn fee_history(
     block_count: Nat,
     newest_block: BlockTag,
@@ -94,7 +94,7 @@ fn median_index(length: usize) -> usize {
 /// * `rpc_services` - The RPC services used to interact with the EVM.
 /// * `evm_rpc` - The EVM RPC canister.
 
-#[query]
+// #[query]
 pub async fn estimate_transaction_fees(
     block_count: u8,
     rpc_services: RpcServices,
