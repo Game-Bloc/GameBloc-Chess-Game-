@@ -23,6 +23,7 @@ use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
 use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
 use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
 use evm_signer::SignedTransaction;
+
 // use crate::evm_signer::SignedTransaction;
 use crate::{
     evm_signer::sign_eip1559_transaction,
@@ -500,6 +501,93 @@ pub async fn transfer_eth(
 
 
 
+}
+
+pub async fn eth_call(
+    contract_address: String,
+    abi: &Contracts,
+    function_name: &str,
+    args: &[Token],
+    block_number: &str,
+) -> Vec<Token> {
+    let f = match abi.functions_by_name(function_name).map(|v| &v[..]) {
+        Ok([f]) => f,
+        Ok(fs) => panic!(
+            "Found {} function overloads. Please pass one of the following: {}",
+            fs.len(),
+            fs.iter()
+                .map(|f| format!("{:?}", f.abi_signature()))
+                .collect::<Vec<_>>()
+                .join(", ")
+        ),
+        Err(_) => abi
+            .functions()
+            .find(|f| function_name == f.abi_signature())
+            .expect("Function not found"),
+    };
+    let data = f
+        .encode_input(args)
+        .expect("Error while encoding input args");
+    let json_rpc_payload = serde_json::to_string(&JsonRpcRequest {
+        id: next_id().await.0.try_into().unwrap(),
+        jsonrpc: "2.0".to_string(),
+        method: "eth_call".to_string(),
+        params: (
+            EthCallParams {
+                to: contract_address,
+                data: to_hex(&data),
+            },
+            block_number.to_string(),
+        ),
+    })
+    .expect("Error while encoding JSON-RPC request");
+
+    let res: CallResult<(RequestResult,)> = call_with_payment(
+        crate::declarations::evm_rpc::evm_rpc.0,
+        "request",
+        (
+            RpcService::EthSepolia(EthSepoliaService::BlockPi),
+            json_rpc_payload,
+            2048_u64,
+        ),
+        2_000_000_000,
+    )
+    .await;
+
+    match res {
+        Ok((RequestResult::Ok(ok),)) => {
+            let json: JsonRpcResult =
+                serde_json::from_str(&ok).expect("JSON was not well-formatted");
+            let result = from_hex(&json.result.expect("Unexpected JSON response")).unwrap();
+            f.decode_output(&result).expect("Error decoding output")
+        }
+        err => panic!("Response error: {err:?}"),
+    }
+}
+
+pub async fn send_raw_transaction(network: String, raw_tx: String) -> SendRawTransactionStatus {
+    let config = None;
+    let services = match network.as_str() {
+        "EthSepolia" => RpcServices::EthSepolia(Some(vec![EthSepoliaService::Alchemy])),
+        "EthMainnet" => RpcServices::EthMainnet(None),
+        _ => RpcServices::EthSepolia(None),
+    };
+
+    let cycles = 20000000;
+    match EvmRpcCanister::eth_send_raw_transaction(services, config, raw_tx, cycles).await {
+        Ok((res,)) => match res {
+            MultiSendRawTransactionResult::Consistent(status) => match status {
+                SendRawTransactionResult::Ok(status) => status,
+                SendRawTransactionResult::Err(e) => {
+                    ic_cdk::trap(format!("Error: {:?}", e).as_str());
+                }
+            },
+            MultiSendRawTransactionResult::Inconsistent(_) => {
+                ic_cdk::trap("Status is inconsistent");
+            }
+        },
+        Err(e) => ic_cdk::trap(format!("Error: {:?}", e).as_str()),
+    }
 }
 
 // for cronos evm integration
