@@ -63,7 +63,7 @@ pub async fn fee_history(
 }
 
 /// Represents the fee estimates.
-#[derive(candid::Deserialize, candid::CandidType, Clone, Debug)] 
+// #[derive(candid::Deserialize, candid::CandidType, Clone, Debug)] 
 pub struct FeeEstimates {
     pub max_fee_per_gas: U256,
     pub max_priority_fee_per_gas: U256,
@@ -92,7 +92,7 @@ fn median_index(length: usize) -> usize {
 ///
 /// * `block_count` - The number of historical blocks to base the fee estimates on.
 /// * `rpc_services` - The RPC services used to interact with the EVM.
-/// * `evm_rpc` - The EVM RPC canister.
+// / * `evm_rpc` - The EVM RPC canister.;
 
 // #[query]
 pub async fn estimate_transaction_fees(

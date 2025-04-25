@@ -8,6 +8,7 @@ use ic_cdk::api::call::CallResult;
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
+use candid::Nat; // Import Nat from candid
 
 // for cronos stunt
 
@@ -18,6 +19,7 @@ use ic_cdk::api::management_canister::ecdsa::{
     ecdsa_public_key, EcdsaCurve, EcdsaKeyId, EcdsaPublicKeyArgument,
 };
 use ethers_core::abi::ethereum_types::{Address, U256};
+use candid::{ Deserialize};
 use ethers_core::utils::keccak256;
 use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
 use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
@@ -25,10 +27,10 @@ use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
 use evm_signer::SignedTransaction;
 
 // use crate::evm_signer::SignedTransaction;
-use crate::{
-    evm_signer::sign_eip1559_transaction,
-    fees::{estimate_transaction_fees, FeeEstimates},
-};
+// use crate::{
+//     evm_signer::sign_eip1559_transaction,
+//     fees::{estimate_transaction_fees, FeeEstimates},
+// };
 
 pub trait IntoChainId {
     fn chain_id(&self) -> U64;
@@ -109,12 +111,29 @@ impl EcdsaKeyIds {
         }
     }
 }
+// #[derive(CandidType, Serialize, Debug)]
+// pub struct TransferArgs {
+//     pub value: U256Wrapper, // Wrap U256 in a type that derives CandidType
+//     pub to: Option<NameOrAddress>,
+//     pub gas: Option<U256Wrapper>, // Wrap U256 in a type that derives CandidType
+// }
 
-pub struct TransferArgs {
-    pub value: U256,
-    pub to: Option<NameOrAddress>,
-    pub gas: Option<U256>,
+#[derive(CandidType, Deserialize, Debug, Clone)]
+pub struct U256Wrapper(pub String); // Wrapper for U256 to derive CandidType
+
+impl From<U256> for U256Wrapper {
+    fn from(value: U256) -> Self {
+        U256Wrapper(value.to_string())
+    }
 }
+
+impl From<U256Wrapper> for U256 {
+    fn from(wrapper: U256Wrapper) -> Self {
+        U256::from_dec_str(&wrapper.0).expect("Invalid U256 string")
+    }
+}
+ // Wrapper for U256 to derive CandidType
+
 
 pub type TransactionHash = String;
 
@@ -456,139 +475,139 @@ pub async fn send_raw_transaction(
 
 // this is the function for the transfer eth 
 // #[update]
-pub async fn transfer_eth(
-    transfer_args: TransferArgs,
-    rpc_services: &RpcServices,
-    key_id: EcdsaKeyId,
-    derivation_path: Vec<Vec<u8>>,
-    nonce: U256,
-    evm_rpc: EvmRpcCanister,
-) -> CallResult<TransactionHash> {
-    // use the user provided gas_limit or fallback to default 210000
-    let gas = transfer_args.gas.unwrap_or(U256::from(21000));
-    // estimate the transaction fees by calling eth_feeHistory
-    let FeeEstimates {
-        max_fee_per_gas,
-        max_priority_fee_per_gas,
-    } = estimate_transaction_fees(9, rpc_services.clone(), evm_rpc.clone()).await;
-    // assemble the EIP 1559 transaction to be signed with t-ECDSA
+// pub async fn transfer_eth(
+//     transfer_args: TransferArgs,
+//     rpc_services: &RpcServices,
+//     key_id: EcdsaKeyId,
+//     derivation_path: Vec<Vec<u8>>,
+//     nonce: U256,
+//     evm_rpc: EvmRpcCanister,
+// ) -> CallResult<TransactionHash> {
+//     // use the user provided gas_limit or fallback to default 210000
+//     let gas = transfer_args.gas.unwrap_or(U256::from(21000));
+//     // estimate the transaction fees by calling eth_feeHistory
+//     let FeeEstimates {
+//         max_fee_per_gas,
+//         max_priority_fee_per_gas,
+//     } = estimate_transaction_fees(9, rpc_services.clone(), evm_rpc.clone()).await;
+//     // assemble the EIP 1559 transaction to be signed with t-ECDSA
 
-    match rpc_services {
-        RpcServices::Custom { chainId, services: _ } => {
+//     match rpc_services {
+//         RpcServices::Custom { chainId, services: _ } => {
 
-                let tx = Eip1559TransactionRequest {
-                    from: None,
-                    to: transfer_args.to,
-                    value: Some(transfer_args.value),
-                    max_fee_per_gas: Some(max_fee_per_gas),
-                    max_priority_fee_per_gas: Some(max_priority_fee_per_gas),
-                    gas: Some(gas),
-                    nonce: Some(nonce),
-                    chain_id: Some((*chainId).into()),
-                    data: Default::default(),
-                    access_list: Default::default(),
-                };
-                let tx = sign_eip1559_transaction(tx, key_id, derivation_path).await;
+//                 let tx = Eip1559TransactionRequest {
+//                     from: None,
+//                     to: transfer_args.to,
+//                     value: Some(transfer_args.value),
+//                     max_fee_per_gas: Some(max_fee_per_gas),
+//                     max_priority_fee_per_gas: Some(max_priority_fee_per_gas),
+//                     gas: Some(gas),
+//                     nonce: Some(nonce),
+//                     chain_id: Some((*chainId).into()),
+//                     data: Default::default(),
+//                     access_list: Default::default(),
+//                 };
+//                 let tx = sign_eip1559_transaction(tx, key_id, derivation_path).await;
         
-                send_raw_transaction(tx.clone(), rpc_services.clone(), evm_rpc).await
-            }
-        RpcServices::EthSepolia(_) => todo!(),
-        RpcServices::BaseMainnet(_) => todo!(),
-        RpcServices::OptimismMainnet(_) => todo!(),
-        RpcServices::ArbitrumOne(_) => todo!(),
-        RpcServices::EthMainnet(_) => todo!(),
-    }
+//                 send_raw_transaction(tx.clone(), rpc_services.clone(), evm_rpc).await
+//             }
+//         RpcServices::EthSepolia(_) => todo!(),
+//         RpcServices::BaseMainnet(_) => todo!(),
+//         RpcServices::OptimismMainnet(_) => todo!(),
+//         RpcServices::ArbitrumOne(_) => todo!(),
+//         RpcServices::EthMainnet(_) => todo!(),
+//     }
 
 
 
-}
+// }
 
-pub async fn eth_call(
-    contract_address: String,
-    abi: &Contracts,
-    function_name: &str,
-    args: &[Token],
-    block_number: &str,
-) -> Vec<Token> {
-    let f = match abi.functions_by_name(function_name).map(|v| &v[..]) {
-        Ok([f]) => f,
-        Ok(fs) => panic!(
-            "Found {} function overloads. Please pass one of the following: {}",
-            fs.len(),
-            fs.iter()
-                .map(|f| format!("{:?}", f.abi_signature()))
-                .collect::<Vec<_>>()
-                .join(", ")
-        ),
-        Err(_) => abi
-            .functions()
-            .find(|f| function_name == f.abi_signature())
-            .expect("Function not found"),
-    };
-    let data = f
-        .encode_input(args)
-        .expect("Error while encoding input args");
-    let json_rpc_payload = serde_json::to_string(&JsonRpcRequest {
-        id: next_id().await.0.try_into().unwrap(),
-        jsonrpc: "2.0".to_string(),
-        method: "eth_call".to_string(),
-        params: (
-            EthCallParams {
-                to: contract_address,
-                data: to_hex(&data),
-            },
-            block_number.to_string(),
-        ),
-    })
-    .expect("Error while encoding JSON-RPC request");
+// pub async fn eth_call(
+//     contract_address: String,
+//     abi: &Contracts,
+//     function_name: &str,
+//     args: &[Token],
+//     block_number: &str,
+// ) -> Vec<Token> {
+//     let f = match abi.functions_by_name(function_name).map(|v| &v[..]) {
+//         Ok([f]) => f,
+//         Ok(fs) => panic!(
+//             "Found {} function overloads. Please pass one of the following: {}",
+//             fs.len(),
+//             fs.iter()
+//                 .map(|f| format!("{:?}", f.abi_signature()))
+//                 .collect::<Vec<_>>()
+//                 .join(", ")
+//         ),
+//         Err(_) => abi
+//             .functions()
+//             .find(|f| function_name == f.abi_signature())
+//             .expect("Function not found"),
+//     };
+//     let data = f
+//         .encode_input(args)
+//         .expect("Error while encoding input args");
+//     let json_rpc_payload = serde_json::to_string(&JsonRpcRequest {
+//         id: next_id().await.0.try_into().unwrap(),
+//         jsonrpc: "2.0".to_string(),
+//         method: "eth_call".to_string(),
+//         params: (
+//             EthCallParams {
+//                 to: contract_address,
+//                 data: to_hex(&data),
+//             },
+//             block_number.to_string(),
+//         ),
+//     })
+//     .expect("Error while encoding JSON-RPC request");
 
-    let res: CallResult<(RequestResult,)> = call_with_payment(
-        crate::declarations::evm_rpc::evm_rpc.0,
-        "request",
-        (
-            RpcService::EthSepolia(EthSepoliaService::BlockPi),
-            json_rpc_payload,
-            2048_u64,
-        ),
-        2_000_000_000,
-    )
-    .await;
+//     let res: CallResult<(RequestResult,)> = call_with_payment(
+//         crate::,
+//         "request",
+//         (
+//             RpcService::EthSepolia(EthSepoliaService::BlockPi),
+//             json_rpc_payload,
+//             2048_u64,
+//         ),
+//         2_000_000_000,
+//     )
+//     .await;
 
-    match res {
-        Ok((RequestResult::Ok(ok),)) => {
-            let json: JsonRpcResult =
-                serde_json::from_str(&ok).expect("JSON was not well-formatted");
-            let result = from_hex(&json.result.expect("Unexpected JSON response")).unwrap();
-            f.decode_output(&result).expect("Error decoding output")
-        }
-        err => panic!("Response error: {err:?}"),
-    }
-}
+//     match res {
+//         Ok((RequestResult::Ok(ok),)) => {
+//             let json: JsonRpcResult =
+//                 serde_json::from_str(&ok).expect("JSON was not well-formatted");
+//             let result = from_hex(&json.result.expect("Unexpected JSON response")).unwrap();
+//             f.decode_output(&result).expect("Error decoding output")
+//         }
+//         err => panic!("Response error: {err:?}"),
+//     }
+// }
 
-pub async fn send_raw_transaction(network: String, raw_tx: String) -> SendRawTransactionStatus {
-    let config = None;
-    let services = match network.as_str() {
-        "EthSepolia" => RpcServices::EthSepolia(Some(vec![EthSepoliaService::Alchemy])),
-        "EthMainnet" => RpcServices::EthMainnet(None),
-        _ => RpcServices::EthSepolia(None),
-    };
+// pub async fn send_raw_transaction(network: String, raw_tx: String) -> SendRawTransactionStatus {
+//     let config = None;
+//     let services = match network.as_str() {
+//         "EthSepolia" => RpcServices::EthSepolia(Some(vec![EthSepoliaService::Alchemy])),
+//         "EthMainnet" => RpcServices::EthMainnet(None),
+//         _ => RpcServices::EthSepolia(None),
+//     };
 
-    let cycles = 20000000;
-    match EvmRpcCanister::eth_send_raw_transaction(services, config, raw_tx, cycles).await {
-        Ok((res,)) => match res {
-            MultiSendRawTransactionResult::Consistent(status) => match status {
-                SendRawTransactionResult::Ok(status) => status,
-                SendRawTransactionResult::Err(e) => {
-                    ic_cdk::trap(format!("Error: {:?}", e).as_str());
-                }
-            },
-            MultiSendRawTransactionResult::Inconsistent(_) => {
-                ic_cdk::trap("Status is inconsistent");
-            }
-        },
-        Err(e) => ic_cdk::trap(format!("Error: {:?}", e).as_str()),
-    }
-}
+//     let cycles = 20000000;
+//     match EvmRpcCanister::eth_send_raw_transaction(services, config, raw_tx, cycles).await {
+//         Ok((res,)) => match res {
+//             MultiSendRawTransactionResult::Consistent(status) => match status {
+//                 SendRawTransactionResult::Ok(status) => status,
+//                 SendRawTransactionResult::Err(e) => {
+//                     ic_cdk::trap(format!("Error: {:?}", e).as_str());
+//                 }
+//             },
+//             MultiSendRawTransactionResult::Inconsistent(_) => {
+//                 ic_cdk::trap("Status is inconsistent");
+//             }
+//         },
+//         Err(e) => ic_cdk::trap(format!("Error: {:?}", e).as_str()),
+//     }
+// }
 
 // for cronos evm integration
 

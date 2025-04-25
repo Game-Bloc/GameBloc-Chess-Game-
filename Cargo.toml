@@ -10,6 +10,8 @@ serde_bytes = "0.11.14"
 serde_json = "1.0.116"
 ic-evm-utils = "4.0.0"
 evm-rpc-canister-types = "4.0.1"
+candid = "0.10.9"
+serde = { version = "1.0.193", features = []}
 ic-cdk = "0.14"
 
 
@@ -17,7 +19,3 @@ ic-cdk = "0.14"
 lto = true
 opt-level = 'z'
 panic = 'abort'
-
-[dependencies]
-serde = { version = "1.0.193", features = []}
-candid = "0.10.9"

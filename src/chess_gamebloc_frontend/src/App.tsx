@@ -10,7 +10,7 @@ import { useState, useEffect, useCallback } from "react"
 import { canisterId } from "../../declarations/chess"
 import { chess } from "../../declarations/chess"
 import { AppMessage} from "../../declarations/chess/chess.did"
-import IcWebSocket, { generateRandomIdentity, createWsConfig } from "ic-websocket-js"
+import ChessApp from "./AppChessEngine"
 
 // export interface AppMessage {
 //   AppMessage: String,

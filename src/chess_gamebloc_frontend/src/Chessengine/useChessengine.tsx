@@ -45,7 +45,7 @@ const useChessengine = () => {
       let otherCheck = '';
       let newCellOther = '';
       if (data.fullMove > 2) {
-        const history = refActiveGame.current.getHistory();
+        const history = refActiveGame.current.getHistory(true);
         const pieceBefore = Object.keys(
           history[history.length - 1].configuration.pieces
         );

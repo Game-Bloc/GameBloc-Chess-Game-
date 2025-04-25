@@ -18,6 +18,8 @@ type CanisterWsOpenArguments = record {
   client_nonce : nat64;
 };
 type ClientKey = record { client_principal : principal; client_nonce : nat64 };
+type EcdsaCurve = variant { secp256k1 };
+type EcdsaKeyId = record { name : text; curve : EcdsaCurve };
 type ManualReply = record {
   age : nat8;
   "principal" : text;
@@ -47,8 +49,12 @@ service : () -> {
   get : (text) -> (ManualReply) query;
   getFen : (text) -> (opt text) query;
   getPlayerProfile : () -> (ManualReply) query;
+  get_canister_public_key : (EcdsaKeyId, opt principal, vec blob) -> (
+      blob,
+    ) query;
   get_player : (text) -> (opt Profile) query;
   inc : () -> ();
+  median_index : (nat64) -> (nat64) query;
   move : (text, text) -> (bool);
   new : (text, bool) -> ();
   pubkey_bytes_to_address : (blob) -> (text) query;
