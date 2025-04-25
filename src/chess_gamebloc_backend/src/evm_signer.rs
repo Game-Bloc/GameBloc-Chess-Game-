@@ -138,6 +138,7 @@ pub async fn get_canister_public_key(
 /// The parity bit.
 
 // #[query]
+// #[query]
 fn y_parity(prehash: &[u8], sig: &[u8], pubkey: &[u8]) -> u64 {
     use ethers_core::k256::ecdsa::{RecoveryId, Signature, VerifyingKey};
 

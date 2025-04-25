@@ -2,12 +2,14 @@
 use candid::{CandidType, Principal};
 use ethers_core::k256::elliptic_curve::PublicKey;
 use ethers_core::k256::Secp256k1;
-// use evm_rpc_canister_types::RpcService;
-use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
 use ic_cdk::api::call::CallResult;
+// use evm_rpc_canister_types::RpcService;
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
+use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
+use candid::Nat; // Import Nat type from candid
+use ethers_core::types::{ FeeHistory}; // Import BlockTag and FeeHistory from ethers_core
 use candid::Nat; // Import Nat from candid
 
 // for cronos stunt
@@ -24,6 +26,17 @@ use ethers_core::utils::keccak256;
 use ethers_core::k256::elliptic_curve::sec1::ToEncodedPoint;
 use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
 use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
+
+// Ensure RpcServices implements Clone
+#[derive(Clone)]
+enum RpcServices {
+    Custom { chainId: u64, services: Vec<String> },
+    EthSepolia(String),
+    BaseMainnet(String),
+    OptimismMainnet(String),
+    ArbitrumOne(String),
+    EthMainnet(String),
+}
 use evm_signer::SignedTransaction;
 
 // use crate::evm_signer::SignedTransaction;
@@ -50,7 +63,7 @@ use ic_websocket_cdk::{
 
 // from the ic-cdk on icp 
 
-mod getrandom_fail;
+// mod getrandom_fail;
 mod handlers;
 
 type GameStore = BTreeMap<String, GameInternal>; // from cdk-chess
@@ -456,6 +469,7 @@ async fn public_key() -> Result<String, String> {
 
 // this is the function to send_raw_transaction
 // #[update]
+// #[update]
 pub async fn send_raw_transaction(
     tx: SignedTransaction,
     rpc_services: RpcServices,
@@ -468,7 +482,7 @@ pub async fn send_raw_transaction(
             ic_cdk::println!("Transaction hash: {}", tx.tx_hash);
             Ok(tx.tx_hash)
         }
-        Err(e) => Err(e),
+        Err(e) => Err((ic_cdk::api::call::RejectionCode::Unknown, format!("Error: {:?}", e))),
     }
 }
 ///////////////

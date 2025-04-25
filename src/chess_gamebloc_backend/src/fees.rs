@@ -95,6 +95,7 @@ fn median_index(length: usize) -> usize {
 // / * `evm_rpc` - The EVM RPC canister.;
 
 // #[query]
+// #[query]
 pub async fn estimate_transaction_fees(
     block_count: u8,
     rpc_services: RpcServices,
