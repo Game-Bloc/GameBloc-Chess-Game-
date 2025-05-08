@@ -24,7 +24,7 @@ contract ArenaverseNFTScript is Script {
         */
 
         // If contract is already deployed (replace with your address)
-        ArenaverseNFT nft = ArenaverseNFT(0xYourContractAddressHere);
+        ArenaverseNFT nft = ArenaverseNFT("");
 
         // Example interactions:
         // 1. Mint NFTs
