@@ -1214,12 +1214,13 @@ abstract contract Ownable is Context {
 
 pragma solidity ^0.8.7;
 
+error NonExistentTokenURI();
 contract ArenaverseNFT is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 0.119 ether;
+  uint256 public cost = 0.119 ether;  // this is the cost that I will set in the foundry script
   uint256 public maxSupply = 1500;
   uint256 public maxMintAmount = 4;
   uint256 public maxMintPerWallet = 21;
@@ -1267,15 +1268,15 @@ contract ArenaverseNFT is ERC721Enumerable, Ownable {
     return tokenIds;
   }
 
-  // Returns the token URI
-  function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-    require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+  // Returns the token URI (this is the old one)
+//   function tokenURiI(uint256 tokenId) public view virtual override returns (string memory) {
+//     require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
 
-    string memory currentBaseURI = _baseURI();
-    return bytes(currentBaseURI).length > 0
-        ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
-        : "";
-  }
+//     string memory currentBaseURI = _baseURI();
+//     return bytes(currentBaseURI).length > 0
+//         ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
+//         : "";
+//   }
 
   // Owner-only functions
   function setCost(uint256 _newCost) public onlyOwner {
@@ -1306,6 +1307,19 @@ contract ArenaverseNFT is ERC721Enumerable, Ownable {
   function pause(bool _state) public onlyOwner {
     paused = _state;
   }
+
+  // this function concatenates the baseURI with the token to form a url
+  function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
+        if (ownerOf(tokenId) == address(0)) {
+            revert NonExistentTokenURI();
+        }
+        return
+            bytes(baseURI).length > 0
+                ? string(abi.encodePacked(baseURI, tokenId.toString()))
+                : "";
+    }
 
   // Withdraw funds
   function withdraw() public onlyOwner {
