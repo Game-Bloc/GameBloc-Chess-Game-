@@ -37,8 +37,8 @@ dfx deploy evm_rpc
 # that is transfer events with the `from` field being the zero address.
 # you can read more about event signatures [here](https://docs.alchemy.com/docs/deep-dive-into-eth_getlogs#what-are-event-signatures)
 cargo build --release --target wasm32-unknown-unknown --package chainfusion_backend
-dfx canister create --with-cycles 10_000_000_000_000 chainfusion_backend
-dfx canister install --wasm target/wasm32-unknown-unknown/release/chainfusion_backend.wasm chainfusion_backend --argument '(
+dfx canister create --with-cycles 10_000_000_000_000 chess_gamebloc_backend
+dfx canister install --wasm target/wasm32-unknown-unknown/release/chess_gamebloc_backend.wasm chess_gamebloc_backend --argument '(
   record {
     ecdsa_key_id = record {
       name = "dfx_test_key";
