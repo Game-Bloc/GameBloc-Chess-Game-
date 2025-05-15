@@ -7,8 +7,7 @@ use ic_cdk::api::call::CallResult;
 use serde::Serialize;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
-use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade};
-use candid::Nat; // Import Nat type from candid
+use ic_cdk::{api::call::ManualReply, init, query, update, post_upgrade}; // Import Nat type from candid
 use ethers_core::types::{ FeeHistory}; // Import BlockTag and FeeHistory from ethers_core
 use candid::Nat; // Import Nat from candid
 
@@ -28,15 +27,6 @@ use ethers_core::types::{Eip1559TransactionRequest, NameOrAddress, U64};
 use evm_rpc_canister_types::{EvmRpcCanister, RpcServices};
 
 // Ensure RpcServices implements Clone
-#[derive(Clone)]
-enum RpcServices {
-    Custom { chainId: u64, services: Vec<String> },
-    EthSepolia(String),
-    BaseMainnet(String),
-    OptimismMainnet(String),
-    ArbitrumOne(String),
-    EthMainnet(String),
-}
 use evm_signer::SignedTransaction;
 
 // use crate::evm_signer::SignedTransaction;

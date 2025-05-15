@@ -36,9 +36,9 @@ dfx deploy evm_rpc
 # the `get_logs_address` here. in our case we are listening for mint events,
 # that is transfer events with the `from` field being the zero address.
 # you can read more about event signatures [here](https://docs.alchemy.com/docs/deep-dive-into-eth_getlogs#what-are-event-signatures)
-cargo build --release --target wasm32-unknown-unknown --package chainfusion_backend
-dfx canister create --with-cycles 10_000_000_000_000 chess_gamebloc_backend
-dfx canister install --wasm target/wasm32-unknown-unknown/release/chess_gamebloc_backend.wasm chess_gamebloc_backend --argument '(
+cargo build --release --target wasm32-unknown-unknown --package chess
+dfx canister create --with-cycles 10_000_000_000_000 chess
+dfx canister install --wasm target/wasm32-unknown-unknown/release/chess.wasm chess --argument '(
   record {
     ecdsa_key_id = record {
       name = "dfx_test_key";
@@ -73,6 +73,6 @@ dfx canister install --wasm target/wasm32-unknown-unknown/release/chess_gamebloc
 # sleep for 3 seconds to allow the evm address to be generated
 sleep 3
 # safe the chain_fusion canisters evm address
-export EVM_ADDRESS=$(dfx canister call chainfusion_backend get_evm_address | awk -F'"' '{print $2}')
+export EVM_ADDRESS=$(dfx canister call chess get_evm_address | awk -F'"' '{print $2}')
 # deploy the contract and mint one nft
 forge script script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast --sig "run(address)" $EVM_ADDRESS

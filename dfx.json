@@ -3,7 +3,8 @@
     "chess": {
       "candid": "src/chess_gamebloc_backend/chess.did",
       "package": "chess",
-      "type": "rust"
+      "type": "rust",
+      "id": "bd3sg-teaaa-aaaaa-qaaba-cai"
     },
     "Chess_Kitchen": {
       "main": "src/chess_kitchen/main.mo",
