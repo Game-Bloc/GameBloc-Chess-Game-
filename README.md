@@ -67,5 +67,3 @@ If you are hosting frontend code somewhere without using DFX, you may need to ma
 * This works using EVM-RPC canister as the api that communicates with ethereum blockchain and the ICP canister. To learn more about evm-rpc <a href="https://internetcomputer.org/docs/building-apps/chain-fusion/ethereum/evm-rpc/overview">Click here</a>
 
 
-## Errors encountered
-* the wasm*-unknown-unknown targets are not supported by default, you may need to enable the "js" feature.
